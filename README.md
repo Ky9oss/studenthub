@@ -77,7 +77,7 @@
 注释： "wwx\_hkx test commit"为提交的信息，这个信息应该规范为你的提交信息，这个信息不影响实际的提交过程。比如你是hkx，你第一次提交你的代码，则这里的信息可以写"HKX： first commit"，这里写好后，最终的成效如下：    
 ![蓝框中为提交信息](src/main/resources/img2.png)  
   
-3. `git remote add wuwenxuan_origin git@github.com:Taylorblue123/webpageDesignLab-group35`: 同样，这里首次创建origin，`wuwenxuan_origin`应该换成你想创建的自己的origin名字。 同时，请注意`git@github.com:Taylorblue123/webpageDesignLab-group35`应改为你在第一步中`remote add .....`时的路径名使用的方式，我这里是因为使用了SSH，如果你用了Github token，最后的这个路径名会不一样(*注意，第一次使用时需要remote add，之后再次使用时，比如下一次提交代码，只要你的origin还在，就可以使用相同origin，而不用重新remote add了*)    
+3. `git remote add wuwenxuan_origin git@github.com:Kygoss/studenthub`: 同样，这里首次创建origin，`wuwenxuan_origin`应该换成你想创建的自己的origin名字。 同时，请注意`git@github.com:Taylorblue123/webpageDesignLab-group35`应改为你在第一步中`remote add .....`时的路径名使用的方式，我这里是因为使用了SSH，如果你用了Github token，最后的这个路径名会不一样(*注意，第一次使用时需要remote add，之后再次使用时，比如下一次提交代码，只要你的origin还在，就可以使用相同origin，而不用重新remote add了*)    
 4. `git push -u wuwenxuan_origin wuwenxuan`: 同样，倒数第二个参数改为你的origin名字，最后一个参数改为**你的分支的名字**
   
 如果一切顺利，此时你登录github，到我们的项目页面，点左上角的main，你应该可以看到你自己刚刚创建好的分支：  
@@ -95,7 +95,8 @@
   
 ### 第三步
 如果你已经成功完成了第二步，之后每次改代码时，你不再需要按照上述步骤执行，而是按照如下步骤：  
-1. git pull your_origin your_branch (或 git pull your_origin your_branch:main 这个命令会整合main分支的所有最新内容到你的分支上，而前者只会拉取你的分支已存在文件的最新内容)。  pull下来之后就可以写你的代码了，写好之后下面三步命令就可以上传  
+1. `git pull your_origin your_branch` (或 `git pull your_origin your_branch:main` 这个命令会整合main分支的所有最新内容到你的分支上，而前者只会拉取你的分支已存在文件的最新内容)。  pull下来之后就可以写你的代码了，写好之后下面三步命令就可以上传  
 2. git add *  
 3. git commit -m "xxxx"  
 4. git push -u your_origin your_branch  
+5. Github页面提交pull request审核  
