@@ -62,8 +62,8 @@
   
 ### 第二步
 在开始第二步前，确保你成功完成了第一步  
-首先，创建一个文件夹，从命令行进入该文件夹(`cd`命令，不会命令行的请善用搜索引擎和chatgpt)，在命令行中输入`git clone https://github.com/Taylorblue123/webpageDesignLab-group35`。  
-此时，你的文件夹下会出现一个新的文件叫做webpageDesignLab-group35，从命令行进入该文件夹，进入之后首先输入`git branch`，确保输出中有`* main`，如果没有，请联系hkx  
+首先，创建一个文件夹，从命令行进入该文件夹(`cd`命令，不会命令行的请善用搜索引擎和chatgpt)，在命令行中输入`git clone https://github.com/Kygoss/studenthub`。  
+此时，你的文件夹下会出现一个新的文件叫做studenthub，从命令行进入该文件夹，进入之后首先输入`git branch`，确保输出中有`* main`，如果没有，请联系hkx  
 接着，使用`git branch xxxx`，这里的xxxx是你的新的branch的名称，你可以仿照我的branch的名称`KaixuanHou`，使用自己的名字作为branch名称  
   
 再次`git branch`,这时候确保你的输出中有`* main`和你刚刚创建好的bran名称(如`KaixuanHou`)  
