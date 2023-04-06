@@ -1,10 +1,10 @@
 # Group Members
 - Name: Kaixuan Hou  |  QMUL-ID: 200977375  
-- Name: Wenxuan Wu  |  QMUL-ID: 200977375  
-- Name: Zhengnan Cao  |  QMUL-ID: 200977375  
-- Name: Yiru Li  |  QMUL-ID: 200977375  
-- Name: ZiLong Wang  |  QMUL-ID: 200977375  
-- Name: Yihan Zhu  |  QMUL-ID: 200977375  
+- Name: Wenxuan Wu  |  QMUL-ID: 200978925  
+- Name: Zhengnan Cao  |  QMUL-ID: 200976884  
+- Name: Yiru Li  |  QMUL-ID: 200977825  
+- Name: ZiLong Wang  |  QMUL-ID: 200978800  
+- Name: Yihan Zhu  |  QMUL-ID: 200979977  
 
 # 重要信息
 下面共有git教程、vscode需要安装的java插件、maven安装第三方库方法、maven的项目结构、TDD方式等信息。请大家耐心阅读。    
