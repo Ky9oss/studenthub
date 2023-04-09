@@ -1,4 +1,4 @@
-package Student;
+package for_understanding_TDD;
 public class Student{
 	public String name;
 
