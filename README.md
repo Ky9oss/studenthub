@@ -6,6 +6,10 @@
 - Name: ZiLong Wang  |  QMUL-ID: 200978800  
 - Name: Yihan Zhu  |  QMUL-ID: 200979977  
 
+# UML
+![](src/main/resources/UML.png)  
+  
+
 # 重要信息
 下面共有git教程、vscode需要安装的java插件、maven安装第三方库方法、maven的项目结构、TDD方式等信息。请大家耐心阅读。    
 ## vscode组件
