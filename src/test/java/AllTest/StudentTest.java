@@ -1,5 +1,5 @@
 package AllTest;
-import Student.*;
+import for_understanding_TDD.*;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
