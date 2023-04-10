@@ -7,9 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.core.*;
 
-/**
- * 
- */
+
+
 public class Controller {
 
     /**
@@ -18,273 +17,280 @@ public class Controller {
     public Controller() {
     }
 
-
+    //create basic information
     public boolean createBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
         
         BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);
-        boolean istrue = basic_information.saveBasicInformation();
+        boolean istrue1 = basic_information.saveImage(head);
+        if(istrue1==false){
+            return false;
+        }
+        String image_path = BasicInformation.getImagePath();
+        boolean istrue = basic_information.saveBasicInformation(image_path);
         return istrue;
     }
 
 
+    //change basic information
     public boolean changeBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
-        BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);
-        boolean istrue1 = basic_information.deleteBasicInformation();
-        if(istrue1==true){
-            boolean istrue2 = basic_information.saveBasicInformation();
-            return istrue2;
-        }else{
+        BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);        
+        
+        boolean istrue = basic_information.saveImage(head);
+        if(istrue==false){
             return false;
         }
+        String image_path = BasicInformation.getImagePath();
+        
+        boolean istrue1 = basic_information.deleteBasicInformation();
+        if(istrue1==false){
+            return false;
+        }
+        
+        boolean istrue2 = basic_information.saveBasicInformation(image_path);
+        return istrue2;
+
     }
 
-    /**
-     * @return
-     */
+
+    //get basic information
     public String getBasicInformation() {
-        // TODO implement here
-        return "";
+        String basic_information = getBasicInformation();
+        return basic_information;
     }
 
 
+    //create skill
     public boolean createSkill(String title, String content, String proficiency, String project) {
-        // TODO implement here
-        return false;
+        Skill skill = new Skill(title, content, proficiency, project);
+        boolean istrue = skill.saveSkill();
+        return istrue;
     }
 
 
+    //change skill
     public boolean changeSkill(String title, String content, String proficiency, String project) {
-        // TODO implement here
-        return false;
+        Skill skill = new Skill(title, content, proficiency, project);
+        boolean istrue = Skill.deleteSkill(title);
+        if(istrue==false){
+            return false;
+        }
+
+        boolean istrue1 = skill.saveSkill();
+        return istrue1;
     }
 
 
+    //delete skill
     public boolean deleteSkill(String title) {
-        // TODO implement here
-        return false;
+        boolean istrue = Skill.deleteSkill(title);
+        return istrue;
     }
 
 
+    //get skills by proficiency
     public String getSkillsByProficiency(String proficiency) {
-        // TODO implement here
-        return "";
+        String skills = Skill.getSkillsByProficiency(proficiency);
+        return skills;
     }
 
 
+    //create achievement
     public boolean createAchievement(String title, String content, String time, String team, String responsibility) {
-        // TODO implement here
-        return false;
+        Achievement achievement = new Achievement(title, content, time, team, responsibility);
+        boolean istrue = achievement.saveAchievement();
+        return istrue;
     }
 
 
+    //change achievement
     public boolean changeAchievement(String title, String content, String time, String team, String responsibility) {
-        // TODO implement here
-        return false;
+        Achievement achievement = new Achievement(title, content, time, team, responsibility);
+        boolean istrue = Achievement.deleteAchievement(title);
+        if(istrue==false){
+            return false;
+        }
+
+        boolean istrue1 = achievement.saveAchievement();
+        return istrue1;
     }
 
  
+    //delete achivement
     public boolean deleteAchievement(String title) {
-        // TODO implement here
-        return false;
+        boolean istrue = Achievement.deleteAchievement(title);
+        return istrue;
     }
 
-    /**
-     * @param year 
-     * @return
-     */
+
+    //With foraward sorting, get achivement by year
     public String getAchievementsByYearForwardSort(int year) {
-        // TODO implement here
-        return "";
+        String json_str = Achievement.getAchievementsByYearForwardSort(year);
+        return json_str;
     }
 
-    /**
-     * @param year 
-     * @return
-     */
+    //With reverse sorting, get achivement by year
     public String getAchievementsByYearReverseSort(int year) {
-        // TODO implement here
-        return "";
+        String json_str = Achievement.getAchievementsByYearReverseSort(year);
+        return json_str;
     }
 
-    /**
-     * @param title 
-     * @param content 
-     * @param time 
-     * @return
-     */
+
+
+    //create role
     public boolean createRole(String title, String content, String time) {
-        // TODO implement here
-        return false;
+        Role role = new Role(title, content, time);
+        boolean istrue = role.saveRole();
+        return istrue;
     }
 
-    /**
-     * @param title 
-     * @param content 
-     * @param time 
-     * @return
-     */
+
+
+    //change role
     public boolean changeRole(String title, String content, String time) {
-        // TODO implement here
-        return false;
+        Role role = new Role(title, content, time);
+        boolean istrue1 = Role.deleteRole(title);
+        if(istrue1==false){
+            return false;
+        }
+        boolean istrue = role.saveRole();
+        return istrue;
     }
 
-    /**
-     * @param title 
-     * @return
-     */
+
+    //delete role
     public boolean deleteRole(String title) {
-        // TODO implement here
-        return false;
+        boolean istrue = Role.deleteRole(title);
+        return istrue;
     }
 
-    /**
-     * @param year 
-     * @return
-     */
+
+    //get roles by year with forward sorting
     public String getRolesByYearForwardSort(int year) {
-        // TODO implement here
-        return "";
+        String json_str = Role.getRolesByYearForwardSort(year);
+        return json_str;
     }
 
-    /**
-     * @param year 
-     * @return
-     */
+
+
+    //get roles by year with reverse sorting
     public String getRolesByYearReverseSort(int year) {
-        // TODO implement here
-        return "";
+        String json_str = Role.getRolesByYearReverseSort(year);
+        return json_str;
     }
 
-    /**
-     * @param title 
-     * @param content 
-     * @param time 
-     * @param type 
-     * @param location 
-     * @return
-     */
+
+
+    //create activity
     public boolean createActivity(String title, String content, String time, String type, String location) {
-        // TODO implement here
-        return false;
+        Activity activity = new Activity(title, content, time, type, location);
+        boolean istrue = activity.saveActivity();
+        return istrue;
     }
 
-    /**
-     * @param title 
-     * @param content 
-     * @param time 
-     * @param type 
-     * @param location 
-     * @return
-     */
+
+    //change activity
     public boolean changeActivity(String title, String content, String time, String type, String location) {
-        // TODO implement here
-        return false;
+        Activity activity = new Activity(title, content, time, type, location);
+        boolean istrue = Activity.deleteActivity(title);
+        if(istrue==false){
+            return false;
+        }
+        boolean istrue1 = activity.saveActivity();
+        return istrue1;
     }
 
-    /**
-     * @param title 
-     * @return
-     */
+
+
+    //delete activity
     public boolean deleteActivity(String title) {
-        // TODO implement here
-        return false;
+        boolean istrue = Activity.deleteActivity(title);
+        return istrue;
     }
 
-    /**
-     * @param year 
-     * @param type 
-     * @return
-     */
+
+
+    //get activities by year and type with forward sorting
     public String getActivitiesByYearAndByTypeForwardSort(int year, String type) {
-        // TODO implement here
-        return "";
+        String json_str = Activity.getActivitiesByYearAndByTypeForwardSort(year, type);
+        return json_str;
     }
 
-    /**
-     * @param year 
-     * @param type 
-     * @return
-     */
+
+
+    //get activities by year and type with reverse sorting
     public String getActivitiesByYearAndByTypeReverseSort(int year, String type) {
-        // TODO implement here
-        return "";
+        String json_str = Activity.getActivitiesByYearAndByTypeReverseSort(year, type);
+        return json_str;
     }
 
-    /**
-     * @param title 
-     * @param content 
-     * @param time 
-     * @param type 
-     * @param teacher 
-     * @param grade 
-     * @param credit 
-     * @return
-     */
+
+    //create course
     public boolean createCourse(String title, String content, String time, String type, String teacher, int grade, int credit) {
-        // TODO implement here
-        return false;
+        Course course = new Course(title, content, time, type, teacher, grade, credit);
+        boolean istrue = course.saveCourse();
+        return istrue;
     }
 
-    /**
-     * @param title 
-     * @param content 
-     * @param time 
-     * @param type 
-     * @param teacher 
-     * @param grade 
-     * @param credit 
-     * @return
-     */
+
+    //change course
     public boolean changeCourse(String title, String content, String time, String type, String teacher, int grade, int credit) {
-        // TODO implement here
-        return false;
+        Course course = new Course(title, content, time, type, teacher, grade, credit);
+        boolean istrue = Course.deleteCourse(title);
+        if(istrue==false){
+            return false;
+        }
+        boolean istrue1 = course.saveCourse();
+        return istrue1;
     }
 
-    /**
-     * @param title 
-     * @return
-     */
+
+
+    //delete course
     public boolean deleteCourse(String title) {
-        // TODO implement here
-        return false;
+        boolean istrue = Course.deleteCourse(title);
+        return istrue;
     }
 
-    /**
-     * @param year 
-     * @param type 
-     * @return
-     */
+
+
+    //get courses by year and type with forward sorting
     public String getCoursesByYearAndByTypeForwardSort(int year, String type) {
-        // TODO implement here
-        return "";
+        String json_str = Course.getCoursesByYearAndByTypeForwardSort(year, type);
+        return json_str;
     }
 
-    /**
-     * @param year 
-     * @param type 
-     * @return
-     */
+
+    //get courses by year and type with reverse sorting
     public String getCoursesByYearAndByTypeReverseSort(int year, String type) {
-        // TODO implement here
-        return "";
+        String json_str = Course.getCoursesByYearAndByTypeReverseSort(year, type);
+        return json_str;
     }
 
-    /**
-     * @param method 
-     * @return
-     */
-    public int calculateGradePointAverage(int method) {
-        // TODO implement here
-        return 0;
+
+
+    //calculate GPA
+    public double calculateGradePointAverage(int method) {
+        Calculator calculator = new Calculator();
+        String grades_credits_types = Course.getAllGradesAndCreditsAndType();
+        switch (method) {
+            case 1:
+                double result1 = calculator.calculateByPostgraduateRecommendation(grades_credits_types);
+                return result1;
+            case 2:
+                double result2 = calculator.calculateByStudyingAbroad(grades_credits_types);
+                return result2;
+            case 3:
+                double result3 = calculator.calculateByWorldEducationScore(grades_credits_types);
+                return result3; 
+            default:
+                return 0;
+        }
+ 
     }
 
-    /**
-     * @param skills_titles 
-     * @param achievements_titles 
-     * @param roles_titles 
-     * @param activities_titles 
-     * @return
-     */
+
+
+    //createCV
     public String createCV(String skills_titles, String achievements_titles, String roles_titles, String activities_titles) {
         // TODO implement here
         return "";

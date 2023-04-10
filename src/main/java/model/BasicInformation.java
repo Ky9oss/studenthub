@@ -60,7 +60,7 @@ public class BasicInformation {
     /**
      * @return
      */
-    public boolean saveBasicInformation() {
+    public boolean saveBasicInformation(String image_path) {
         // TODO implement here
         return false;
     }
