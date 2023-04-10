@@ -46,12 +46,12 @@ public class Course {
     /**
      * 
      */
-    private int grade;
+    private double grade;
 
     /**
      * 
      */
-    private int credit;
+    private double credit;
 
     /**
      * @return
