@@ -97,5 +97,8 @@ public class Course {
         // TODO implement here
         return "";
     }
+    public String getAllCourses(){
+	    return "";
+    }
 
 }

@@ -82,4 +82,8 @@ public class Role {
         return "";
     }
 
+    public String getAllRoles(){
+	    return "";
+    }
+
 }
