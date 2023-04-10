@@ -17,36 +17,24 @@ public class Controller {
     public Controller() {
     }
 
+
     //create basic information
     public boolean createBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
         
         BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);
-        boolean istrue1 = basic_information.saveImage(head);
-        if(istrue1==false){
-            return false;
-        }
-        String image_path = BasicInformation.getImagePath();
-        boolean istrue = basic_information.saveBasicInformation(image_path);
+        boolean istrue = basic_information.saveBasicInformation(head);
         return istrue;
     }
 
 
     //change basic information
     public boolean changeBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
-        BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);        
-        
-        boolean istrue = basic_information.saveImage(head);
-        if(istrue==false){
-            return false;
-        }
-        String image_path = BasicInformation.getImagePath();
-        
+        BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);            
         boolean istrue1 = basic_information.deleteBasicInformation();
         if(istrue1==false){
             return false;
-        }
-        
-        boolean istrue2 = basic_information.saveBasicInformation(image_path);
+        }     
+        boolean istrue2 = basic_information.saveBasicInformation(head);
         return istrue2;
 
     }
@@ -54,7 +42,7 @@ public class Controller {
 
     //get basic information
     public String getBasicInformation() {
-        String basic_information = getBasicInformation();
+        String basic_information = BasicInformation.getBasicInformation();
         return basic_information;
     }
 
@@ -283,7 +271,7 @@ public class Controller {
                 double result3 = calculator.calculateByWorldEducationScore(grades_credits_types);
                 return result3; 
             default:
-                return 0;
+                return 0.0;
         }
  
     }

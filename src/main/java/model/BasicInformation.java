@@ -60,7 +60,7 @@ public class BasicInformation {
     /**
      * @return
      */
-    public boolean saveBasicInformation(String image_path) {
+    public boolean saveBasicInformation(File image) {
         // TODO implement here
         return false;
     }
@@ -74,20 +74,6 @@ public class BasicInformation {
     }
 
 
-    /**
-     * @return
-     */
-    public boolean saveImage(File head) {
-        // TODO implement here
-        return false;
-    }
 
-    /**
-     * @return
-     */
-    public static String getImagePath() {
-        // TODO implement here
-        return "";
-    }
 
 }
