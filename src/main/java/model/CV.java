@@ -21,7 +21,8 @@ public class CV {
      */
     public String createCV(String basic_informations, String skills, String ahievements, String roles, String activities) {
         // TODO implement here
-        return "";
+        String pdf_path = "";
+        return pdf_path;
     }
 
 }

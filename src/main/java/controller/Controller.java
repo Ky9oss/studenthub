@@ -1,6 +1,6 @@
 package controller;
 import java.io.File;
-import java.util.*;
+//import java.util.*;
 import model.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -292,10 +292,18 @@ public class Controller {
 
     //createCV
     public String createCV(String skills_titles, String achievements_titles, String roles_titles, String activities_titles) {
-        // TODO implement here
-        return "";
+        CV cv = new CV();
+        String basic_information = BasicInformation.getBasicInformation();
+        String skills = Skill.getSkillsByTitles(skills_titles);
+        String achievements = Achievement.getAchievementsByTitles(achievements_titles);
+        String roles = Role.getRolesByTitles(roles_titles);
+        String activities = Activity.getActivitiesByTitles(activities_titles);
+        String pdf_path = cv.createCV(basic_information, skills, achievements, roles, activities);
+        return pdf_path;
     }
 
+
+    //get skills all titles
     public String getSkillsTitles(){
         String jsonStr = Skill.getAllSkills();
 
@@ -321,16 +329,84 @@ public class Controller {
         }
     }
 
+    //get roles all titles
     public String getRolesTitles(){
-        return "";
+        String jsonStr = Role.getAllRoles();
+
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode rootNode = mapper.readTree(jsonStr);
+
+            StringBuilder sb = new StringBuilder();
+
+            for (JsonNode node : rootNode) {
+                String name = node.get("name").asText();
+                sb.append(name).append(",");
+            }
+
+            String result = sb.toString().replaceAll(",$", "");
+            return result;
+        }catch(JsonMappingException e){
+            e.printStackTrace();
+            return "";
+        }catch(JsonProcessingException e){
+            e.printStackTrace();
+            return "";
+        }
     }
 
+
+    //get activities all titles
     public String getActivitiesTitles(){
-        return "";
+        String jsonStr = Activity.getAllActivities();
+
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode rootNode = mapper.readTree(jsonStr);
+
+            StringBuilder sb = new StringBuilder();
+
+            for (JsonNode node : rootNode) {
+                String name = node.get("name").asText();
+                sb.append(name).append(",");
+            }
+
+            String result = sb.toString().replaceAll(",$", "");
+            return result;
+        }catch(JsonMappingException e){
+            e.printStackTrace();
+            return "";
+        }catch(JsonProcessingException e){
+            e.printStackTrace();
+            return "";
+        }
     }
 
+
+    //get achivements all titles
     public String getAchievementsTitles(){
-        return "";
+        String jsonStr = Achievement.getAllAchivements();
+
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode rootNode = mapper.readTree(jsonStr);
+
+            StringBuilder sb = new StringBuilder();
+
+            for (JsonNode node : rootNode) {
+                String name = node.get("name").asText();
+                sb.append(name).append(",");
+            }
+
+            String result = sb.toString().replaceAll(",$", "");
+            return result;
+        }catch(JsonMappingException e){
+            e.printStackTrace();
+            return "";
+        }catch(JsonProcessingException e){
+            e.printStackTrace();
+            return "";
+        }
     }
 
 }
