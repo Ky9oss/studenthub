@@ -1,5 +1,6 @@
 package model;
 import java.util.*;
+import java.io.File;
 
 /**
  * 
@@ -51,7 +52,7 @@ public class BasicInformation {
     /**
      * @return
      */
-    public String getBasicInformation() {
+    public static String getBasicInformation() {
         // TODO implement here;
         return "";
     }
@@ -72,18 +73,11 @@ public class BasicInformation {
         return false;
     }
 
-    /**
-     * @return
-     */
-    public String getAllInformationForCV() {
-        // TODO implement here
-        return "";
-    }
 
     /**
      * @return
      */
-    public boolean saveImage() {
+    public boolean saveImage(File head) {
         // TODO implement here
         return false;
     }
@@ -91,7 +85,7 @@ public class BasicInformation {
     /**
      * @return
      */
-    public String getImagePath() {
+    public static String getImagePath() {
         // TODO implement here
         return "";
     }

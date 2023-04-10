@@ -56,7 +56,7 @@ public class Achievement {
      * @param title 
      * @return
      */
-    public boolean deleteAchievement(String title) {
+    public static boolean deleteAchievement(String title) {
         // TODO implement here
         return false;
     }
@@ -65,7 +65,7 @@ public class Achievement {
      * @param year 
      * @return
      */
-    public String getAchievementsByYearForwardSort(int year) {
+    public static String getAchievementsByYearForwardSort(int year) {
         // TODO implement here
         return "";
     }
@@ -74,7 +74,7 @@ public class Achievement {
      * @param year 
      * @return
      */
-    public String getAchievementsByYearReverseSort(int year) {
+    public static String getAchievementsByYearReverseSort(int year) {
         // TODO implement here
         return "";
     }
@@ -83,7 +83,7 @@ public class Achievement {
      * @param achievements_titles 
      * @return
      */
-    public String getAchievementsByTitles(String achievements_titles) {
+    public static String getAchievementsByTitles(String achievements_titles) {
         // TODO implement here
         return "";
     }
