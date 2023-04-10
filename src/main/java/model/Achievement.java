@@ -88,4 +88,8 @@ public class Achievement {
         return "";
     }
 
+    public static String getAllAchivements(){
+	    return "";
+    }
+
 }
