@@ -52,7 +52,7 @@ public class Activity {
      * @param title 
      * @return
      */
-    public boolean deleteActivity(String title) {
+    public static boolean deleteActivity(String title) {
         // TODO implement here
         return false;
     }
@@ -62,7 +62,7 @@ public class Activity {
      * @param type 
      * @return
      */
-    public String getActivitiesByYearAndByTypeForwardSort(int year, String type) {
+    public static String getActivitiesByYearAndByTypeForwardSort(int year, String type) {
         // TODO implement here
         return "";
     }
@@ -72,7 +72,7 @@ public class Activity {
      * @param type 
      * @return
      */
-    public String getActivitiesByYearAndByTypeReverseSort(int year, String type) {
+    public static String getActivitiesByYearAndByTypeReverseSort(int year, String type) {
         // TODO implement here
         return "";
     }
@@ -81,11 +81,11 @@ public class Activity {
      * @param activities_titles 
      * @return
      */
-    public String getActivitiesByTitles(String activities_titles) {
+    public static String getActivitiesByTitles(String activities_titles) {
         // TODO implement here
         return "";
     }
-    public String getAllActivities(){
+    public static String getAllActivities(){
 	    return "";
     }
 

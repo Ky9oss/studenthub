@@ -1,6 +1,11 @@
 package controller;
 import java.io.File;
 import java.util.*;
+import model.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.core.*;
 
 /**
  * 
@@ -13,34 +18,24 @@ public class Controller {
     public Controller() {
     }
 
-    /**
-     * @param name 
-     * @param age 
-     * @param school 
-     * @param major 
-     * @param admission_time 
-     * @param graduation_time 
-     * @param head 
-     * @return
-     */
+
     public boolean createBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
-        // TODO implement here
-        return false;
+        
+        BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);
+        boolean istrue = basic_information.saveBasicInformation();
+        return istrue;
     }
 
-    /**
-     * @param name 
-     * @param age 
-     * @param school 
-     * @param major 
-     * @param admission_time 
-     * @param graduation_time 
-     * @param head 
-     * @return
-     */
+
     public boolean changeBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
-        // TODO implement here
-        return false;
+        BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);
+        boolean istrue1 = basic_information.deleteBasicInformation();
+        if(istrue1==true){
+            boolean istrue2 = basic_information.saveBasicInformation();
+            return istrue2;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -51,78 +46,43 @@ public class Controller {
         return "";
     }
 
-    /**
-     * @param title 
-     * @param content 
-     * @param proficiency 
-     * @param project 
-     * @return
-     */
+
     public boolean createSkill(String title, String content, String proficiency, String project) {
         // TODO implement here
         return false;
     }
 
-    /**
-     * @param title 
-     * @param content 
-     * @param proficiency 
-     * @param project 
-     * @return
-     */
+
     public boolean changeSkill(String title, String content, String proficiency, String project) {
         // TODO implement here
         return false;
     }
 
-    /**
-     * @param title 
-     * @return
-     */
+
     public boolean deleteSkill(String title) {
         // TODO implement here
         return false;
     }
 
-    /**
-     * @param proficiency 
-     * @return
-     */
+
     public String getSkillsByProficiency(String proficiency) {
         // TODO implement here
         return "";
     }
 
-    /**
-     * @param title 
-     * @param content 
-     * @param time 
-     * @param team 
-     * @param responsibility 
-     * @return
-     */
+
     public boolean createAchievement(String title, String content, String time, String team, String responsibility) {
         // TODO implement here
         return false;
     }
 
-    /**
-     * @param title 
-     * @param content 
-     * @param time 
-     * @param team 
-     * @param responsibility 
-     * @return
-     */
+
     public boolean changeAchievement(String title, String content, String time, String team, String responsibility) {
         // TODO implement here
         return false;
     }
 
-    /**
-     * @param title 
-     * @return
-     */
+ 
     public boolean deleteAchievement(String title) {
         // TODO implement here
         return false;
@@ -327,6 +287,43 @@ public class Controller {
      */
     public String createCV(String skills_titles, String achievements_titles, String roles_titles, String activities_titles) {
         // TODO implement here
+        return "";
+    }
+
+    public String getSkillsTitles(){
+        String jsonStr = Skill.getAllSkills();
+
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode rootNode = mapper.readTree(jsonStr);
+
+            StringBuilder sb = new StringBuilder();
+
+            for (JsonNode node : rootNode) {
+                String name = node.get("name").asText();
+                sb.append(name).append(",");
+            }
+
+            String result = sb.toString().replaceAll(",$", "");
+            return result;
+        }catch(JsonMappingException e){
+            e.printStackTrace();
+            return "";
+        }catch(JsonProcessingException e){
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public String getRolesTitles(){
+        return "";
+    }
+
+    public String getActivitiesTitles(){
+        return "";
+    }
+
+    public String getAchievementsTitles(){
         return "";
     }
 

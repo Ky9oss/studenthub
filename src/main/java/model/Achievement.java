@@ -42,7 +42,7 @@ public class Achievement {
         this.time = time;
         this.team = team;
         this.responsibility = responsibility;
-    }
+    }   
 
     /**
      * @return
@@ -86,10 +86,6 @@ public class Achievement {
     public String getAchievementsByTitles(String achievements_titles) {
         // TODO implement here
         return "";
-    }
-
-    public String getAllAchievements(){
-	    return "";
     }
 
 }

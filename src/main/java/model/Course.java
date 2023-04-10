@@ -65,7 +65,7 @@ public class Course {
      * @param title 
      * @return
      */
-    public boolean deleteCourse(String title) {
+    public static boolean deleteCourse(String title) {
         // TODO implement here
         return false;
     }
@@ -75,7 +75,7 @@ public class Course {
      * @param type 
      * @return
      */
-    public String getCoursesByYearAndByTypeForwardSort(int year, String type) {
+    public static String getCoursesByYearAndByTypeForwardSort(int year, String type) {
         // TODO implement here
         return "";
     }
@@ -85,7 +85,7 @@ public class Course {
      * @param type 
      * @return
      */
-    public String getCoursesByYearAndByTypeReverseSort(int year, String type) {
+    public static String getCoursesByYearAndByTypeReverseSort(int year, String type) {
         // TODO implement here
         return "";
     }
@@ -93,11 +93,11 @@ public class Course {
     /**
      * @return
      */
-    public String getAllGradesAndCreditsAndType() {
+    public static String getAllGradesAndCreditsAndType() {
         // TODO implement here
         return "";
     }
-    public String getAllCourses(){
+    public static String getAllCourses(){
 	    return "";
     }
 

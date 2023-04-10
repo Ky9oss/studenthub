@@ -41,7 +41,7 @@ public class Role {
      * @param title 
      * @return
      */
-    public boolean deleteRole(String title) {
+    public static boolean deleteRole(String title) {
         // TODO implement here
         return false;
     }
@@ -50,7 +50,7 @@ public class Role {
      * @param year 
      * @return
      */
-    public String getRolesByYearForwardSort(int year) {
+    public static String getRolesByYearForwardSort(int year) {
         // TODO implement here
         return "";
     }
@@ -59,7 +59,7 @@ public class Role {
      * @param year 
      * @return
      */
-    public String getRolesByYearReverseSort(int year) {
+    public static String getRolesByYearReverseSort(int year) {
         // TODO implement here
         return "";
     }
@@ -68,21 +68,14 @@ public class Role {
      * @param roles_titles 
      * @return
      */
-    public String getRolesByTitles(String roles_titles) {
+    public static String getRolesByTitles(String roles_titles) {
         // TODO implement here
         return "";
     }
 
-    /**
-     * @param skills_titles 
-     * @return
-     */
-    public String getSkillsByTitles(String skills_titles) {
-        // TODO implement here
-        return "";
-    }
 
-    public String getAllRoles(){
+
+    public static String getAllRoles(){
 	    return "";
     }
 
