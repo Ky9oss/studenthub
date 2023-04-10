@@ -85,5 +85,8 @@ public class Activity {
         // TODO implement here
         return "";
     }
+    public String getAllActivities(){
+	    return "";
+    }
 
 }

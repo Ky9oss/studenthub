@@ -68,5 +68,8 @@ public class Skill {
         // TODO implement here
         return "";
     }
+    public String getAllSkills(){
+	    return "";
+    }
 
 }
