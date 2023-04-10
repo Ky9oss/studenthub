@@ -46,7 +46,7 @@ public class Skill {
      * @param title 
      * @return
      */
-    public boolean deleteSkill(String title) {
+    public static boolean deleteSkill(String title) {
         // TODO implement here
         return false;
     }
@@ -55,7 +55,7 @@ public class Skill {
      * @param proficiency 
      * @return
      */
-    public String getSkillsByProficiency(String proficiency) {
+    public static String getSkillsByProficiency(String proficiency) {
         // TODO implement here
         return "";
     }
@@ -64,11 +64,11 @@ public class Skill {
      * @param skills_titles 
      * @return
      */
-    public String getSkillsByTitles(String skills_titles) {
+    public static String getSkillsByTitles(String skills_titles) {
         // TODO implement here
         return "";
     }
-    public String getAllSkills(){
+    public static String getAllSkills(){
 	    return "";
     }
 
