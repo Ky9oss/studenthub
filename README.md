@@ -9,6 +9,9 @@
 # UML
 ![](src/main/resources/UML.png)  
   
+# TDD-Controller Done!
+![](src/main/resources/C-tdd1.png)  
+![](src/main/resources/C-tdd2.png)  
 
 # 重要信息
 下面共有git教程、vscode需要安装的java插件、maven安装第三方库方法、maven的项目结构、TDD方式等信息。请大家耐心阅读。    
