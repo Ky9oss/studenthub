@@ -1,6 +1,7 @@
 package model;
 import java.util.*;
-
+import java.time.LocalTime;
+import java.util.Arrays;
 /**
  * 
  */
@@ -17,7 +18,7 @@ public class Role {
     /**
      * 
      */
-    private String title;
+    private static String title;
 
     /**
      * 
@@ -32,8 +33,19 @@ public class Role {
     /**
      * @return
      */
-    public boolean saveRole() {
-        // TODO implement here
+    public boolean saveRoles() {
+        String path = "C:/Users/28950/Desktop/2.json";
+        String json = getStr(path);
+	    Gson gson = new Gson();
+        Role[] roles = gson.fromJson(json, Role[].class);
+        ArrayList<Role> roleList = new ArrayList<>(Arrays.asList(roles));
+
+        // Constructor
+        Role newRole = new Role(this.title, this. year, this.year,this.roles_titles);
+        RollList.add(newRole);
+
+        String savedRoles = gson.toJson(RoleList);
+        return setStr(path, savedRoles);
         return false;
     }
 
@@ -41,9 +53,20 @@ public class Role {
      * @param title 
      * @return
      */
-    public static boolean deleteRole(String title) {
-        // TODO implement here
-        return false;
+    public static boolean deleteRoles(String title) {
+        String path = "C:/Users/28950/Desktop/2.json";
+        String json = getStr(path);
+	    Gson gson = new Gson();
+        Role[] roles = gson.fromJson(json, Role[].class);
+        ArrayList<Role> roleList = new ArrayList<>(Arrays.asList(roles));
+
+        for(int i = 0; i < roleList.size(); i++){
+            // skillList.get(i).title == title ?
+            if(roleList.get(i).title.equals(title)){
+                roleList.remove(i);
+                break;
+            }
+        return setStr(path, deletedRoles);}
     }
 
     /**
@@ -51,8 +74,32 @@ public class Role {
      * @return
      */
     public static String getRolesByYearForwardSort(int year) {
-        // TODO implement here
-        return "";
+        yearyear = String.valueOf(year);
+        List<Achievement> results = new ArrayList<>();
+        File folder = new File(".");
+        for (File file : folder.listFiles()) {
+    
+            if (file.getName().endsWith(".json")) {
+                try {
+                    String json = new String(Files.readAllBytes(file.toPath()));
+                    JSONObject jsonObject = new JSONObject(json);
+                    Role Role = new Role(
+                            jsonObject.getString("title"),
+                            jsonObject.getString("year"),
+                            jsonObject.getString("year"),
+                            jsonObject.getString("roles_titles")); 
+                          
+
+                    if (Role.getTime().contains(year)) {
+                        results.add(roles_titles);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return results;
     }
 
     /**
@@ -69,14 +116,64 @@ public class Role {
      * @return
      */
     public static String getRolesByTitles(String roles_titles) {
-        // TODO implement here
-        return "";
+        if (roles_titles == "") return "";
+
+        String[] proes =roles_titles .split(",");
+        ArrayList<String> proesList = new ArrayList<>(Arrays.asList(proes));
+
+        String json = getStr("");
+	    Gson gson = new Gson();
+        Role[] roles = gson.fromJson(json, Role[].class);
+        ArrayList<Role> skillList = new ArrayList<>(Arrays.asList(roles));
+
+        for (int i = roleList.size() - 1; i >= 0; i--) {
+            if( !proesList.contains(roleList.get(i).roles_titles) ) {
+                roleList.remove(i);
+            }
+        }
+
+        String allRoles = "";
+        for(int i = 0; i < roleList.size(); i++) {
+            allRoles = allRoles + "{\n";
+            allRoles = allRoles + "\"title\": \"" + roleList.get(i).title + "\",\n";
+            allRoles = allRoles + "\"year\": \"" + roleList.get(i).year + "\",\n";
+            allRoles = allRoles + "\"year\": \"" + roleList.get(i).year + "\",\n";
+            allRoles = allRoles + "\"roles_titles\": \"" + roleList.get(i).roles_titles+ "\",\n";
+            
+            if (i == roleList.size() - 1) {
+                allRoles = allRoles + "}\n";
+            }
+            else {
+                allRole = allRoles + "},\n";
+            }
+        }
+        return allRoles;
     }
 
 
 
     public static String getAllRoles(){
-	    return "";
+	    String json = getStr("C:/Users/Hanxi/Documents/WeChat Files/wxid_df2qbfla549x22/FileStorage/File/2023-04/studenthub-main/src/main/java/model/1.json");
+	    Gson gson = new Gson();
+        Skill[] skillList = gson.fromJson(json, Skill[].class);
+
+        String allRoles = "";
+        for(int i = 0; i < roleList.size(); i++) {
+            allRoles = allRoles + "{\n";
+            allRoles = allRoles + "\"title\": \"" + roleList.get(i).title + "\",\n";
+            allRoles = allRoles + "\"year\": \"" + roleList.get(i).year + "\",\n";
+            allRoles = allRoles + "\"year\": \"" + roleList.get(i).year + "\",\n";
+            allRoles = allRoles + "\"roles_titles\": \"" + roleList.get(i).roles_titles+ "\",\n";
+            
+            if (i == roleList.size() - 1) {
+                allRoles = allRoles + "}\n";
+            }
+            else {
+                allRole = allRoles + "},\n";
+            }
+        }
+        return allRoles;
+
     }
 
 }
