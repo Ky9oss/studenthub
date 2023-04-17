@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coursework.ReturnTest">
+  <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.20001220703125" minWidth="10.0" prefWidth="82.79998779296875" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.00001220703126" minWidth="10.0" prefWidth="400.00001220703126" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="100.79998779296875" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+         <children>
+            <VBox layoutX="108.0" layoutY="81.0" prefHeight="200.0" prefWidth="42.0">
+               <children>
+                  <Label text="成就1" />
+                  <Label text="成就2" />
+                  <Label text="成就3" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button layoutX="18.0" layoutY="343.0" mnemonicParsing="false" onAction="#gotoHome" text="return" />
+         </children></AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+         <children>
+            <Button layoutX="27.0" layoutY="108.0" mnemonicParsing="false" text="Button" />
+            <Button layoutX="27.0" layoutY="154.0" mnemonicParsing="false" text="Button" />
+            <Button layoutX="27.0" layoutY="219.0" mnemonicParsing="false" text="Button" />
+            <Button layoutX="27.0" layoutY="289.0" mnemonicParsing="false" text="Button" />
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>
