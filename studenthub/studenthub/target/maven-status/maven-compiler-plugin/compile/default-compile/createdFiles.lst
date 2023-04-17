@@ -1,0 +1,10 @@
+model/Skill.class
+model/Activity.class
+model/Calculator.class
+model/BasicInformation.class
+for_understanding_TDD/Student.class
+model/Course.class
+model/Role.class
+model/CV.class
+model/Achievement.class
+controller/Controller.class
