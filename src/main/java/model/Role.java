@@ -18,7 +18,7 @@ public class Role {
     /**
      * 
      */
-    private static String title;
+    private String title;
 
     /**
      * 
@@ -46,7 +46,6 @@ public class Role {
 
         String savedRoles = gson.toJson(RoleList);
         return setStr(path, savedRoles);
-        return false;
     }
 
     /**
@@ -66,31 +65,33 @@ public class Role {
                 roleList.remove(i);
                 break;
             }
-        return setStr(path, deletedRoles);}
+        }
+        String deletedRoles = gson.toJson(roleList);
+        return setStr(path, deletedRoles);
     }
 
     /**
-     * @param year 
+     * @param year
      * @return
      */
-    public static String getRolesByYearForwardSort(int year) {
-        yearyear = String.valueOf(year);
-        List<Achievement> results = new ArrayList<>();
+    public ArrayList<Role> getRolesByYearForwardSort(int yearlow, int yearhigh) {
+        yearyear1 = String.valueOf(yearlow);
+        yearyear2 = String.valueOf(yearhigh);
+        ArrayList<Role> results = new ArrayList<>();
         File folder = new File(".");
         for (File file : folder.listFiles()) {
-    
             if (file.getName().endsWith(".json")) {
                 try {
                     String json = new String(Files.readAllBytes(file.toPath()));
                     JSONObject jsonObject = new JSONObject(json);
                     Role Role = new Role(
                             jsonObject.getString("title"),
-                            jsonObject.getString("year"),
-                            jsonObject.getString("year"),
+                            jsonObject.getInteger("year"),
+                            jsonObject.getInteger("year"),
                             jsonObject.getString("roles_titles")); 
                           
 
-                    if (Role.getTime().contains(year)) {
+                    if ((Role.year<=yearhigh)&&(Role.year>=yearlow)) {
                         results.add(roles_titles);
                     }
                 } catch (IOException e) {
@@ -98,6 +99,8 @@ public class Role {
                 }
             }
         }
+
+        results.sort(Comparator.comparing(Role::year));
 
         return results;
     }
@@ -108,7 +111,34 @@ public class Role {
      */
     public static String getRolesByYearReverseSort(int year) {
         // TODO implement here
-        return "";
+        yearyear1 = String.valueOf(yearlow);
+        yearyear2 = String.valueOf(yearhigh);
+        ArrayList<Role> results = new ArrayList<>();
+        File folder = new File(".");
+        for (File file : folder.listFiles()) {
+            if (file.getName().endsWith(".json")) {
+                try {
+                    String json = new String(Files.readAllBytes(file.toPath()));
+                    JSONObject jsonObject = new JSONObject(json);
+                    Role Role = new Role(
+                            jsonObject.getString("title"),
+                            jsonObject.getInteger("year"),
+                            jsonObject.getInteger("year"),
+                            jsonObject.getString("roles_titles")); 
+                          
+
+                    if ((Role.year<=yearhigh)&&(Role.year>=yearlow)) {
+                        results.add(roles_titles);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        results.sort(Comparator.comparing(Role::year).reversed());
+
+        return results;
     }
 
     /**
