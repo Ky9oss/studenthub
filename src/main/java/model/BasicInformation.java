@@ -1,15 +1,11 @@
 package model;
 
-import java.util.*;
 
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -82,9 +78,7 @@ public class BasicInformation {
 
     public static String getBasicInformation() throws URISyntaxException {
         try {
-                        // 获取程序文件所在的目录
-
-
+            // 获取程序文件所在的目录
             java.net.URL classResource = BasicInformation.class.getProtectionDomain().getCodeSource().getLocation();
             Path classDirectory = Paths.get(classResource.toURI());
             Path resourcesPath = classDirectory.getParent().getParent();
@@ -92,20 +86,20 @@ public class BasicInformation {
             //获取resources的文件目录
 
             String jsonPath = mainResourcesPath.toString() + "/basicInformation.json";      
-//检查文件是否存在
-Path filePath = Paths.get(jsonPath);
-if (!Files.exists(filePath)) {
-    throw new FileNotFoundException("JSON file not found at path: " + jsonPath);
-}
+            //检查文件是否存在
+            Path filePath = Paths.get(jsonPath);
+            if (!Files.exists(filePath)) {
+                throw new FileNotFoundException("JSON file not found at path: " + jsonPath);
+            }
 
-//读取文件内容
-byte[] encoded = Files.readAllBytes(filePath);
-return new String(encoded, StandardCharsets.UTF_8);
+            //读取文件内容
+            byte[] encoded = Files.readAllBytes(filePath);
+            return new String(encoded, StandardCharsets.UTF_8);
 
 
         } catch (IOException e) {
             e.printStackTrace();
-            return "error"; // 读取失败时返回空字符串
+            return null; // 读取失败时返回空字符串
         }
     }
 

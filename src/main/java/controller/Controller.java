@@ -1,5 +1,7 @@
 package controller;
 import java.io.File;
+import java.net.URISyntaxException;
+
 //import java.util.*;
 import model.*;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -19,29 +21,29 @@ public class Controller {
 
 
     //create basic information
-    public boolean createBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
+    public String createBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
         
         BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);
-        boolean istrue = basic_information.saveBasicInformation(head);
-        return istrue;
+        String image_path = basic_information.saveBasicInformation(head);
+        return image_path+"/image.png";
     }
 
 
     //change basic information
-    public boolean changeBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
+    public String changeBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
         BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);            
         boolean istrue1 = basic_information.deleteBasicInformation();
         if(istrue1==false){
-            return false;
+            return null;
         }     
-        boolean istrue2 = basic_information.saveBasicInformation(head);
-        return istrue2;
+        String image_path = basic_information.saveBasicInformation(head);
+        return image_path+"/image.png";
 
     }
 
 
     //get basic information
-    public String getBasicInformation() {
+    public String getBasicInformation() throws URISyntaxException {
         String basic_information = BasicInformation.getBasicInformation();
         return basic_information;
     }
