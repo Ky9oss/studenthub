@@ -322,7 +322,7 @@
 											"top": 184,
 											"width": 840.0234375,
 											"height": 13,
-											"text": "+createBasicInformation(name: String, age: int, school: String, major: String, admission_time: String, graduation_time: String, head: file): boolean",
+											"text": "+createBasicInformation(name: String, age: int, school: String, major: String, admission_time: String, graduation_time: String, head: File): String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -798,7 +798,7 @@
 											"top": 604,
 											"width": 840.0234375,
 											"height": 13,
-											"text": "+createCV(skills_titles: String, achievements_titles: String, roles_titles: String, activities_titles: String): String",
+											"text": "+createCV(): String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -8089,7 +8089,7 @@
 										"$ref": "AAAAAAGHYgV18ILyLsY="
 									},
 									"name": "create_basic_information_return",
-									"type": "boolean",
+									"type": "String",
 									"direction": "return"
 								},
 								{
@@ -8099,7 +8099,7 @@
 										"$ref": "AAAAAAGHYgV18ILyLsY="
 									},
 									"name": "head",
-									"type": "file"
+									"type": "File"
 								}
 							]
 						},
@@ -9301,42 +9301,6 @@
 									"name": "file_path",
 									"type": "String",
 									"direction": "return"
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAGHaoa0ag8Bl2U=",
-									"_parent": {
-										"$ref": "AAAAAAGHZkxkG55x9q8="
-									},
-									"name": "skills_titles",
-									"type": "String"
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAGHaoa0aw8CDtA=",
-									"_parent": {
-										"$ref": "AAAAAAGHZkxkG55x9q8="
-									},
-									"name": "achievements_titles",
-									"type": "String"
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAGHaoa0aw8DaVs=",
-									"_parent": {
-										"$ref": "AAAAAAGHZkxkG55x9q8="
-									},
-									"name": "roles_titles",
-									"type": "String"
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAGHaoa0aw8Ek38=",
-									"_parent": {
-										"$ref": "AAAAAAGHZkxkG55x9q8="
-									},
-									"name": "activities_titles",
-									"type": "String"
 								}
 							]
 						},
