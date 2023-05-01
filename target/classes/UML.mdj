@@ -322,7 +322,11 @@
 											"top": 184,
 											"width": 840.0234375,
 											"height": 13,
+<<<<<<< HEAD
+											"text": "+createBasicInformation(name: String, age: int, school: String, major: String, admission_time: String, graduation_time: String, head: file): String",
+=======
 											"text": "+createBasicInformation(name: String, age: int, school: String, major: String, admission_time: String, graduation_time: String, head: File): String",
+>>>>>>> main
 											"horizontalAlignment": 0
 										},
 										{
@@ -339,7 +343,7 @@
 											"top": 199,
 											"width": 840.0234375,
 											"height": 13,
-											"text": "+changeBasicInformation(name: String, age: int, school: String, major: String, admission_time: String, graduation_time: String, head: file): boolean",
+											"text": "+changeBasicInformation(name: String, age: int, school: String, major: String, admission_time: String, graduation_time: String, head: file): String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -799,6 +803,8 @@
 											"width": 840.0234375,
 											"height": 13,
 											"text": "+createCV(): String",
+<<<<<<< HEAD
+=======
 											"horizontalAlignment": 0
 										},
 										{
@@ -867,6 +873,7 @@
 											"width": 840.0234375,
 											"height": 13,
 											"text": "+getAchievementsTitles(): String",
+>>>>>>> main
 											"horizontalAlignment": 0
 										}
 									],
@@ -874,7 +881,7 @@
 									"left": 216,
 									"top": 179,
 									"width": 850.0234375,
-									"height": 503
+									"height": 443
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -8172,7 +8179,7 @@
 										"$ref": "AAAAAAGHZJfNsclV6pM="
 									},
 									"name": "change_basic_information_return",
-									"type": "boolean",
+									"type": "String",
 									"direction": "return"
 								},
 								{
@@ -9301,6 +9308,8 @@
 									"name": "file_path",
 									"type": "String",
 									"direction": "return"
+<<<<<<< HEAD
+=======
 								}
 							]
 						},
@@ -9377,6 +9386,7 @@
 									},
 									"type": "String",
 									"direction": "return"
+>>>>>>> main
 								}
 							]
 						}

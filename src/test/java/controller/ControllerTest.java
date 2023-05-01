@@ -49,13 +49,6 @@ class ControllerTest {
         assertEquals(result2, "{\"major\":\"major\",\"school\":\"school\",\"image_path\":\"/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/image.png\",\"name\":\"name\",\"graduation_time\":\"graduation_time\",\"admission_time\":\"admission_time\",\"age\":0}");
     }
 
-<<<<<<< HEAD
-    public static void main(String args[]) throws URISyntaxException, IOException {
-        String jsonPath = "src/main/resources/1.json";
-        Path filePath = Paths.get(jsonPath);
-        byte[] encoded = Files.readAllBytes(filePath);
-        System.out.println(new String(encoded, StandardCharsets.UTF_8));
-=======
     public static void main(String args[]) throws URISyntaxException {
         controllerUnderTest = new Controller();
         final String result2 = controllerUnderTest.getBasicInformation();
@@ -65,7 +58,6 @@ class ControllerTest {
         String activities = "[{\"title\": \"hahahaha\", \"content\": \"contentetetete\"},{\"title\": \"hahahaha\", \"content\": \"contentetetete\"}]";
         JSONArray jsonObj2 = new JSONArray(activities);
         System.out.println(jsonObj2);
->>>>>>> main
     }
 
     @Test
