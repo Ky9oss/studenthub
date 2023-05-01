@@ -7,7 +7,19 @@ import java.io.File;
 import java.net.URISyntaxException;
 
 import static org.junit.Assert.*;
-
+import java.nio.file.Files;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 class ControllerTest {
 
@@ -35,8 +47,11 @@ class ControllerTest {
         assertEquals(result2, "{\"major\":\"major\",\"school\":\"school\",\"image_path\":\"/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/image.png\",\"name\":\"name\",\"graduation_time\":\"graduation_time\",\"admission_time\":\"admission_time\",\"age\":0}");
     }
 
-    public static void main(String args[]) {
-        System.out.println(System.getProperty("user.dir"));
+    public static void main(String args[]) throws URISyntaxException, IOException {
+        String jsonPath = "src/main/resources/1.json";
+        Path filePath = Paths.get(jsonPath);
+        byte[] encoded = Files.readAllBytes(filePath);
+        System.out.println(new String(encoded, StandardCharsets.UTF_8));
     }
 
     @Test

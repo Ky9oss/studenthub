@@ -322,7 +322,7 @@
 											"top": 184,
 											"width": 840.0234375,
 											"height": 13,
-											"text": "+createBasicInformation(name: String, age: int, school: String, major: String, admission_time: String, graduation_time: String, head: file): String",
+											"text": "+createBasicInformation(name: String, age: int, school: String, major: String, admission_time: String, graduation_time: String, head: file): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -339,7 +339,7 @@
 											"top": 199,
 											"width": 840.0234375,
 											"height": 13,
-											"text": "+changeBasicInformation(name: String, age: int, school: String, major: String, admission_time: String, graduation_time: String, head: file): String",
+											"text": "+changeBasicInformation(name: String, age: int, school: String, major: String, admission_time: String, graduation_time: String, head: file): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -798,7 +798,75 @@
 											"top": 604,
 											"width": 840.0234375,
 											"height": 13,
-											"text": "+createCV(): String",
+											"text": "+createCV(skills_titles: String, achievements_titles: String, roles_titles: String, activities_titles: String): String",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGHaiXrgZD4RLk=",
+											"_parent": {
+												"$ref": "AAAAAAGHYfbO3oEKHvc="
+											},
+											"model": {
+												"$ref": "AAAAAAGHaiXrdZD1G7E="
+											},
+											"font": "Arial;13;0",
+											"left": 221,
+											"top": 619,
+											"width": 840.0234375,
+											"height": 13,
+											"text": "+getSkillsTitles(): String",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGHaiYYmJWTvQs=",
+											"_parent": {
+												"$ref": "AAAAAAGHYfbO3oEKHvc="
+											},
+											"model": {
+												"$ref": "AAAAAAGHaiYYk5WQC1s="
+											},
+											"font": "Arial;13;0",
+											"left": 221,
+											"top": 634,
+											"width": 840.0234375,
+											"height": 13,
+											"text": "+getRolesTitles(): String",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGHaiiYxt0x7rs=",
+											"_parent": {
+												"$ref": "AAAAAAGHYfbO3oEKHvc="
+											},
+											"model": {
+												"$ref": "AAAAAAGHaiiYvd0uDeE="
+											},
+											"font": "Arial;13;0",
+											"left": 221,
+											"top": 649,
+											"width": 840.0234375,
+											"height": 13,
+											"text": "+getActivitiesTitles(): String",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGHaij6T9+xGxs=",
+											"_parent": {
+												"$ref": "AAAAAAGHYfbO3oEKHvc="
+											},
+											"model": {
+												"$ref": "AAAAAAGHaij6Sd+udGg="
+											},
+											"font": "Arial;13;0",
+											"left": 221,
+											"top": 664,
+											"width": 840.0234375,
+											"height": 13,
+											"text": "+getAchievementsTitles(): String",
 											"horizontalAlignment": 0
 										}
 									],
@@ -806,7 +874,7 @@
 									"left": 216,
 									"top": 179,
 									"width": 850.0234375,
-									"height": 443
+									"height": 503
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -8021,7 +8089,7 @@
 										"$ref": "AAAAAAGHYgV18ILyLsY="
 									},
 									"name": "create_basic_information_return",
-									"type": "String",
+									"type": "boolean",
 									"direction": "return"
 								},
 								{
@@ -8104,7 +8172,7 @@
 										"$ref": "AAAAAAGHZJfNsclV6pM="
 									},
 									"name": "change_basic_information_return",
-									"type": "String",
+									"type": "boolean",
 									"direction": "return"
 								},
 								{
@@ -9231,6 +9299,118 @@
 										"$ref": "AAAAAAGHZkxkG55x9q8="
 									},
 									"name": "file_path",
+									"type": "String",
+									"direction": "return"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGHaoa0ag8Bl2U=",
+									"_parent": {
+										"$ref": "AAAAAAGHZkxkG55x9q8="
+									},
+									"name": "skills_titles",
+									"type": "String"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGHaoa0aw8CDtA=",
+									"_parent": {
+										"$ref": "AAAAAAGHZkxkG55x9q8="
+									},
+									"name": "achievements_titles",
+									"type": "String"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGHaoa0aw8DaVs=",
+									"_parent": {
+										"$ref": "AAAAAAGHZkxkG55x9q8="
+									},
+									"name": "roles_titles",
+									"type": "String"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGHaoa0aw8Ek38=",
+									"_parent": {
+										"$ref": "AAAAAAGHZkxkG55x9q8="
+									},
+									"name": "activities_titles",
+									"type": "String"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGHaiXrdZD1G7E=",
+							"_parent": {
+								"$ref": "AAAAAAGHYfbO3YEBWHg="
+							},
+							"name": "getSkillsTitles",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGHaiYYX5UHfW8=",
+									"_parent": {
+										"$ref": "AAAAAAGHaiXrdZD1G7E="
+									},
+									"type": "String",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGHaiYYk5WQC1s=",
+							"_parent": {
+								"$ref": "AAAAAAGHYfbO3YEBWHg="
+							},
+							"name": "getRolesTitles",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGHaicZutNKen0=",
+									"_parent": {
+										"$ref": "AAAAAAGHaiYYk5WQC1s="
+									},
+									"type": "String",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGHaiiYvd0uDeE=",
+							"_parent": {
+								"$ref": "AAAAAAGHYfbO3YEBWHg="
+							},
+							"name": "getActivitiesTitles",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGHaij6Ed8lPf0=",
+									"_parent": {
+										"$ref": "AAAAAAGHaiiYvd0uDeE="
+									},
+									"type": "String",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGHaij6Sd+udGg=",
+							"_parent": {
+								"$ref": "AAAAAAGHYfbO3YEBWHg="
+							},
+							"name": "getAchievementsTitles",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGHaikupuF3T58=",
+									"_parent": {
+										"$ref": "AAAAAAGHaij6Sd+udGg="
+									},
 									"type": "String",
 									"direction": "return"
 								}

@@ -281,20 +281,20 @@ public class Controller {
 
 
     //createCV
-    public String createCV(String skills_titles, String achievements_titles, String roles_titles, String activities_titles) {
+    public String createCV() throws URISyntaxException {
         CV cv = new CV();
         String basic_information = BasicInformation.getBasicInformation();
-        String skills = Skill.getSkillsByTitles(skills_titles);
-        String achievements = Achievement.getAchievementsByTitles(achievements_titles);
-        String roles = Role.getRolesByTitles(roles_titles);
-        String activities = Activity.getActivitiesByTitles(activities_titles);
+        String skills = Skill.getSkillsByTitles(getSkillsTitles());
+        String achievements = Achievement.getAchievementsByTitles(getAchievementsTitles());
+        String roles = Role.getRolesByTitles(getRolesTitles());
+        String activities = Activity.getActivitiesByTitles(getActivitiesTitles());
         String pdf_path = cv.createCV(basic_information, skills, achievements, roles, activities);
         return pdf_path;
     }
 
 
     //get skills all titles
-    public String getSkillsTitles(){
+    private String getSkillsTitles(){
         String jsonStr = Skill.getAllSkills();
 
         try{
@@ -320,7 +320,7 @@ public class Controller {
     }
 
     //get roles all titles
-    public String getRolesTitles(){
+    private String getRolesTitles(){
         String jsonStr = Role.getAllRoles();
 
         try{
@@ -347,7 +347,7 @@ public class Controller {
 
 
     //get activities all titles
-    public String getActivitiesTitles(){
+    private String getActivitiesTitles(){
         String jsonStr = Activity.getAllActivities();
 
         try{
@@ -374,7 +374,7 @@ public class Controller {
 
 
     //get achivements all titles
-    public String getAchievementsTitles(){
+    private String getAchievementsTitles(){
         String jsonStr = Achievement.getAllAchivements();
 
         try{
