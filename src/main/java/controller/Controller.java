@@ -288,6 +288,14 @@ public class Controller {
         String achievements = Achievement.getAchievementsByTitles(getAchievementsTitles());
         String roles = Role.getRolesByTitles(getRolesTitles());
         String activities = Activity.getActivitiesByTitles(getActivitiesTitles());
+<<<<<<< HEAD
+=======
+        basic_information = "{\"major\":\"major2\",\"school\":\"school2\",\"image_path\":\"/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/image.png\",\"name\":\"name2\",\"graduation_time\":\"graduation_time2\",\"admission_time\":\"admission_time2\",\"age\":0}";
+        skills = "[{\"title\": \"hahahaha\", \"content\": \"contentetetete\", \"proficiency\": \"Advanced\", \"project\": \"java\"},{\"title\": \"hahahaha22\", \"content\": \"conten22\", \"proficiency\": \"Advanced\", \"project\": \"java22\"}]";
+        activities = "[{\"title\": \"hahahaha\", \"content\": \"contentetetete\", \"time\": \"xxxx-xx-xx\", \"type\": \"111\", \"location\": \"beijing\"},{\"title\": \"hahahaha\", \"content\": \"contentetetete\", \"time\": \"xxxx-xx-xx\", \"type\": \"111\", \"location\": \"beijing\"}]";
+        roles = "[{\"title\": \"hahahaha\", \"content\": \"contentetetete\", \"time\": \"xxxx-xx-xx\"},{\"title\": \"hahahaha\", \"content\": \"contentetetete\", \"time\": \"xxxx-xx-xx\"}]";
+        achievements = "[{\"title\": \"hahahaha\", \"content\": \"contentetetete\", \"time\": \"xxxx-xx-xx\", \"team\": \"111\", \"responsibility\": \"beijing\"},{\"title\": \"hahahaha\", \"content\": \"contentetetete\", \"time\": \"xxxx-xx-xx\", \"team\": \"111\", \"responsibility\": \"beijing\"}]";
+>>>>>>> main
         String pdf_path = cv.createCV(basic_information, skills, achievements, roles, activities);
         return pdf_path;
     }
