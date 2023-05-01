@@ -6,6 +6,14 @@
 - Name: ZiLong Wang  |  QMUL-ID: 200978800  
 - Name: Yihan Zhu  |  QMUL-ID: 200979977  
 
+# Product Backlog
+
+![image](https://user-images.githubusercontent.com/72750624/232548708-2ac6e270-2a5f-4451-a0f9-759aa1c88ecd.png)
+
+# Prototype
+
+![image](https://user-images.githubusercontent.com/72750624/232549161-c72d3bd4-e2c8-49b4-8233-d461d19af4d2.png)
+
   
 # UML
 ![](src/main/resources/UML.png)  

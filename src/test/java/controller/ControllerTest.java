@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.net.URISyntaxException;
+
 import static org.junit.Assert.*;
 
 
@@ -17,35 +19,40 @@ class ControllerTest {
     }
 
     @Test
-    void testCreateBasicInformation() {
+    void testCreateBasicInformation() throws URISyntaxException {
         // Setup
-        final File head = new File("filename.txt");
+        final File head = new File("src/test/resources/C-tdd1.png");
 
         // Run the test
-        final boolean result = controllerUnderTest.createBasicInformation("name", 0, "school", "major",
+        final String result = controllerUnderTest.createBasicInformation("name", 0, "school", "major",
                 "admission_time", "graduation_time", head);
 
         // Verify the results
-        assertEquals(result, false);
+        assertEquals(result, "/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/image.png");
+        
+        // Verify getBasicInformation()
+        final String result2 = controllerUnderTest.getBasicInformation();
+        assertEquals(result2, "{\"major\":\"major\",\"school\":\"school\",\"image_path\":\"/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/image.png\",\"name\":\"name\",\"graduation_time\":\"graduation_time\",\"admission_time\":\"admission_time\",\"age\":0}");
+    }
+
+    public static void main(String args[]) {
+        System.out.println(System.getProperty("user.dir"));
     }
 
     @Test
-    void testChangeBasicInformation() {
+    void testChangeBasicInformation() throws URISyntaxException {
         // Setup
-        final File head = new File("filename.txt");
+        final File head = new File("src/test/resources/C-tdd1.png");
 
         // Run the test
-        final boolean result = controllerUnderTest.changeBasicInformation("name", 0, "school", "major",
-                "admission_time", "graduation_time", head);
+        final String result = controllerUnderTest.changeBasicInformation("name2", 0, "school2", "major2",
+                "admission_time2", "graduation_time2", head);
 
         // Verify the results
-        assertEquals(result, false);
-    }
-
-    @Test
-    void testGetBasicInformation() {
-        final String result = controllerUnderTest.getBasicInformation();
-        assertEquals(result, "");
+        assertEquals(result, "/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/image.png");
+        
+        final String result2 = controllerUnderTest.getBasicInformation();
+        assertEquals(result2, "{\"major\":\"major2\",\"school\":\"school2\",\"image_path\":\"/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/image.png\",\"name\":\"name2\",\"graduation_time\":\"graduation_time2\",\"admission_time\":\"admission_time2\",\"age\":0}");
     }
 
     @Test
@@ -74,7 +81,7 @@ class ControllerTest {
 
     @Test
     void testCreateAchievement() {
-        boolean istrue = controllerUnderTest.createAchievement("title", "content", "time", "team", "responsibility");
+        boolean istrue = controllerUnderTest.createAchievement("title", "content", "xxxx-xx-xx", "team", "responsibility");
         assertEquals(istrue, false);
     }
 
