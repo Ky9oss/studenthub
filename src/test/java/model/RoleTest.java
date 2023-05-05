@@ -1,3 +1,4 @@
+package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -24,11 +25,10 @@ public class RoleTest {
     }
     @Test
     void obtainedPath() throws URISyntaxException {
-        // 获取程序文件所在的目录
         java.net.URL classResource = BasicInformation.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
         Path RootPath = classDirectory.getParent().getParent();
-        assertEquals("/Users/mac/Desktop/Java软工/studenthub", RootPath.toString()); //改成你们文档的地址
+        assertEquals("/Users/mac/Desktop/Java锟斤拷锟斤拷/studenthub", RootPath.toString()); //锟侥筹拷锟斤拷锟斤拷锟侥碉拷锟侥碉拷址
     }
     @Test
     void TestsaveRoles() throws URISyntaxException{

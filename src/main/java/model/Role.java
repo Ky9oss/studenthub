@@ -1,7 +1,7 @@
+package model;
 import java.util.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.Arrays;
 
 import java.io.*;
