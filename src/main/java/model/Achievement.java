@@ -52,6 +52,12 @@ public class Achievement {
         return responsibility;
     }
 
+    private String actievementpath;
+
+    public void setAchievementPath(String path) {
+        this.achievement_path = path;
+    }
+
     public Achievement(String title, String content, String time, String team, String responsibility) {
         this.title = title;
         this.content = content;
@@ -65,19 +71,46 @@ public class Achievement {
      */
     public boolean saveAchievement() {
         try {
-            // 将Activity对象转换成JSON格式
+            // 获取程序文件所在的目录
+            java.net.URL classResource = BasicInformation.class.getProtectionDomain().getCodeSource().getLocation();
+            Path classDirectory = Paths.get(classResource.toURI());
+            Path resourcesPath = classDirectory.getParent().getParent();
+            Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+
+            // 获取resources的文件目录
+            String activityPath = mainResourcesPath.toString() + "achievement.json";
+
+            // 设置achievement_path变量
+
+            this.setAchievementPath(achievementPath);
+            // 将Achievement对象转换成JSON格式
             JSONObject jsonObject = new JSONObject(this);
             String json = jsonObject.toString();
 
+            // 创建resources目录
+            File resourcesDirectory = new File(mainResourcesPath.toString());
+            if (!resourcesDirectory.exists()) {
+                resourcesDirectory.mkdir();
+            }
+            if (jsonFile.exists()) {
+                // 如果文件已存在，删除它
+                jsonFile.delete();
+            }
+            if (jsonFile.createNewFile()) {
+                FileWriter writer = new FileWriter(jsonFile);
+                writer.write(json);
+                writer.close();
+            }
             // 将JSON字符串写入
-            FileWriter writer = new FileWriter("file1.json");// 自定义
+            FileWriter writer = new FileWriter("achivevement.json");
             writer.write(json);
             writer.close();
 
-            return true; // 表示保存成功
-        } catch (IOException e) {
+            // 返回相对路径
+            return resourcesDirectory.getPath();
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
-            return false; // 表示保存失败
+            return null; // 表示保存失败
         }
     }
 
@@ -104,7 +137,7 @@ public class Achievement {
      * @param year
      * @return
      */
-    public static String getAchievementsByYearForwardSort(int year) {
+    public static string getAchievementsByYearForwardSort(int year) {
         yearyear = String.valueOf(year);
         List<Achievement> results = new ArrayList<>();
 
@@ -131,8 +164,32 @@ public class Achievement {
                 }
             }
         }
+        for (int i = results.size() - 1; i >= 0; i--) {
+            if (!results.get(i).year.substring(0, 4).equals(String.valueOf(year))) {
+                results.remove(i);
+            }
+        }
 
-        String str = String.join(",", results);// StringUtils.join(list, ",");
+        for (int i = 0; i < results.size(); i++) {
+            for (int j = 0; j < results.size() - 1 - i; j++) {
+                SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
+                if (ft.parse(results.get(j).year).compareTo(ft.parse(results.get(j + 1).year)) > 0) {
+                    Collections.swap(results, j, j + 1);
+                }
+            }
+        }
+
+        for (int i = 0; i < results.size(); i++) {
+            str = str + "{\n";
+            String str = String.join(",", results.get(i));// StringUtils.join(list, ",");
+            return str;
+
+            if (i == results.size() - 1) {
+                str = str + "}\n";
+            } else {
+                str = str + "},\n";
+            }
+        }
         return str;
 
     }
@@ -142,8 +199,60 @@ public class Achievement {
      * @return
      */
     public static String getAchievementsByYearReverseSort(int year) {
-        // TODO implement here
-        return "";
+        yearyear = String.valueOf(year);
+        List<Achievement> results = new ArrayList<>();
+
+        // 遍历当前目录下的所有文件
+        File folder = new File(".");
+        for (File file : folder.listFiles()) {
+            // 如果文件是一个Achievement文件，读取文件内容并检查关键字是否匹配
+            if (file.getName().endsWith(".json")) {
+                try {
+                    String json = new String(Files.readAllBytes(file.toPath()));
+                    JSONObject jsonObject = new JSONObject(json);
+                    Achievement achievement = new Achievement(
+                            jsonObject.getString("title"),
+                            jsonObject.getString("content"),
+                            jsonObject.getString("time"),
+                            jsonObject.getString("team"),
+                            jsonObject.getString("responsibility"));
+
+                    if (achievement.getTime().contains(yearyear)) {
+                        results.add(achievement);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        for (int i = results.size() - 1; i >= 0; i--) {
+            if (!results.get(i).year.substring(0, 4).equals(String.valueOf(year))) {
+                results.remove(i);
+            }
+        }
+
+        for (int i = 0; i < results.size(); i++) {
+            for (int j = 0; j < results.size() - 1 - i; j++) {
+                SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
+                if (ft.parse(results.get(j).year).compareTo(ft.parse(results.get(j + 1).year)) > 0) {
+                    Collections.swap(results, j, j + 1);
+                }
+            }
+        }
+
+        for (int i = 0; i < results.size(); i++) {
+            str = str + "{\n";
+            String str = String.join(",", results.get(i));// StringUtils.join(list, ",");
+            return str;
+
+            if (i == results.size() - 1) {
+                str = str + "}\n";
+            } else {
+                str = str + "},\n";
+            }
+        }
+        return str;
+
     }
 
     /**
@@ -172,7 +281,7 @@ public class Achievement {
         }
     }
 
-    public static String getAllAchivements(){
+    public static string getAllAchivements(){
 	    List<Achivement> results = new ArrayList<>();
         
             // 遍历当前目录下的所有文件
@@ -198,6 +307,4 @@ public class Achievement {
             return str;
           }
           }
-}
-
 }

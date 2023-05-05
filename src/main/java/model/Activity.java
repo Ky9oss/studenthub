@@ -2,6 +2,24 @@ package model;
 
 import java.util.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
+
 /**
  * 
  */
@@ -60,24 +78,59 @@ public class Activity {
         return location;
     }
 
+    private String activity_path;
+
+    public void setActivityPath(String path) {
+        this.activity_path = path;
+    }
+
     /**
      * @return
      */
     public boolean saveActivity() {
         try {
+            // 获取程序文件所在的目录
+            java.net.URL classResource = BasicInformation.class.getProtectionDomain().getCodeSource().getLocation();
+            Path classDirectory = Paths.get(classResource.toURI());
+            Path resourcesPath = classDirectory.getParent().getParent();
+            Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+
+            // 获取resources的文件目录
+            String activityPath = mainResourcesPath.toString() + "activity.json";
+
+            // 设置image_path变量
+
+            this.setActivityPath(activityPath);
+
             // 将Activity对象转换成JSON格式
             JSONObject jsonObject = new JSONObject(this);
             String json = jsonObject.toString();
 
+            // 创建resources目录
+            File resourcesDirectory = new File(mainResourcesPath.toString());
+            if (!resourcesDirectory.exists()) {
+                resourcesDirectory.mkdir();
+            }
+
+            if (jsonFile.exists()) {
+                // 如果文件已存在，删除它
+                jsonFile.delete();
+            }
+            if (jsonFile.createNewFile()) {
+                FileWriter writer = new FileWriter(jsonFile);
+                writer.write(json);
+                writer.close();
+            }
             // 将JSON字符串写入
-            FileWriter writer = new FileWriter("file01.txt");// 自定义的文件夹
+            FileWriter writer = new FileWriter("activity.json");
             writer.write(json);
             writer.close();
 
-            return true; // 表示保存成功
-        } catch (IOException e) {
+            // 返回相对路径
+            return resourcesDirectory.getPath();
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
-            return false; // 表示保存失败
+            return null; // 表示保存失败
         }
     }
 
@@ -133,9 +186,34 @@ public class Activity {
                 }
             }
         }
+        for (int i = results.size() - 1; i >= 0; i--) {
+            if (!results.get(i).year.substring(0, 4).equals(String.valueOf(year))) {
+                results.remove(i);
+            }
+        }
 
-        String str = String.join(",", results);// StringUtils.join(list, ",");
+        for (int i = 0; i < results.size(); i++) {
+            for (int j = 0; j < results.size() - 1 - i; j++) {
+                SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
+                if (ft.parse(results.get(j).year).compareTo(ft.parse(results.get(j + 1).year)) > 0) {
+                    Collections.swap(results, j, j + 1);
+                }
+            }
+        }
+
+        for (int i = 0; i < results.size(); i++) {
+            str = str + "{\n";
+            String str = String.join(",", results.get(i));// StringUtils.join(list, ",");
+            return str;
+
+            if (i == results.size() - 1) {
+                str = str + "}\n";
+            } else {
+                str = str + "},\n";
+            }
+        }
         return str;
+
     }
 
     /**
@@ -144,8 +222,63 @@ public class Activity {
      * @return
      */
     public static String getActivitiesByYearAndByTypeReverseSort(int year, String type) {
-        // TODO implement here
-        return "";
+        yearyear = String.valueOf(year);
+        List<Activity> results = new ArrayList<>();
+
+        // 遍历当前目录下的所有文件
+        File folder = new File(".");
+        for (File file : folder.listFiles()) {
+            // 如果文件是一个Activity文件，读取文件内容并检查关键字是否匹配
+            if (file.getName().endsWith(".json")) {
+                try {
+                    String json = new String(Files.readAllBytes(file.toPath()));
+                    JSONObject jsonObject = new JSONObject(json);
+                    Activity activity = new Activity(
+                            jsonObject.getString("title"),
+                            jsonObject.getString("content"),
+                            jsonObject.getString("time"),
+                            jsonObject.getString("type"),
+                            jsonObject.getString("location"));
+
+                    if (activity.getTime().contains(yearyear) &&
+                            activity.getType().contains(typetype)) {
+                        results.add(activity);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        for (int i = results.size() - 1; i >= 0; i--) {
+            if (!results.get(i).year.substring(0, 4).equals(String.valueOf(year))) {
+                results.remove(i);
+            }
+        }
+
+        for (int i = 0; i < results.size(); i++) {
+            for (int j = 0; j < results.size() - 1 - i; j++) {
+                SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
+                if (ft.parse(results.get(j).year).compareTo(ft.parse(results.get(j + 1).year)) > 0) {
+                    Collections.swap(results, j, j + 1);
+                }
+            }
+        }
+
+        for (int i = 0; i < results.size(); i++) {
+            str = str + "{\n";
+            String str = String.join(",", results.get(i));// StringUtils.join(list, ",");
+            return str;
+
+            if (i == results.size() - 1) {
+                str = str + "}\n";
+            } else {
+                str = str + "},\n";
+            }
+        }
+        return str;
+
+    }
+
     }
 
     /**
@@ -174,9 +307,10 @@ public class Activity {
         }
     }
 
-    }
-
-    public static String getAllActivities(){
+    /**
+     * @return
+     */
+    public static string getAllActivities(){
 	    List<Activity> results = new ArrayList<>();
         
             // 遍历当前目录下的所有文件
