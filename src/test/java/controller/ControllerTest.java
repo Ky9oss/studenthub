@@ -66,14 +66,14 @@ class ControllerTest {
         final File head = new File("src/test/resources/C-tdd1.png");
 
         // Run the test
-        final String result = controllerUnderTest.changeBasicInformation("name2", 0, "school2", "major2",
+        final String result = controllerUnderTest.changeBasicInformation("name3", 0, "school2", "major2",
                 "admission_time2", "graduation_time2", head);
 
         // Verify the results
         assertEquals(result, "/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/image.png");
         
         final String result2 = controllerUnderTest.getBasicInformation();
-        assertEquals(result2, "{\"major\":\"major2\",\"school\":\"school2\",\"image_path\":\"/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/image.png\",\"name\":\"name2\",\"graduation_time\":\"graduation_time2\",\"admission_time\":\"admission_time2\",\"age\":0}");
+        assertEquals(result2, "{\"major\":\"major2\",\"school\":\"school2\",\"image_path\":\"/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/image.png\",\"name\":\"name3\",\"graduation_time\":\"graduation_time2\",\"admission_time\":\"admission_time2\",\"age\":0}");
     }
 
     @Test
