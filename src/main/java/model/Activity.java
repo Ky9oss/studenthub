@@ -105,7 +105,7 @@ public class Activity {
      * @param type
      * @return
      */
-    public static string getActivitiesByYearAndByTypeForwardSort(int year, String typetype) {
+    public static String getActivitiesByYearAndByTypeForwardSort(int year, String typetype) {
         yearyear = String.valueOf(year);
         List<Activity> results = new ArrayList<>();
 

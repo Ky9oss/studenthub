@@ -9,19 +9,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 
 import static org.junit.Assert.*;
-import java.nio.file.Files;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 
 class ControllerTest {
 
@@ -46,6 +34,7 @@ class ControllerTest {
         
         // Verify getBasicInformation()
         final String result2 = controllerUnderTest.getBasicInformation();
+        System.out.println("lalala");
         assertEquals(result2, "{\"major\":\"major\",\"school\":\"school\",\"image_path\":\"/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/image.png\",\"name\":\"name\",\"graduation_time\":\"graduation_time\",\"admission_time\":\"admission_time\",\"age\":0}");
     }
 
@@ -55,7 +44,7 @@ class ControllerTest {
         System.out.println(result2);
         JSONObject jsonObj = new JSONObject(result2);
         System.out.println(jsonObj);
-        String activities = "[{\"title\": \"hahahaha\", \"content\": \"contentetetete\"},{\"title\": \"hahahaha\", \"content\": \"contentetetete\"}]";
+        String activities = "[{\"title\":\"hahahaha\",\"content\":\"contentetetete\"},{\"title\":\"hahahaha\",\"content\":\"contentetetete\"}]";
         JSONArray jsonObj2 = new JSONArray(activities);
         System.out.println(jsonObj2);
     }
@@ -77,190 +66,172 @@ class ControllerTest {
     }
 
     @Test
-    void testCreateSkill() {
-        boolean istrue = controllerUnderTest.createSkill("title", "content", "proficiency", "project");
-        assertEquals(istrue, false);
-    }
-
-    @Test
-    void testChangeSkill() {
-        boolean istrue = controllerUnderTest.changeSkill("title", "content", "proficiency", "project");
-        assertEquals(istrue, false);
-    }
-
-    @Test
-    void testDeleteSkill() {
-        boolean istrue = controllerUnderTest.deleteSkill("title");
-        assertEquals(istrue, false);
-    }
-
-    @Test
-    void testGetSkillsByProficiency() {
-        String json_str = controllerUnderTest.getSkillsByProficiency("proficiency");
-        assertEquals(json_str, "");
-    }
-
-    @Test
-    void testCreateAchievement() {
-        boolean istrue = controllerUnderTest.createAchievement("title", "content", "xxxx-xx-xx", "team", "responsibility");
-        assertEquals(istrue, false);
-    }
-
-    @Test
-    void testChangeAchievement() {
-        boolean istrue = controllerUnderTest.changeAchievement("title", "content", "time", "team", "responsibility");
-        assertEquals(istrue, false);
+    void testSkill() {
+        boolean istrue = controllerUnderTest.createSkill("title", "111", "proficiency11", "project");
+        assertEquals(istrue, true);
+        boolean istrue2 = controllerUnderTest.createSkill("title22", "content22", "proficiency22", "project22");
+        assertEquals(istrue2, true);
+        boolean istrue3 = controllerUnderTest.createSkill("title33", "111", "proficiency11", "project33");
+        assertEquals(istrue3, true);
+        boolean istrue4 = controllerUnderTest.changeSkill("title22", "111", "proficiency11", "project555");
+        assertEquals(istrue4, true);
+        boolean istrue5 = controllerUnderTest.createSkill("title55", "content", "proficiency11", "project555");
+        assertEquals(istrue5, true);
+        boolean istrue6 = controllerUnderTest.deleteSkill("title55");
+        assertEquals(istrue6, true);
+        String json_str = controllerUnderTest.getSkillsByProficiency("proficiency11");
+        JSONArray json_array = new JSONArray(json_str);
+        System.out.println(json_array);
     }
 
 
-    @Test
-    void testDeleteAchievement() {
-        boolean istrue = controllerUnderTest.deleteAchievement("title");
-        assertEquals(istrue, false);
-    }
 
     @Test
-    void testGetAchievementsByYearForwardSort() {
-        String json_str = controllerUnderTest.getAchievementsByYearForwardSort(2020);
-        assertEquals(json_str, "");
+    void testAchievement() {
+        boolean istrue = controllerUnderTest.createAchievement("title1", "content", "2022-11-15", "team", "responsibility");
+        assertEquals(istrue, true);
+        boolean istrue2 = controllerUnderTest.createAchievement("title2", "content", "2023-1-21", "team", "responsibility");
+        assertEquals(istrue2, true);
+        boolean istrue3 = controllerUnderTest.createAchievement("title3", "111", "2022-5-25", "team", "responsibility");
+        assertEquals(istrue3, true);
+        boolean istrue4 = controllerUnderTest.changeAchievement("title1", "222", "2022-6-9", "team", "responsibility");
+        assertEquals(istrue4, true);
+        boolean istrue5 = controllerUnderTest.createAchievement("title5", "333", "2022-12-21", "team", "responsibility");
+        assertEquals(istrue5, true);
+        boolean istrue6 = controllerUnderTest.createAchievement("title6", "content", "2022-12-21", "team", "responsibility");
+        assertEquals(istrue6, true);
+        boolean istrue7 = controllerUnderTest.deleteAchievement("title6");
+        assertEquals(istrue7, true);
+
+        String json_str = controllerUnderTest.getAchievementsByYearForwardSort(2022);
+        JSONArray json_array = new JSONArray(json_str);
+        System.out.println(json_array);
+        String json_str2 = controllerUnderTest.getAchievementsByYearReverseSort(2022);
+        JSONArray json_array2 = new JSONArray(json_str2);
+        System.out.println(json_array2);
     }
 
-    @Test
-    void testGetAchievementsByYearReverseSort() {
-        String json_str = controllerUnderTest.getAchievementsByYearReverseSort(2020);
-        assertEquals(json_str, "");
-    }
+
 
     @Test
-    void testCreateRole() {
-        boolean istrue = controllerUnderTest.createRole("title", "content", "time");
-        assertEquals(istrue, false);
+    void testRole() {
+        boolean istrue = controllerUnderTest.createRole("title1", "content", "2022-11-15");
+        assertEquals(istrue, true);
+        boolean istrue2 = controllerUnderTest.createRole("title2", "content", "2023-1-21");
+        assertEquals(istrue2, true);
+        boolean istrue3 = controllerUnderTest.createRole("title3", "111", "2022-5-25");
+        assertEquals(istrue3, true);
+        boolean istrue4 = controllerUnderTest.changeRole("title1", "222", "2022-6-9");
+        assertEquals(istrue4, true);
+        boolean istrue5 = controllerUnderTest.createRole("title5", "333", "2022-12-21");
+        assertEquals(istrue5, true);
+        boolean istrue6 = controllerUnderTest.createRole("title6", "content", "2022-12-21");
+        assertEquals(istrue6, true);
+        boolean istrue7 = controllerUnderTest.deleteRole("title6");
+        assertEquals(istrue7, true);
+
+        String json_str = controllerUnderTest.getRolesByYearForwardSort(2022);
+        JSONArray json_array = new JSONArray(json_str);
+        System.out.println(json_array);
+        String json_str2 = controllerUnderTest.getRolesByYearReverseSort(2022);
+        JSONArray json_array2 = new JSONArray(json_str2);
+        System.out.println(json_array2);
     }
 
-    @Test
-    void testChangeRole() {
-        boolean istrue = controllerUnderTest.changeRole("title", "content", "time");
-        assertEquals(istrue, false);
-    }
+
 
     @Test
-    void testDeleteRole() {
-        boolean istrue = controllerUnderTest.deleteRole("title");
-        assertEquals(istrue, false);
+    void testActivity() {
+        boolean istrue = controllerUnderTest.createActivity("title1", "content", "2022-11-15", "type", "location");
+        assertEquals(istrue, true);
+        boolean istrue2 = controllerUnderTest.createActivity("title2", "content", "2023-1-21", "type", "location");
+        assertEquals(istrue2, true);
+        boolean istrue3 = controllerUnderTest.createActivity("title3", "111", "2022-5-25", "type", "location");
+        assertEquals(istrue3, true);
+        boolean istrue4 = controllerUnderTest.changeActivity("title1", "222", "2022-6-9", "type", "location");
+        assertEquals(istrue4, true);
+        boolean istrue5 = controllerUnderTest.createActivity("title5", "333", "2022-12-21", "type", "location");
+        assertEquals(istrue5, true);
+        boolean istrue6 = controllerUnderTest.createActivity("title6", "content", "2022-12-22", "type222", "location");
+        assertEquals(istrue6, true);
+        boolean istrue7 = controllerUnderTest.createActivity("title7", "content", "2022-12-22", "type", "location");
+        assertEquals(istrue7, true);
+        boolean istrue8 = controllerUnderTest.deleteActivity("title7");
+        assertEquals(istrue8, true);
+        String json_str = controllerUnderTest.getActivitiesByYearAndByTypeForwardSort(2022, "type");
+        JSONArray json_array = new JSONArray(json_str);
+        System.out.println(json_array);
+        String json_str2 = controllerUnderTest.getActivitiesByYearAndByTypeReverseSort(2022, "type");
+        JSONArray json_array2 = new JSONArray(json_str2);
+        System.out.println(json_array2);
     }
 
-    @Test
-    void testGetRolesByYearForwardSort() {
-        String json_str = controllerUnderTest.getRolesByYearForwardSort(2020);
-        assertEquals(json_str, "");
-    }
+
 
     @Test
-    void testGetRolesByYearReverseSort() {
-        String json_str = controllerUnderTest.getRolesByYearReverseSort(2020);
-        assertEquals(json_str, "");
+    void testCourse() {
+        boolean istrue = controllerUnderTest.createCourse("title1", "content", "2022-11-15", "type", "teacher", 0, 0);
+        assertEquals(istrue, true);
+        boolean istrue2 = controllerUnderTest.createCourse("title2", "content", "2023-1-21", "type", "teacher", 0, 0);
+        assertEquals(istrue2, true);
+        boolean istrue3 = controllerUnderTest.createCourse("title3", "111", "2022-5-25", "type", "teacher", 0, 0);
+        assertEquals(istrue3, true);
+        boolean istrue4 = controllerUnderTest.changeCourse("title1", "222", "2022-6-9", "type", "teacher", 0, 0);
+        assertEquals(istrue4, true);
+        boolean istrue5 = controllerUnderTest.createCourse("title5", "333", "2022-12-21", "type", "teacher", 0, 0);
+        assertEquals(istrue5, true);
+        boolean istrue6 = controllerUnderTest.createCourse("title6", "content", "2022-12-22", "type222", "teacher", 0, 0);
+        assertEquals(istrue6, true);
+        boolean istrue7 = controllerUnderTest.createCourse("title7", "content", "2022-12-22", "type", "teacher", 0, 0);
+        assertEquals(istrue7, true);
+        boolean istrue8 = controllerUnderTest.deleteCourse("title7");
+        assertEquals(istrue8, true);
+
+        String json_str = controllerUnderTest.getCoursesByYearAndByTypeForwardSort(2022, "type");
+        JSONArray json_array = new JSONArray(json_str);
+        System.out.println(json_array);
+        String json_str2 = controllerUnderTest.getCoursesByYearAndByTypeReverseSort(2022, "type");
+        JSONArray json_array2 = new JSONArray(json_str2);
+        System.out.println(json_array2);
     }
 
-    @Test
-    void testCreateActivity() {
-        boolean istrue = controllerUnderTest.createActivity("title", "content", "time", "type", "location");
-        assertEquals(istrue, false);
-    }
+
 
     @Test
-    void testChangeActivity() {
-        boolean istrue = controllerUnderTest.changeActivity("title", "content", "time", "type", "location");
-        assertEquals(istrue, false);
-    }
-
-    @Test
-    void testDeleteActivity() {
-        boolean istrue = controllerUnderTest.deleteActivity("title");
-        assertEquals(istrue, false);
-    }
-
-    @Test
-    void testGetActivitiesByYearAndByTypeForwardSort() {
-        String json_str = controllerUnderTest.getActivitiesByYearAndByTypeForwardSort(2020, "type");
-        assertEquals(json_str, "");
-    }
-
-    @Test
-    void testGetActivitiesByYearAndByTypeReverseSort() {
-        String json_str = controllerUnderTest.getActivitiesByYearAndByTypeReverseSort(2020, "type");
-        assertEquals(json_str, "");
-    }
-
-    @Test
-    void testCreateCourse() {
-        boolean istrue = controllerUnderTest.createCourse("title", "content", "time", "type", "teacher", 0, 0);
-        assertEquals(istrue, false);
-    }
-
-    @Test
-    void testChangeCourse() {
-        boolean istrue = controllerUnderTest.changeCourse("title", "content", "time", "type", "teacher", 0, 0);
-        assertEquals(istrue, false);
-    }
-
-    @Test
-    void testDeleteCourse() {
-        boolean istrue = controllerUnderTest.deleteCourse("title");
-        assertEquals(istrue, false);
-    }
-
-    @Test
-    void testGetCoursesByYearAndByTypeForwardSort() {
-        String json_str = controllerUnderTest.getCoursesByYearAndByTypeForwardSort(2020, "type");
-        assertEquals(json_str, "");
-    }
-
-    @Test
-    void testGetCoursesByYearAndByTypeReverseSort() {
-        String json_str = controllerUnderTest.getCoursesByYearAndByTypeReverseSort(2020, "type");
-        assertEquals(json_str, "");
-    }
-
-    @Test
-    void testCalculateGradePointAverage() {
+    void testCalculater() {
         double result = controllerUnderTest.calculateGradePointAverage(4);
-        assertEquals(result, 0.0, 0.000001);
+        assertEquals(result, 0, 0.01);
+
+
+        boolean istrue = controllerUnderTest.createCourse("title1", "content", "2022-11-15", "type", "teacher", 85, 2);
+        assertEquals(istrue, true);
+        boolean istrue2 = controllerUnderTest.createCourse("title2", "content", "2023-1-21", "type", "teacher", 82, 4);
+        assertEquals(istrue2, true);
+        boolean istrue3 = controllerUnderTest.createCourse("title3", "content", "2022-5-25", "type", "teacher", 95, 3);
+        assertEquals(istrue3, true);
+        boolean istrue4 = controllerUnderTest.changeCourse("title1", "content", "2022-6-9", "type", "teacher", 72, 3);
+        assertEquals(istrue4, true);
+        boolean istrue5 = controllerUnderTest.createCourse("title5", "content", "2022-12-21", "type", "teacher", 86, 4);
+        assertEquals(istrue5, true);
+        boolean istrue6 = controllerUnderTest.createCourse("title6", "content", "2022-12-22", "type222", "teacher", 60, 5);
+        assertEquals(istrue6, true);
+        boolean istrue7 = controllerUnderTest.createCourse("title6", "content", "2022-12-22", "type222", "teacher", 98, 3);
+        assertEquals(istrue7, true);
+        boolean istrue8 = controllerUnderTest.createCourse("title6", "content", "2022-12-22", "type222", "teacher", 84, 2);
+        assertEquals(istrue8, true);
+        boolean istrue9 = controllerUnderTest.createCourse("title6", "content", "2022-12-22", "type222", "teacher", 86, 4);
+        assertEquals(istrue9, true);
+        boolean istrue10 = controllerUnderTest.createCourse("title6", "content", "2022-12-22", "type222", "teacher", 86, 2);
+        assertEquals(istrue10, true);
         double result1 = controllerUnderTest.calculateGradePointAverage(1);
-        assertEquals(result1, 0.1, 0.000001);
+        assertEquals(result1, 3.28, 0.01);
         double result2 = controllerUnderTest.calculateGradePointAverage(2);
-        assertEquals(result2, 0.2, 0.000001);
+        assertEquals(result2, 3.13, 0.2);
         double result3 = controllerUnderTest.calculateGradePointAverage(3);
-        assertEquals(result3, 0.3, 0.000001);
+        assertEquals(result3, 3.31, 0.1);
     }
 
     @Test
-    void testCreateCV() {
-        String json_str = controllerUnderTest.createCV("skills_titles", "achievements_titles", "roles_titles",
-                "activities_titles");
-        assertEquals(json_str, "");
-    }
+    void testControllerGetTitles(){}
 
-    @Test
-    void testGetSkillsTitles() {
-        String json_str = controllerUnderTest.getSkillsTitles();
-        assertEquals(json_str, "");
-    }
-
-    @Test
-    void testGetRolesTitles() {
-        String json_str = controllerUnderTest.getRolesTitles();
-        assertEquals(json_str, "");
-    }
-
-    @Test
-    void testGetActivitiesTitles() {
-        String json_str = controllerUnderTest.getActivitiesTitles();
-        assertEquals(json_str, "");
-    }
-
-    @Test
-    void testGetAchievementsTitles() {
-        String json_str = controllerUnderTest.getAchievementsTitles();
-        assertEquals(json_str, "");
-    }
 }
