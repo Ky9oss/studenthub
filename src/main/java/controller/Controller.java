@@ -264,16 +264,16 @@ public class Controller {
         String grades_credits_types = Course.getAllGradesAndCreditsAndType();
         switch (method) {
             case 1:
-                double result1 = calculator.calculateByPostgraduateRecommendation(grades_credits_types);
+                double result1 = calculator.calculateByStandardWeightingAlgorithm(grades_credits_types);
                 return result1;
             case 2:
-                double result2 = calculator.calculateByStudyingAbroad(grades_credits_types);
+                double result2 = calculator.calculateByBeiDa4_0(grades_credits_types);
                 return result2;
             case 3:
                 double result3 = calculator.calculateByWorldEducationScore(grades_credits_types);
                 return result3; 
             default:
-                return 0.0;
+                return 0;
         }
  
     }
