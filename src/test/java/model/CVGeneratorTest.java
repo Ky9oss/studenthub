@@ -3,8 +3,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -18,7 +20,7 @@ public class CVGeneratorTest {
     }
 
     @Test
-    public void testGenerateCV() {
+    public void testGenerateCV() throws URISyntaxException {
         // 提供输入字符串
         String basic_information = "{\"major\":\"major_content\",\"school\":\"school_content\",\"image_path\":\"/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/image.png\",\"name\":\"name_content\",\"graduation_time\":\"graduation_time_content\",\"admission_time\":\"admission_time_content\",\"age\":0}";
         String skills = "[{\"title\": \"title_content\", \"content\": \"content_content\", \"proficiency\": \"Advanced(for example)\", \"project\": \"java(for example)\"},{\"title2\": \"hahahaha22\", \"content\": \"conten22\", \"proficiency\": \"Advanced\", \"project\": \"java22\"}]";

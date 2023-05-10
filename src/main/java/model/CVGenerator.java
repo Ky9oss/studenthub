@@ -6,12 +6,14 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.json.JSONObject;
 
 public class CVGenerator {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws URISyntaxException {
         // 提供您的输入字符串。
         String basic_information = "Your basic_information string";
         String skills = "Your skills string";
@@ -23,7 +25,7 @@ public class CVGenerator {
         cvGenerator.generateCV(basic_information, skills, activities, roles, achievements);
     }
 
-    public void generateCV(String basic_information, String skills, String activities, String roles, String achievements) {
+    public void generateCV(String basic_information, String skills, String activities, String roles, String achievements) throws URISyntaxException {
         try {
             XWPFDocument document = new XWPFDocument();
 
