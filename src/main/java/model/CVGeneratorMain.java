@@ -1,5 +1,9 @@
+package model;
+
+import java.net.URISyntaxException;
+
 public class CVGeneratorMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws URISyntaxException {
         CVGenerator cvGenerator = new CVGenerator();
 
         String basic_information = "{\"major\":\"major_content\",\"school\":\"school_content\",\"image_path\":\"/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/image.png\",\"name\":\"name_content\",\"graduation_time\":\"graduation_time_content\",\"admission_time\":\"admission_time_content\",\"age\":0}";
