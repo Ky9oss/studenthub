@@ -73,6 +73,10 @@ public class Course {
      */
     private double credit;
 
+    public static String getCoursesForCV(){
+        return "";
+    }
+
     /**
      * @return
      */
@@ -176,7 +180,7 @@ public class Course {
     /**
      * @return
      */
-    public static String getAllGradesAndCreditsAndType() {
+    public static JSONArray getAllGradesAndCreditsAndType() {
         // TODO implement here
         String results = new StringBuffer();
         File folder = new File(".");

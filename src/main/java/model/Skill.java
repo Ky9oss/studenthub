@@ -38,6 +38,10 @@ public class Skill {
      */
     private String project;
 
+    public static String getSkillsForCV(){
+        return "";
+    }
+
     /**
      * @return
      */
