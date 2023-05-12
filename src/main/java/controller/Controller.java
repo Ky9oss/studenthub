@@ -1,6 +1,7 @@
 package controller;
 import java.io.File;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 
 //import java.util.*;
 import model.*;
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.core.*;
+import org.json.JSONArray;
 
 
 
@@ -50,22 +52,22 @@ public class Controller {
 
 
     //create skill
-    public boolean createSkill(String title, String content, String proficiency, String project) {
+    public int createSkill(String title, String content, String proficiency, String project) {
         Skill skill = new Skill(title, content, proficiency, project);
-        boolean istrue = skill.saveSkill();
+        int istrue = skill.saveSkill();
         return istrue;
     }
 
 
     //change skill
-    public boolean changeSkill(String title, String content, String proficiency, String project) {
+    public int changeSkill(String title, String content, String proficiency, String project) {
         Skill skill = new Skill(title, content, proficiency, project);
         boolean istrue = Skill.deleteSkill(title);
         if(istrue==false){
-            return false;
+            return 0;
         }
 
-        boolean istrue1 = skill.saveSkill();
+        int istrue1 = skill.saveSkill();
         return istrue1;
     }
 
@@ -85,41 +87,41 @@ public class Controller {
 
 
     //create achievement
-    public boolean createAchievement(String title, String content, String time, String team, String responsibility) {
+    public int createAchievement(String title, String content, String time, String team, String responsibility) throws URISyntaxException {
         Achievement achievement = new Achievement(title, content, time, team, responsibility);
-        boolean istrue = achievement.saveAchievement();
+        int istrue = achievement.saveAchievement();
         return istrue;
     }
 
 
     //change achievement
-    public boolean changeAchievement(String title, String content, String time, String team, String responsibility) {
+    public int changeAchievement(String title, String content, String time, String team, String responsibility) throws URISyntaxException {
         Achievement achievement = new Achievement(title, content, time, team, responsibility);
         boolean istrue = Achievement.deleteAchievement(title);
         if(istrue==false){
-            return false;
+            return 0;
         }
 
-        boolean istrue1 = achievement.saveAchievement();
+        int istrue1 = achievement.saveAchievement();
         return istrue1;
     }
 
  
     //delete achivement
-    public boolean deleteAchievement(String title) {
+    public boolean deleteAchievement(String title) throws URISyntaxException, ParseException{
         boolean istrue = Achievement.deleteAchievement(title);
         return istrue;
     }
 
 
     //With foraward sorting, get achivement by year
-    public String getAchievementsByYearForwardSort(int year) {
+    public String getAchievementsByYearForwardSort(int year) throws URISyntaxException, ParseException{
         String json_str = Achievement.getAchievementsByYearForwardSort(year);
         return json_str;
     }
 
     //With reverse sorting, get achivement by year
-    public String getAchievementsByYearReverseSort(int year) {
+    public String getAchievementsByYearReverseSort(int year) throws URISyntaxException, ParseException{
         String json_str = Achievement.getAchievementsByYearReverseSort(year);
         return json_str;
     }
@@ -127,35 +129,35 @@ public class Controller {
 
 
     //create role
-    public boolean createRole(String title, String content, String time) {
+    public int createRole(String title, String content, String time) {
         Role role = new Role(title, content, time);
-        boolean istrue = role.saveRole();
+        int istrue = role.saveRoles();
         return istrue;
     }
 
 
 
     //change role
-    public boolean changeRole(String title, String content, String time) {
+    public int changeRole(String title, String content, String time) {
         Role role = new Role(title, content, time);
-        boolean istrue1 = Role.deleteRole(title);
+        boolean istrue1 = Role.deleteRoles(title);
         if(istrue1==false){
-            return false;
+            return 0;
         }
-        boolean istrue = role.saveRole();
+        int istrue = role.saveRoles();
         return istrue;
     }
 
 
     //delete role
     public boolean deleteRole(String title) {
-        boolean istrue = Role.deleteRole(title);
+        boolean istrue = Role.deleteRoles(title);
         return istrue;
     }
 
 
     //get roles by year with forward sorting
-    public String getRolesByYearForwardSort(int year) {
+    public String getRolesByYearForwardSort(int year) throws ParseException {
         String json_str = Role.getRolesByYearForwardSort(year);
         return json_str;
     }
@@ -163,7 +165,7 @@ public class Controller {
 
 
     //get roles by year with reverse sorting
-    public String getRolesByYearReverseSort(int year) {
+    public String getRolesByYearReverseSort(int year) throws ParseException {
         String json_str = Role.getRolesByYearReverseSort(year);
         return json_str;
     }
@@ -171,28 +173,28 @@ public class Controller {
 
 
     //create activity
-    public boolean createActivity(String title, String content, String time, String type, String location) {
+    public int createActivity(String title, String content, String time, String type, String location) throws URISyntaxException {
         Activity activity = new Activity(title, content, time, type, location);
-        boolean istrue = activity.saveActivity();
+        int istrue = activity.saveActivity();
         return istrue;
     }
 
 
     //change activity
-    public boolean changeActivity(String title, String content, String time, String type, String location) {
+    public int changeActivity(String title, String content, String time, String type, String location) throws URISyntaxException {
         Activity activity = new Activity(title, content, time, type, location);
         boolean istrue = Activity.deleteActivity(title);
         if(istrue==false){
-            return false;
+            return 0;
         }
-        boolean istrue1 = activity.saveActivity();
+        int istrue1 = activity.saveActivity();
         return istrue1;
     }
 
 
 
     //delete activity
-    public boolean deleteActivity(String title) {
+    public boolean deleteActivity(String title) throws URISyntaxException {
         boolean istrue = Activity.deleteActivity(title);
         return istrue;
     }
@@ -200,7 +202,7 @@ public class Controller {
 
 
     //get activities by year and type with forward sorting
-    public String getActivitiesByYearAndByTypeForwardSort(int year, String type) {
+    public String getActivitiesByYearAndByTypeForwardSort(int year, String type) throws URISyntaxException, ParseException{
         String json_str = Activity.getActivitiesByYearAndByTypeForwardSort(year, type);
         return json_str;
     }
@@ -208,28 +210,28 @@ public class Controller {
 
 
     //get activities by year and type with reverse sorting
-    public String getActivitiesByYearAndByTypeReverseSort(int year, String type) {
+    public String getActivitiesByYearAndByTypeReverseSort(int year, String type) throws URISyntaxException, ParseException{
         String json_str = Activity.getActivitiesByYearAndByTypeReverseSort(year, type);
         return json_str;
     }
 
 
     //create course
-    public boolean createCourse(String title, String content, String time, String type, String teacher, int grade, int credit) {
+    public int createCourse(String title, String content, String time, String type, String teacher, int grade, int credit) {
         Course course = new Course(title, content, time, type, teacher, grade, credit);
-        boolean istrue = course.saveCourse();
+        int istrue = course.saveCourse();
         return istrue;
     }
 
 
     //change course
-    public boolean changeCourse(String title, String content, String time, String type, String teacher, int grade, int credit) {
+    public int changeCourse(String title, String content, String time, String type, String teacher, int grade, int credit) {
         Course course = new Course(title, content, time, type, teacher, grade, credit);
         boolean istrue = Course.deleteCourse(title);
         if(istrue==false){
-            return false;
+            return 0;
         }
-        boolean istrue1 = course.saveCourse();
+        int istrue1 = course.saveCourse();
         return istrue1;
     }
 
@@ -255,19 +257,21 @@ public class Controller {
         String json_str = Course.getCoursesByYearAndByTypeReverseSort(year, type);
         return json_str;
     }
+}
 
 
 
     //calculate GPA
+    /*
     public double calculateGradePointAverage(int method) {
         Calculator calculator = new Calculator();
-        String grades_credits_types = Course.getAllGradesAndCreditsAndType();
+        JSONArray grades_credits_types = Course.getAllGradesAndCreditsAndType();
         switch (method) {
             case 1:
-                double result1 = calculator.calculateByStandardWeightingAlgorithm(grades_credits_types);
+                double result1 = calculator.calculateByStandard(grades_credits_types);
                 return result1;
             case 2:
-                double result2 = calculator.calculateByBeiDa4_0(grades_credits_types);
+                double result2 = calculator.calculateByBeida4_0(grades_credits_types);
                 return result2;
             case 3:
                 double result3 = calculator.calculateByWorldEducationScore(grades_credits_types);
@@ -296,8 +300,9 @@ public class Controller {
         String pdf_path = cv.createCV(basic_information, skills, achievements, roles, activities);
         return pdf_path;
     }
+     */
 
-
+/* 
     //get skills all titles
     public String getSkillsTitles(){
         String jsonStr = Skill.getAllSkills();
@@ -405,3 +410,4 @@ public class Controller {
     }
 
 }
+*/

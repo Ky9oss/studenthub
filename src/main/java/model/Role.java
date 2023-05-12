@@ -53,8 +53,10 @@ public class Role {
     /**
      * @return
      */
-    public boolean saveRoles() {
-        String path = "C:/Users/Hanxi/Desktop/role.json";
+    //任务1 ： 存之前判断：输入的数据是否为空，如果为空，返回-1;输入的标题是否重复，如果重复，返回-2。如果成功，return 1,如果因为其他原因失败，return 0
+    /*  这是一个示例  
+        public int saveRoles() {
+        String path = "/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/role.json";
         String json = getStr(path);
         Gson gson = new Gson();
         Role[] roles = gson.fromJson(json, Role[].class);
@@ -65,7 +67,53 @@ public class Role {
         roleList.add(newRole);
 
         String savedRoles = gson.toJson(roleList);
-        return setStr(path, savedRoles);
+        if(setStr(path, savedRoles)==true){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+        //再加return-1和return-2的情况
+        xxx
+        return -1
+        xxx
+        return -2
+    } */
+    //相应的，ControllerTest所对应的每一项测试也要全部更改
+    //任务2 ： 取出三组数据，JSON格式的String
+    //任务3 ： 根据所给的JSON格式的String，获取所有title;根据一个title获取一组数据
+    public static String getRoleByTitle(String title){
+        return "";
+    }
+    public static String[] getAllTitles(String json_str){
+        //下面是一个输出结果的格式的示例
+        String[] results = {"title1", "title2", "title3", "title4", "title5"};
+        return results;
+    }
+    public static boolean getRolesForCV(){
+        return true;
+        //如果成功，return true
+        //如果失败，return false
+    }
+    public int saveRoles() {
+        String path = "/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/role.json";
+        String json = getStr(path);
+        Gson gson = new Gson();
+        Role[] roles = gson.fromJson(json, Role[].class);
+        ArrayList<Role> roleList = new ArrayList<>(Arrays.asList(roles));
+
+        // Constructor
+        Role newRole = new Role(this.title, this.year, this.roles_titles);
+        roleList.add(newRole);
+
+        String savedRoles = gson.toJson(roleList);
+        if(setStr(path, savedRoles)==true){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+        //再加return-1和return-2的情况
     }
 
     /**
@@ -73,7 +121,7 @@ public class Role {
      * @return
      */
     public static boolean deleteRoles(String title) {
-        String path = "C:/Users/Hanxi/Desktop/role.json";
+        String path = "/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/role.json";
         String json = getStr(path);
         Gson gson = new Gson();
         Role[] roles = gson.fromJson(json, Role[].class);
@@ -95,7 +143,7 @@ public class Role {
      * @throws ParseException
      */
     public static String getRolesByYearReverseSort(int year) throws ParseException {
-        String path = "C:/Users/Hanxi/Desktop/role.json";
+        String path = "/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/role.json";
         String json = getStr(path);
         Gson gson = new Gson();
         Role[] roles = gson.fromJson(json, Role[].class);
@@ -139,7 +187,7 @@ public class Role {
      * @throws ParseException
      */
     public static String getRolesByYearForwardSort(int year) throws ParseException {
-        String path = "C:/Users/Hanxi/Desktop/role.json";
+        String path = "/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/role.json";
         String json = getStr(path);
         Gson gson = new Gson();
         Role[] roles = gson.fromJson(json, Role[].class);
@@ -187,7 +235,7 @@ public class Role {
         String[] titles = roles_titles.split(",");
         ArrayList<String> titlesList = new ArrayList<>(Arrays.asList(titles));
 
-        String path = "C:/Users/Hanxi/Desktop/role.json";
+        String path = "/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/role.json";
         String json = getStr(path);
         Gson gson = new Gson();
         Role[] roles = gson.fromJson(json, Role[].class);
@@ -219,7 +267,7 @@ public class Role {
 
 
     public static String getAllRoles(){
-        String json = getStr("C:/Users/Hanxi/Desktop/role.json");
+        String json = getStr("/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/role.json");
         Gson gson = new Gson();
         Role[] roleList = gson.fromJson(json, Role[].class);
 
