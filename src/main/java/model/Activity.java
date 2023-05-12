@@ -19,6 +19,25 @@ import java.nio.file.StandardCopyOption;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+
+import java.io.*;
+import com.google.gson.Gson;
+
+ import java.io.File;
+ import java.io.FileWriter;
+ import java.io.IOException;
+ import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
+
 
 /**
  * 
@@ -86,19 +105,20 @@ public class Activity {
 
     /**
      * @return
+     * @throws URISyntaxException
      */
-    public boolean saveActivity() {
-        try {
+    public boolean saveActivity() throws URISyntaxException {
+        try{
             // 获取程序文件所在的目录
-            java.net.URL classResource = BasicInformation.class.getProtectionDomain().getCodeSource().getLocation();
+            java.net.URL classResource = Activity.class.getProtectionDomain().getCodeSource().getLocation();
             Path classDirectory = Paths.get(classResource.toURI());
             Path resourcesPath = classDirectory.getParent().getParent();
             Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
 
             // 获取resources的文件目录
-            String activityPath = mainResourcesPath.toString() + "activity.json";
+            String activityPath = mainResourcesPath.toString() + "/activity.json";
 
-            // 设置image_path变量
+            // 设置activity_path变量
 
             this.setActivityPath(activityPath);
 
@@ -111,65 +131,139 @@ public class Activity {
             if (!resourcesDirectory.exists()) {
                 resourcesDirectory.mkdir();
             }
-
-            if (jsonFile.exists()) {
-                // 如果文件已存在，删除它
-                jsonFile.delete();
-            }
-            if (jsonFile.createNewFile()) {
-                FileWriter writer = new FileWriter(jsonFile);
-                writer.write(json);
-                writer.close();
-            }
-            // 将JSON字符串写入
-            FileWriter writer = new FileWriter("activity.json");
-            writer.write(json);
-            writer.close();
-
-            // 返回相对路径
-            return resourcesDirectory.getPath();
-        } catch (IOException | URISyntaxException e) {
+            String actjson = getStr(activityPath);
+            Gson gson = new Gson();
+            Activity[] Activitys = gson.fromJson(actjson, Activity[].class);
+            ArrayList<Activity> activityList = new ArrayList<>(Arrays.asList(Activitys));
+    
+            // Constructor
+            Activity newActivity = new Activity(this.title, this.content, this.time,this.type,this.location);
+            activityList.add(newActivity);
+    
+            String savedActivitys = gson.toJson(activityList);
+            return setStr(activityPath, savedActivitys);
+        } catch (URISyntaxException e) {
             e.printStackTrace();
-            return null; // 表示保存失败
+            return false;
         }
     }
 
     /**
      * @param title
      * @return
+     * @throws URISyntaxException
      */
-    public static boolean deleteActivity(String title) {
-        // 根据标题获取文件路径
-        String filePath = title + ".json";
+    public static boolean deleteActivity(String title) throws URISyntaxException {
+        //try{
+        // 获取程序文件所在的目录
+            java.net.URL classResource = Activity.class.getProtectionDomain().getCodeSource().getLocation();
+            Path classDirectory = Paths.get(classResource.toURI());
+            Path resourcesPath = classDirectory.getParent().getParent();
+            Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+            //获取resources的文件目录
 
-        // 创建对应的文件对象
-        File file = new File(filePath);
+             String jsonPath = mainResourcesPath.toString() + "/activity.json";
+             Path filePath = Paths.get(jsonPath);
+             String pathStr = filePath.toString();
+             String json = getStr(pathStr);
+             Gson gson = new Gson();
+             Activity[] Activitys = gson.fromJson(json, Activity[].class);
+             ArrayList<Activity> results = new ArrayList<>(Arrays.asList(Activitys));
 
-        // 如果文件存在且删除成功，返回true
-        if (file.exists() && file.delete()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+            for(int i = 0; i < results.size(); i++){
+              if(results.get(i).title.equals(title)){
+                results.remove(i);
+                break;
+            }
+            }
+        String deletedActivitys = gson.toJson(results);
+        return setStr(pathStr, deletedActivitys);}
+          /* } catch (URISyntaxException e) {
+            e.printStackTrace();
+          }     */  
+    
 
     /**
-     * @param year
+       @param year
      * @param type
-     * @return
+     * @throws ParseException
      */
-    public static string getActivitiesByYearAndByTypeForwardSort(int year, String typetype) {
-        yearyear = String.valueOf(year);
-        List<Activity> results = new ArrayList<>();
+    public static String getActivitiesByYearAndByTypeForwardSort(int year, String typetype)  throws URISyntaxException,ParseException{
+        String yearyear = String.valueOf(year);
+        //JSONArray results = new JSONArray();
 
-        // 遍历当前目录下的所有文件
-        File folder = new File(".");
-        for (File file : folder.listFiles()) {
-            // 如果文件是一个Activity文件，读取文件内容并检查关键字是否匹配
-            if (file.getName().endsWith(".json")) {
+        java.net.URL classResource = Activity.class.getProtectionDomain().getCodeSource().getLocation();
+        Path classDirectory = Paths.get(classResource.toURI());
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        //获取resources的文件目录
+
+             String jsonPath = mainResourcesPath.toString() + "/activity.json";
+             Path filePath = Paths.get(jsonPath);
+             String pathStr = filePath.toString();
+             String json = getStr(pathStr);
+        Gson gson = new Gson();
+        Activity[] Activitys = gson.fromJson(json, Activity[].class);
+        ArrayList<Activity> activityList = new ArrayList<>(Arrays.asList(Activitys));
+
+        for(int i = activityList.size() - 1; i >= 0 ; i--){
+            if(!(activityList.get(i).getType().equals(typetype) &&activityList.get(i).getTime().contains(yearyear))){
+                activityList.remove(i);
+            }
+        }
+        for(int i = 0; i < activityList.size(); i++){
+            for(int j = 0; j < activityList.size() - 1 - i; j++){
+                SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
+                if (ft.parse(activityList.get(j).time).compareTo (ft.parse(activityList.get(j + 1).time)) > 0){
+                    Collections.swap(activityList, j, j+1);
+                }
+            }
+        }
+        /*Collections.sort(activityList, new Comparator<Object>() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                JSONObject obj1 = (JSONObject) o1;
+                JSONObject obj2 = (JSONObject) o2;
+                return obj1.getString("time").compareTo(obj2.getString("time"));
+            }
+        });
+       /* for(int i = 0; i < activityList.size(); i++){
+            for(int j = 0; j < activityList.size() - 1 - i; j++){
+                SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
+                if (ft.parse(activityList.get(j).getTime().contains(yearyear)).compareTo(ft.parse(activityList.get(j + 1).getTime().contains(yearyear))) > 0){
+                    Collections.swap(activityList, j, j+1);
+                }
+            }
+        }*/ 
+
+        String allActivitys = "";
+        for(int i = 0; i < activityList.size(); i++) {
+            allActivitys = allActivitys + "{\n";
+            allActivitys = allActivitys + "\"title\": \"" + activityList.get(i).title + "\",\n";
+            allActivitys = allActivitys + "\"content\": \"" + activityList.get(i).content+ "\",\n";
+            allActivitys = allActivitys + "\"time\": \"" + activityList.get(i).time + "\",\n";
+            allActivitys = allActivitys + "\"type\": \"" + activityList.get(i).type + "\",\n";
+            allActivitys = allActivitys + "\"location\": \"" + activityList.get(i).location+ "\",\n";
+
+            if (i == activityList.size() - 1) {
+                allActivitys = allActivitys + "}\n";
+            }
+            else {
+                allActivitys = allActivitys + "},\n";
+            }
+        }
+        allActivitys="["+allActivitys+"]";
+        return allActivitys;
+             /*String json = getStr(pathStr);
+             Gson gson = new Gson();
+             Activity[] Activitys = gson.fromJson(json, Activity[].class);
+             ArrayList<Activity> results = new ArrayList<>(Arrays.asList(Activitys));
+             JSONArray jsonArrayResults = new JSONArray(results);
+             //if(results.get(i).title.equals(title))
+            for(int i = 0; i < results.size(); i++){
                 try {
-                    String json = new String(Files.readAllBytes(file.toPath()));
-                    JSONObject jsonObject = new JSONObject(json);
+                    String jsonAct = new String(Files.readAllBytes(filePath));
+                    JSONObject jsonObject = new JSONObject(jsonAct);
                     Activity activity = new Activity(
                             jsonObject.getString("title"),
                             jsonObject.getString("content"),
@@ -177,62 +271,101 @@ public class Activity {
                             jsonObject.getString("type"),
                             jsonObject.getString("location"));
 
-                    if (activity.getTime().contains(yearyear) &&
-                            activity.getType().contains(typetype)) {
-                        results.add(activity);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        for (int i = results.size() - 1; i >= 0; i--) {
-            if (!results.get(i).year.substring(0, 4).equals(String.valueOf(year))) {
-                results.remove(i);
-            }
-        }
+                    if (activity.getTime().contains(typetype) &&activity.getTime().contains(yearyear)) {
+                        JSONObject object = new JSONObject();
+                        object.put("title", activity.getTitle());
+                        object.put("content", activity.getContent());
+                        object.put("time", activity.getTime());
+                        object.put("type", activity.getType());
+                        object.put("location", activity.getLocation());
+                        jsonArrayResults.put(object);
+                    }*/
+                } 
 
-        for (int i = 0; i < results.size(); i++) {
-            for (int j = 0; j < results.size() - 1 - i; j++) {
-                SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
-                if (ft.parse(results.get(j).year).compareTo(ft.parse(results.get(j + 1).year)) > 0) {
-                    Collections.swap(results, j, j + 1);
-                }
-            }
-        }
 
-        for (int i = 0; i < results.size(); i++) {
-            str = str + "{\n";
-            String str = String.join(",", results.get(i));// StringUtils.join(list, ",");
-            return str;
-
-            if (i == results.size() - 1) {
-                str = str + "}\n";
-            } else {
-                str = str + "},\n";
-            }
-        }
-        return str;
-
-    }
 
     /**
      * @param year
      * @param type
-     * @return
+     * @throws ParseException
      */
-    public static String getActivitiesByYearAndByTypeReverseSort(int year, String type) {
-        yearyear = String.valueOf(year);
-        List<Activity> results = new ArrayList<>();
+    public static String getActivitiesByYearAndByTypeReverseSort(int year, String type)  throws URISyntaxException,ParseException{
+        String yearyear = String.valueOf(year);
+        //JSONArray results = new JSONArray();
 
-        // 遍历当前目录下的所有文件
-        File folder = new File(".");
-        for (File file : folder.listFiles()) {
-            // 如果文件是一个Activity文件，读取文件内容并检查关键字是否匹配
-            if (file.getName().endsWith(".json")) {
+        java.net.URL classResource = Activity.class.getProtectionDomain().getCodeSource().getLocation();
+        Path classDirectory = Paths.get(classResource.toURI());
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        //获取resources的文件目录
+
+             String jsonPath = mainResourcesPath.toString() + "/activity.json";
+             Path filePath = Paths.get(jsonPath);
+             String pathStr = filePath.toString();
+             String json = getStr(pathStr);
+        Gson gson = new Gson();
+        Activity[] Activitys = gson.fromJson(json, Activity[].class);
+        ArrayList<Activity> activityList = new ArrayList<>(Arrays.asList(Activitys));
+
+       
+        for(int i = 0; i < activityList.size(); i++){
+            for(int j = 0; j < activityList.size() - 1 - i; j++){
+                SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
+                if (ft.parse(activityList.get(j).time).compareTo (ft.parse(activityList.get(j + 1).time)) < 0){
+                    Collections.swap(activityList, j, j+1);
+                }
+            }
+        }
+        for(int i = activityList.size() - 1; i >= 0 ; i--){
+            if(!(activityList.get(i).getType().equals(type) &&activityList.get(i).getTime().contains(yearyear))){
+                activityList.remove(i);
+            }
+        }
+        /*Collections.sort(activityList, new Comparator<Object>() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                JSONObject obj1 = (JSONObject) o1;
+                JSONObject obj2 = (JSONObject) o2;
+                return obj1.getString("time").compareTo(obj2.getString("time"));
+            }
+        });
+       /* for(int i = 0; i < activityList.size(); i++){
+            for(int j = 0; j < activityList.size() - 1 - i; j++){
+                SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
+                if (ft.parse(activityList.get(j).getTime().contains(yearyear)).compareTo(ft.parse(activityList.get(j + 1).getTime().contains(yearyear))) > 0){
+                    Collections.swap(activityList, j, j+1);
+                }
+            }
+        }*/ 
+
+        String allActivitys = "";
+        for(int i = 0; i < activityList.size(); i++) {
+            allActivitys = allActivitys + "{\n";
+            allActivitys = allActivitys + "\"title\": \"" + activityList.get(i).title + "\",\n";
+            allActivitys = allActivitys + "\"content\": \"" + activityList.get(i).content+ "\",\n";
+            allActivitys = allActivitys + "\"time\": \"" + activityList.get(i).time + "\",\n";
+            allActivitys = allActivitys + "\"type\": \"" + activityList.get(i).type + "\",\n";
+            allActivitys = allActivitys + "\"location\": \"" + activityList.get(i).location+ "\",\n";
+
+            if (i == activityList.size() - 1) {
+                allActivitys = allActivitys + "}\n";
+            }
+            else {
+                allActivitys = allActivitys + "},\n";
+            }
+        }
+        allActivitys="["+allActivitys+"]";
+        return allActivitys;
+             /*String json = getStr(pathStr);
+             Gson gson = new Gson();
+             Activity[] Activitys = gson.fromJson(json, Activity[].class);
+             ArrayList<Activity> results = new ArrayList<>(Arrays.asList(Activitys));
+             JSONArray jsonArrayResults = new JSONArray(results);
+             //if(results.get(i).title.equals(title))
+            for(int i = 0; i < results.size(); i++){
                 try {
-                    String json = new String(Files.readAllBytes(file.toPath()));
-                    JSONObject jsonObject = new JSONObject(json);
+                    String jsonAct = new String(Files.readAllBytes(filePath));
+                    JSONObject jsonObject = new JSONObject(jsonAct);
                     Activity activity = new Activity(
                             jsonObject.getString("title"),
                             jsonObject.getString("content"),
@@ -240,53 +373,66 @@ public class Activity {
                             jsonObject.getString("type"),
                             jsonObject.getString("location"));
 
-                    if (activity.getTime().contains(yearyear) &&
-                            activity.getType().contains(typetype)) {
-                        results.add(activity);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        for (int i = results.size() - 1; i >= 0; i--) {
-            if (!results.get(i).year.substring(0, 4).equals(String.valueOf(year))) {
-                results.remove(i);
-            }
-        }
-
-        for (int i = 0; i < results.size(); i++) {
-            for (int j = 0; j < results.size() - 1 - i; j++) {
-                SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
-                if (ft.parse(results.get(j).year).compareTo(ft.parse(results.get(j + 1).year)) > 0) {
-                    Collections.swap(results, j, j + 1);
-                }
-            }
-        }
-
-        for (int i = 0; i < results.size(); i++) {
-            str = str + "{\n";
-            String str = String.join(",", results.get(i));// StringUtils.join(list, ",");
-            return str;
-
-            if (i == results.size() - 1) {
-                str = str + "}\n";
-            } else {
-                str = str + "},\n";
-            }
-        }
-        return str;
-
-    }
-
-    }
+                    if (activity.getTime().contains(typetype) &&activity.getTime().contains(yearyear)) {
+                        JSONObject object = new JSONObject();
+                        object.put("title", activity.getTitle());
+                        object.put("content", activity.getContent());
+                        object.put("time", activity.getTime());
+                        object.put("type", activity.getType());
+                        object.put("location", activity.getLocation());
+                        jsonArrayResults.put(object);
+                    }*/
+                } 
 
     /**
      * @param activities_titles
      * @return
      */
-    public static String getActivitiesByTitles(String activities_titles) {
-        try {
+    public static String getActivitiesByTitles(String activities_titles)throws URISyntaxException {
+        if (activities_titles == "") return "";
+
+        String[] titles = activities_titles.split(",");
+        ArrayList<String> titlesList = new ArrayList<>(Arrays.asList(titles));
+
+        java.net.URL classResource = Activity.class.getProtectionDomain().getCodeSource().getLocation();
+        Path classDirectory = Paths.get(classResource.toURI());
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        //获取resources的文件目录
+
+        String jsonPath = mainResourcesPath.toString() + "/activity.json";
+        Path filePath = Paths.get(jsonPath);
+        String pathStr = filePath.toString();
+        String json = getStr(pathStr);
+        Gson gson = new Gson();
+        Activity[] activities = gson.fromJson(json, Activity[].class);
+        ArrayList<Activity> activityList = new ArrayList<>(Arrays.asList(activities));
+
+        for (int i = titlesList.size() - 1; i >= 0; i--) {
+            if(!titlesList.contains(activityList.get(i).title) ) {
+                activityList.remove(i);
+            }
+        }
+
+        String allActivitys = "";
+        for(int i = 0; i < activityList.size(); i++) {
+            allActivitys = allActivitys + "{\n";
+            allActivitys = allActivitys + "\"title\": \"" + activityList.get(i).title + "\",\n";
+            allActivitys = allActivitys + "\"content\": \"" + activityList.get(i).content+ "\",\n";
+            allActivitys = allActivitys + "\"time\": \"" + activityList.get(i).time + "\",\n";
+            allActivitys = allActivitys + "\"type\": \"" + activityList.get(i).type + "\",\n";
+            allActivitys = allActivitys + "\"location\": \"" + activityList.get(i).location+ "\",\n";
+
+            if (i == activityList.size() - 1) {
+                allActivitys = allActivitys + "}\n";
+            }
+            else {
+                allActivitys = allActivitys + "},\n";
+            }
+        }
+        return allActivitys;
+    }
+        /*try {
             // 根据标题获取文件路径
             String filePath = activities_titles + ".json";
 
@@ -300,27 +446,58 @@ public class Activity {
                     jsonObject.getString("type"),
                     jsonObject.getString("location"));
 
-            return activity; // 返回读取到的Activity对象
+            return activity.toString(); // 返回读取到的Activity对象
         } catch (IOException e) {
             e.printStackTrace();
             return null; // 表示读取失败
-        }
-    }
+        }*/
+    
 
     /**
      * @return
      */
-    public static string getAllActivities(){
-	    List<Activity> results = new ArrayList<>();
+    public static String getallActivitys()throws URISyntaxException{
+        java.net.URL classResource = Activity.class.getProtectionDomain().getCodeSource().getLocation();
+        Path classDirectory = Paths.get(classResource.toURI());
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        //获取resources的文件目录
+
+             String jsonPath = mainResourcesPath.toString() + "/activity.json";
+             Path filePath = Paths.get(jsonPath);
+             String pathStr = filePath.toString();
+             String json = getStr(pathStr);
+        Gson gson = new Gson();
+        Activity[] activities = gson.fromJson(json, Activity[].class);
+        ArrayList<Activity> activityList = new ArrayList<>(Arrays.asList(activities));
+
+        String allActivitys = "";
+        for(int i = 0; i < activityList.size(); i++) {
+            allActivitys = allActivitys + "{\n";
+            allActivitys = allActivitys + "\"title\": \"" + activityList.get(i).title + "\",\n";
+            allActivitys = allActivitys + "\"content\": \"" + activityList.get(i).content+ "\",\n";
+            allActivitys = allActivitys + "\"time\": \"" + activityList.get(i).time + "\",\n";
+            allActivitys = allActivitys + "\"type\": \"" + activityList.get(i).type + "\",\n";
+            allActivitys = allActivitys + "\"location\": \"" + activityList.get(i).location+ "\",\n";
+
+
+            if (i == activityList.size() - 1) {
+                allActivitys = allActivitys + "}\n";
+            }
+            else {
+                allActivitys = allActivitys + "},\n";
+            }
+        }
+        return allActivitys;
+	    /*JSONArray results = new JSONArray();
         
             // 遍历当前目录下的所有文件
             File folder = new File(".");
             for (File file : folder.listFiles()) {
               // 如果文件是一个Activity文件，读取文件内容并检查关键字是否匹配
               if (file.getName().endsWith(".json")) {
-                try {
-                  String json = new String(Files.readAllBytes(file.toPath()));
-                  JSONObject jsonObject = new JSONObject(json);
+                  //String json = new String(Files.readAllBytes(file.toPath()));
+                  JSONObject jsonObject = new JSONObject();
                   Activity activity = new Activity(
                     jsonObject.getString("title"),
                     jsonObject.getString("content"),
@@ -328,10 +505,53 @@ public class Activity {
                     jsonObject.getString("type"),
                     jsonObject.getString("location")
                   );
-                    results.add(activity);
+                
+                    results.put(activity);
               }
             }
-            String str = String.join(",", results);// StringUtils.join(list, ",");
-            return str;
-          }
+
+          return results.toString();*/
 }
+public static String getStr(String jsonFile){
+    String jsonStr = "";
+    try {
+        File file = new File(jsonFile);
+        FileReader fileReader = new FileReader(file);
+        Reader reader = new InputStreamReader(new FileInputStream(jsonFile),"utf-8");
+        int ch = 0;
+        StringBuffer sb = new StringBuffer();
+        while ((ch = reader.read()) != -1) {
+            if(ch != 13){ //\r need to be eliminated
+                sb.append((char) ch);
+            }
+        }
+        fileReader.close();
+        reader.close();
+        jsonStr = sb.toString();
+        return jsonStr;
+    } catch (IOException e) {
+        e.printStackTrace();
+        return null;
+    }
+}
+public static boolean setStr(String jsonFile, String text){
+    try{
+        File file = new File(jsonFile);
+        FileWriter fileWriter = new FileWriter(file);
+        // clean the file
+        fileWriter.write("");
+        BufferedWriter bw = new BufferedWriter(fileWriter);
+        bw.write(text);
+        fileWriter.flush();
+        bw.flush();
+        fileWriter.close();
+        bw.close();
+        return true;
+    }catch(Exception e ){
+        e.printStackTrace();
+        return false;
+    }
+}
+}
+
+
