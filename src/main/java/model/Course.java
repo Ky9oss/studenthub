@@ -76,7 +76,7 @@ public class Course {
     /**
      * @return
      */
-    public boolean saveCourse() {
+    public int saveCourse() {
         // TODO implement here
         try {
             // 创建一个FileWriter对象，指定要保存的文件路径
@@ -88,10 +88,10 @@ public class Course {
             // 关闭文件流
             writer.close();
 
-            return true;
+            return 1;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            return 0;
         }
     }
 

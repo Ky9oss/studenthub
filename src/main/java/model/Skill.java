@@ -41,7 +41,7 @@ public class Skill {
     /**
      * @return
      */
-    public boolean saveSkill() {
+    public int saveSkill() {
         // -------------done, waiting for changing the JSON path---------------
 
         String path = "C:/Users/Hanxi/Desktop/skill.json";
@@ -55,7 +55,11 @@ public class Skill {
         skillList.add(newSkill);
 
         String savedSkills = gson.toJson(skillList);
-        return setStr(path, savedSkills);
+        if(setStr(path, savedSkills)==true){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
 
