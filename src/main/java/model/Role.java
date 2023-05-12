@@ -40,6 +40,8 @@ public class Role {
      */
     private String roles_titles;
 
+    
+
     public String getTitle(){
         return title;
     }
@@ -49,6 +51,8 @@ public class Role {
     public String getRoles_titles() {
         return roles_titles;
     }
+
+
 
     /**
      * @return
@@ -82,19 +86,20 @@ public class Role {
     //相应的，ControllerTest所对应的每一项测试也要全部更改
     //任务2 ： 取出三组数据，JSON格式的String
     //任务3 ： 根据所给的JSON格式的String，获取所有title;根据一个title获取一组数据
-    public static String getRoleByTitle(String title){
+    //public static String getRoleByTitle(String title){
+    //    return "";
+    //}
+    //public static String[] getRolesTitles(String json_str){
+    //    //下面是一个输出结果的格式的示例
+    //    String[] results = {"title1", "title2", "title3", "title4", "title5"};
+    //    return results;
+    //}
+    public static String getRolesForCV(){
         return "";
     }
-    public static String[] getAllTitles(String json_str){
-        //下面是一个输出结果的格式的示例
-        String[] results = {"title1", "title2", "title3", "title4", "title5"};
-        return results;
-    }
-    public static boolean getRolesForCV(){
-        return true;
-        //如果成功，return true
-        //如果失败，return false
-    }
+
+
+
     public int saveRoles() {
         String path = "/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/role.json";
         String json = getStr(path);

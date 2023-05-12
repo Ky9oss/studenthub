@@ -31,7 +31,7 @@ public class RoleTest {
         Path RootPath = classDirectory.getParent().getParent();
 
         role = new Role("abc", "2023-5-5", "member");
-        boolean result = role.saveRoles();
+        int result = role.saveRoles();
         assertEquals(true, result);
     }
 

@@ -22,6 +22,27 @@ public class Controller {
     }
 
 
+    public static String getRolesForCV(){
+        String s = Role.getRolesForCV();
+        return s;
+    }
+    public static String getSkillsForCV(){
+        String s = Skill.getSkillsForCV();
+        return s;
+    }
+    public static String getActivitiesForCV(){
+        String s = Activity.getActivitiesForCV();
+        return s;
+    }
+    public static String getAchievementsForCV(){
+        String s = Achievement.getAchievementsForCV();
+        return s;
+    }
+
+    //public static String getCoursesForCV(){
+    //    String s = Course.getCoursesForCV();
+    //    return s;
+    //}
     //create basic information
     public String createBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
         
@@ -214,8 +235,10 @@ public class Controller {
         String json_str = Activity.getActivitiesByYearAndByTypeReverseSort(year, type);
         return json_str;
     }
+}
 
 
+        /*
     //create course
     public int createCourse(String title, String content, String time, String type, String teacher, int grade, int credit) {
         Course course = new Course(title, content, time, type, teacher, grade, credit);
@@ -257,12 +280,12 @@ public class Controller {
         String json_str = Course.getCoursesByYearAndByTypeReverseSort(year, type);
         return json_str;
     }
-}
+
 
 
 
     //calculate GPA
-    /*
+
     public double calculateGradePointAverage(int method) {
         Calculator calculator = new Calculator();
         JSONArray grades_credits_types = Course.getAllGradesAndCreditsAndType();
@@ -281,7 +304,8 @@ public class Controller {
         }
  
     }
-
+}
+    /*
 
 
     //createCV

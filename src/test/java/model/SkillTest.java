@@ -30,7 +30,7 @@ public class SkillTest {
         Path RootPath = classDirectory.getParent().getParent();
 
         skill = new Skill("Roger", "ddd","eee","fff");
-        boolean result = skill.saveSkill();
+        int result = skill.saveSkill();
         assertEquals(true, result);
     }
 

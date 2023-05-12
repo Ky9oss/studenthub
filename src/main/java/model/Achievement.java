@@ -43,6 +43,7 @@ import java.io.IOException;
  */
 public class Achievement {
 
+    
     public Achievement(String title, String content, String time, String team, String responsibility) {
         this.title = title;
         this.content = content;
@@ -50,6 +51,7 @@ public class Achievement {
         this.team = team;
         this.responsibility = responsibility;
     }
+
     /**
      * 
      */
@@ -74,6 +76,12 @@ public class Achievement {
      * 
      */
     private String responsibility;
+
+    
+    public static String getAchievementsForCV(){
+        return "";
+    }
+
 
     public String getTitle() {
         return title;

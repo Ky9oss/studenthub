@@ -83,6 +83,10 @@ class ControllerTest {
         String json_str = controllerUnderTest.getSkillsByProficiency("proficiency11");
         JSONArray json_array = new JSONArray(json_str);
         System.out.println(json_array);
+
+        //String json_str3 = Controller.getSkillsForCV();
+        //JSONArray json_array3 = new JSONArray(json_str3);
+        //System.out.println(json_array3);
     }
 
 
@@ -110,6 +114,10 @@ class ControllerTest {
         String json_str2 = controllerUnderTest.getAchievementsByYearReverseSort(2022);
         JSONArray json_array2 = new JSONArray(json_str2);
         System.out.println(json_array2);
+
+        String json_str3 = Controller.getAchievementsForCV();
+        JSONArray json_array3 = new JSONArray(json_str3);
+        System.out.println(json_array3);
     }
 
 
@@ -137,6 +145,10 @@ class ControllerTest {
         String json_str2 = controllerUnderTest.getRolesByYearReverseSort(2022);
         JSONArray json_array2 = new JSONArray(json_str2);
         System.out.println(json_array2);
+
+        //String json_str3 = Controller.getRolesForCV();
+        //JSONArray json_array3 = new JSONArray(json_str3);
+        //System.out.println(json_array3);
     }
 
 
@@ -165,10 +177,14 @@ class ControllerTest {
         String json_str2 = controllerUnderTest.getActivitiesByYearAndByTypeReverseSort(2022, "type");
         JSONArray json_array2 = new JSONArray(json_str2);
         System.out.println(json_array2);
+
+        String json_str3 = Controller.getActivitiesForCV();
+        JSONArray json_array3 = new JSONArray(json_str3);
+        System.out.println(json_array3);
     }
 
 
-
+/* 
     @Test
     void testCourse() {
         int istrue = controllerUnderTest.createCourse("title1", "content", "2022-11-15", "type", "teacher", 0, 0);
@@ -194,6 +210,10 @@ class ControllerTest {
         String json_str2 = controllerUnderTest.getCoursesByYearAndByTypeReverseSort(2022, "type");
         JSONArray json_array2 = new JSONArray(json_str2);
         System.out.println(json_array2);
+
+        //String json_str3 = Controller.getCoursesForCV();
+        //JSONArray json_array3 = new JSONArray(json_str3);
+        //System.out.println(json_array3);
     }
 
 
@@ -231,9 +251,10 @@ class ControllerTest {
         double result3 = controllerUnderTest.calculateGradePointAverage(3);
         assertEquals(result3, 3.31, 0.1);
     }
+    */
 
     @Test
-    void testPanDuan(){
+    void testPanDuan1() throws URISyntaxException{
         int istrue = controllerUnderTest.createSkill("title", "111", "", "project");
         assertEquals(istrue, -1);
         int istrue3 = controllerUnderTest.createSkill("title", "", "111", "");
@@ -242,6 +263,10 @@ class ControllerTest {
         assertEquals(istrue2, 1);
         int istrue4 = controllerUnderTest.createSkill("title22", "content22", "proficiency22", "project22");
         assertEquals(istrue4, -2);
+    }
+
+    @Test
+    void testPanDuan2() throws URISyntaxException{
 
         int istrue5 = controllerUnderTest.createAchievement("title1", "content", "2022-11-15", "", "");
         assertEquals(istrue5, -1);
@@ -249,7 +274,10 @@ class ControllerTest {
         assertEquals(istrue6, 1);
         int istrue7 = controllerUnderTest.createAchievement("title2", "content", "2023-1-21", "team", "responsibility");
         assertEquals(istrue7, -2);
+    }
 
+    @Test
+    void testPanDuan3() throws URISyntaxException{
         int istrue8 = controllerUnderTest.createRole("title2", "content", "");
         assertEquals(istrue8, -1);
         int istrue9 = controllerUnderTest.createRole("title3", "111", "2022-5-25");
@@ -258,5 +286,32 @@ class ControllerTest {
         assertEquals(istrue10, -2);
 
     }
+
+    @Test
+    void testPanDuan4() throws URISyntaxException{
+        int istrue11 = controllerUnderTest.createActivity("title1", "", "2022-11-15", "type", "location");
+        assertEquals(istrue11, -1);
+        int istrue14 = controllerUnderTest.createActivity("title1", "11", "", "type", "location");
+        assertEquals(istrue14, -1);
+        int istrue12 = controllerUnderTest.createActivity("title2", "content", "2023-1-21", "type", "location");
+        assertEquals(istrue12, 1);
+        int istrue13 = controllerUnderTest.createActivity("title2", "content", "2023-1-21", "type", "location");
+        assertEquals(istrue13, -2);
+    }
+
+    //grade credit如果为0,则表示为空
+    /* 
+    @Test
+    void testPanDuan5() throws URISyntaxException{
+        int istrue = controllerUnderTest.createCourse("title1", "", "2022-11-15", "type", "", 1, 1);
+        assertEquals(istrue, -1);
+        int istrue2 = controllerUnderTest.createCourse("title2", "content", "2023-1-21", "type", "teacher", 1, 0);
+        assertEquals(istrue2, -1);
+        int istrue3 = controllerUnderTest.createCourse("title2", "content", "2023-1-21", "type", "teacher", 1, 1);
+        assertEquals(istrue3, 1);
+        int istrue4 = controllerUnderTest.createCourse("title2", "xxx", "2023-1-21", "type", "teacher", 1, 1);
+        assertEquals(istrue4, -2);
+    }
+    */
 
 }

@@ -1,0 +1,8 @@
+model/Skill.class
+model/Activity.class
+model/BasicInformation.class
+model/Role.class
+model/CV.class
+model/Main.class
+model/Achievement.class
+controller/Controller.class

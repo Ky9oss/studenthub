@@ -51,6 +51,7 @@ public class Activity {
         this.type = type;
         this.location = location;
     }
+    
 
     /**
      * 
@@ -76,6 +77,10 @@ public class Activity {
      * 
      */
     private String location;
+
+    public static String getActivitiesForCV(){
+        return "";
+    }
 
     public String getTitle() {
         return title;
