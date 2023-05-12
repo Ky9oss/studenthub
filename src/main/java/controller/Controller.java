@@ -51,6 +51,12 @@ public class Controller {
         return image_path+"/image.png";
     }
 
+    public String newCreateBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, int selection) {
+        
+        BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);
+        String image_path = basic_information.newSaveBasicInformation(selection);
+        return image_path;
+    }
 
     //change basic information
     public String changeBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
@@ -61,6 +67,18 @@ public class Controller {
         }     
         String image_path = basic_information.saveBasicInformation(head);
         return image_path+"/image.png";
+
+    }
+
+    //change basic information
+    public String newChangeBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, int selection) {
+        BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);            
+        boolean istrue1 = basic_information.deleteBasicInformation();
+        if(istrue1==false){
+            return null;
+        }     
+        String image_path = basic_information.newSaveBasicInformation(selection);
+        return image_path;
 
     }
 
