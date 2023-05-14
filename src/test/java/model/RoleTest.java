@@ -35,7 +35,7 @@ public class RoleTest {
         assertEquals(true, result);
     }
 
-    void TestdeleteRoles(){
+    void TestdeleteRoles() throws URISyntaxException{
         role = new Role("abc", "2023-5-5", "member");
         boolean result = Role.deleteRoles("");
         assertTrue(result);

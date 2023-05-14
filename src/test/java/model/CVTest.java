@@ -6,7 +6,6 @@ import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import static org.junit.jupiter.api.Assertions.*;
-import org.apache.commons.io.output.*;
 
 class CVTest {
     private CV cvGenerator;
