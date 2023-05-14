@@ -35,7 +35,7 @@ public class SkillTest {
     }
 
 
-    void TestdeleteSkill(){
+    void TestdeleteSkill() throws URISyntaxException{
         skill = new Skill("Roger", "ddd","eee","fff");
         boolean result = Skill.deleteSkill("Jay");
         assertTrue(result);

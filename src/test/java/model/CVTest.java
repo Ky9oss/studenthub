@@ -6,7 +6,6 @@ import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import static org.junit.jupiter.api.Assertions.*;
-import org.apache.commons.io.output.*;
 
 class CVTest {
     private CV cvGenerator;
@@ -24,7 +23,7 @@ class CVTest {
         String roles = "[{\"title\": \"title_content\", \"content\": \"content_content\", \"time\": \"xxxx-xx-xx\"},{\"title\": \"title_detail\", \"content\": \"content_content\", \"time\": \"xxxx-xx-xx\"}]";
         String achievements = "[{\"title\": \"title_content\", \"content\": \"content_content\", \"time\": \"xxxx-xx-xx\", \"team\": \"111(for example)\", \"responsibility\": \"beijing\"},{\"title\": \"title_content\", \"content\": \"content_content\", \"time\": \"xxxx-xx-xx\", \"team\": \"222(example\", \"responsibility\": \"beijing(example)\"}]";
 
-        String expectedFilePath = Paths.get(System.getProperty("user.dir"), "src", "main", "java", "model", "CV.docx").toString();
+        String expectedFilePath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "CV.docx").toString();
         String actualFilePath = cvGenerator.createCV(basic_information, skills, activities, roles, achievements);
         assertEquals(expectedFilePath, actualFilePath);
     }
