@@ -43,7 +43,7 @@ public class Calculator {
      */
     public double calculateByStandard(JSONArray content) {
         double gpa = 0;
-        this.content = content;
+
         double totalGradePoints = 0.0;
         int totalCredits = 0;
 
@@ -80,6 +80,7 @@ public class Calculator {
         }
 
         gpa = totalGradePoints / totalCredits;
+        gpa = Math.round(gpa * 100.0) / 100.0;
 
         return gpa;
     }// 100～90 4.0
@@ -94,7 +95,7 @@ public class Calculator {
      */
     public double calculateByBeida4_0(JSONArray content) {
         double gpa = 0;
-        this.content = content;
+
         double totalGradePoints = 0.0;
         int totalCredits = 0;
 
@@ -141,6 +142,7 @@ public class Calculator {
         }
 
         gpa = totalGradePoints / totalCredits;
+        gpa = Math.round(gpa * 100.0) / 100.0;
 
         return gpa;
     }// 只有"type1"纳入计算
@@ -151,7 +153,7 @@ public class Calculator {
      */
     public double calculateByWorldEducationScore(JSONArray content) {
         double gpa = 0;
-        this.content = content;
+
         double totalGradePoints = 0.0;
         int totalCredits = 0;
 
@@ -183,6 +185,7 @@ public class Calculator {
         }
 
         gpa = totalGradePoints / totalCredits;
+        gpa = Math.round(gpa * 100.0) / 100.0;
 
         return gpa;
     }// 100～85 4.0, 84～75 3.0, 74～60 2.0, 59～0 1.0 所有type都纳入计算
