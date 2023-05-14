@@ -78,9 +78,6 @@ public class Activity {
      */
     private String location;
 
-    public static String getActivitiesForCV(){
-        return "";
-    }
 
     public String getTitle() {
         return title;
@@ -140,9 +137,17 @@ public class Activity {
             Gson gson = new Gson();
             Activity[] Activitys = gson.fromJson(actjson, Activity[].class);
             ArrayList<Activity> activityList = new ArrayList<>(Arrays.asList(Activitys));
+            if(this.type.isEmpty()||this.title.isEmpty()||this.content.isEmpty()||this.time.isEmpty()||this.location.isEmpty()){
+                return -1;
+            }
     
             // Constructor
             Activity newActivity = new Activity(this.title, this.content, this.time,this.type,this.location);
+            for(int i = 0; i < activityList.size(); i++){
+                if(activityList.get(i).title.equals(newActivity.title)){
+                   return -2;
+                }
+              }
             activityList.add(newActivity);
     
             String savedActivitys = gson.toJson(activityList);
@@ -439,6 +444,7 @@ public class Activity {
                 allActivitys = allActivitys + "},\n";
             }
         }
+        allActivitys="["+allActivitys+"]";
         return allActivitys;
     }
         /*try {
@@ -497,6 +503,7 @@ public class Activity {
                 allActivitys = allActivitys + "},\n";
             }
         }
+        allActivitys="["+allActivitys+"]";
         return allActivitys;
 	    /*JSONArray results = new JSONArray();
         
@@ -520,6 +527,45 @@ public class Activity {
             }
 
           return results.toString();*/
+}
+public static String getActivitiesForCV()throws URISyntaxException{
+    java.net.URL classResource = Activity.class.getProtectionDomain().getCodeSource().getLocation();
+    Path classDirectory = Paths.get(classResource.toURI());
+    Path resourcesPath = classDirectory.getParent().getParent();
+    Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+    //获取resources的文件目录
+
+         String jsonPath = mainResourcesPath.toString() + "/activity.json";
+         Path filePath = Paths.get(jsonPath);
+         String pathStr = filePath.toString();
+         String json = getStr(pathStr);
+    Gson gson = new Gson();
+    Activity[] activities = gson.fromJson(json, Activity[].class);
+    ArrayList<Activity> activityList = new ArrayList<>(Arrays.asList(activities));
+
+    String allActivitys = "";
+    if(activityList.size()<3)
+        {
+            return null;
+        }
+    for(int i = 0; i < 3; i++) {
+        allActivitys = allActivitys + "{\n";
+        allActivitys = allActivitys + "\"title\": \"" + activityList.get(i).title + "\",\n";
+        allActivitys = allActivitys + "\"content\": \"" + activityList.get(i).content+ "\",\n";
+        allActivitys = allActivitys + "\"time\": \"" + activityList.get(i).time + "\",\n";
+        allActivitys = allActivitys + "\"type\": \"" + activityList.get(i).type + "\",\n";
+        allActivitys = allActivitys + "\"location\": \"" + activityList.get(i).location+ "\",\n";
+
+
+        if (i == activityList.size() - 1) {
+            allActivitys = allActivitys + "}\n";
+        }
+        else {
+            allActivitys = allActivitys + "},\n";
+        }
+    }
+    allActivitys="["+allActivitys+"]";
+    return allActivitys;
 }
 public static String getStr(String jsonFile){
     String jsonStr = "";

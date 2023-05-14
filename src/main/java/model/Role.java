@@ -101,9 +101,7 @@ public class Role {
     // String[] results = {"title1", "title2", "title3", "title4", "title5"};
     // return results;
     // }
-    public static String getRolesForCV() {
-        return "";
-    }
+    
 
     private String rolepath;
 
@@ -135,9 +133,17 @@ public class Role {
         Gson gson = new Gson();
         Role[] roles = gson.fromJson(achjson, Role[].class);
         ArrayList<Role> roleList = new ArrayList<>(Arrays.asList(roles));
+        if(this.title.isEmpty()||this.content.isEmpty()||this.time.isEmpty()){
+            return -1;
+        }
 
         // Constructor
         Role newRole = new Role(this.title, this.content, this.time);
+        for(int i = 0; i < roleList.size(); i++){
+            if(roleList.get(i).title.equals(newRole.title)){
+               return -2;
+            }
+          }
         roleList.add(newRole);
 
         String savedRoles = gson.toJson(roleList);
@@ -367,7 +373,41 @@ public class Role {
         return allRoles;
 
     }
+    public static String getRolesForCV() throws URISyntaxException {
+        java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
+        Path classDirectory = Paths.get(classResource.toURI());
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        // 获取resources的文件目录
 
+        String jsonPath = mainResourcesPath.toString() + "/role.json";
+        Path filePath = Paths.get(jsonPath);
+        String pathStr = filePath.toString();
+        String json = getStr(pathStr);
+        Gson gson = new Gson();
+        Role[] roleList = gson.fromJson(json, Role[].class);
+
+        String allRoles = "";
+        if(roleList.length<3)
+        {
+            return null;
+        }
+        for (int i = 0; i < 3; i++) {
+            allRoles = allRoles + "{\n";
+            allRoles = allRoles + "\"title\": \"" + roleList[i].title + "\",\n";
+            allRoles = allRoles + "\"content\": \"" + roleList[i].content + "\",\n";
+            allRoles = allRoles + "\"time\": \"" + roleList[i].time + "\",\n";
+
+            if (i == roleList.length - 1) {
+                allRoles = allRoles + "}\n";
+            } else {
+                allRoles = allRoles + "},\n";
+            }
+        }
+        allRoles = "["+allRoles+"]";
+        return allRoles;
+
+    }
     public static String getStr(String jsonFile) {
         String jsonStr = "";
         try {
