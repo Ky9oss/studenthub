@@ -10,14 +10,14 @@
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GPAControler">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="444.4000244140625" minWidth="10.0" prefWidth="212.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="817.9999618530273" minWidth="10.0" prefWidth="688.8" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="444.4000244140625" minWidth="10.0" prefWidth="215.2" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="817.9999618530273" minWidth="10.0" prefWidth="685.5999999999999" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <GridPane>
+      <GridPane prefWidth="238.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
@@ -98,7 +98,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
                <children>
-                  <Button mnemonicParsing="false" onAction="#gotoGPA" prefHeight="44.8" prefWidth="84.0" text="GPA" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Button mnemonicParsing="false" onAction="#gotoGPA" prefHeight="44.8" prefWidth="84.0" style="-fx-background-color: cyan;" text="GPA" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -138,12 +138,12 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label fx:id="gpa" layoutX="451.0" layoutY="233.0" prefHeight="191.0" prefWidth="202.0" text="88.8">
+            <Label fx:id="gpa" layoutX="451.0" layoutY="233.0" prefHeight="191.0" prefWidth="202.0" text="待计算">
                <font>
-                  <Font size="71.0" />
+                  <Font size="37.0" />
                </font>
             </Label>
-            <Label fx:id="detail" alignment="TOP_LEFT" layoutX="100.0" layoutY="308.0" prefHeight="146.0" prefWidth="261.0" text="算法简介" />
+            <Label fx:id="detail" alignment="TOP_LEFT" layoutX="100.0" layoutY="308.0" prefHeight="146.0" prefWidth="261.0" text="请选择一个算法" />
             <Label layoutX="492.0" layoutY="208.0" prefHeight="50.0" prefWidth="78.0" text="GPA">
                <font>
                   <Font name="System Bold Italic" size="29.0" />

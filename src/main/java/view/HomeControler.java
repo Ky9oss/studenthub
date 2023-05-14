@@ -114,8 +114,8 @@ public class HomeControler {
     }
     @FXML
     private void gotoGPA(ActionEvent event) throws IOException {
-        App.setRoot("GPA");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("course.fxml"));
+        // App.setRoot("GPA");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GPA.fxml"));
         Parent root = loader.load();
          Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
          Scene scene = new Scene(root);
@@ -124,8 +124,8 @@ public class HomeControler {
     }
     @FXML
     private void gotoCV(ActionEvent event) throws IOException {
-        App.setRoot("CV");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("course.fxml"));
+        // App.setRoot("CV");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CV.fxml"));
         Parent root = loader.load();
          Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
          Scene scene = new Scene(root);
@@ -135,7 +135,8 @@ public class HomeControler {
     @FXML
     private void changetest() throws IOException{   
         if(this.status==0){          
-            testlabel.setText(f1.getText()+f2.getText()+f3.getText()+f4.getText()+f5.getText()+f6.getText());
+            // testlabel.setText(f1.getText()+f2.getText()+f3.getText()+f4.getText()+f5.getText()+f6.getText());
+            testlabel.setText("点击修改");
             f1.setDisable(false);
             f2.setDisable(false);
             f3.setDisable(false);
@@ -146,7 +147,7 @@ public class HomeControler {
             this.status=1;
         }
             else{
-                testlabel.setText("new子龙最帅啦!");
+                testlabel.setText("修改成功!");
                 f1.setDisable(true);
                 f2.setDisable(true);
                 f3.setDisable(true);

@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CourseDetailControler">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AchievementDetailControler">
    <children>
-      <Label layoutX="54.0" layoutY="86.0" text="科目">
+      <Label layoutX="54.0" layoutY="86.0" text="标题">
          <font>
             <Font size="53.0" />
          </font>
@@ -28,46 +28,34 @@
             <Font name="Bell MT" size="30.0" />
          </font>
       </Button>
-      <Label layoutX="358.0" layoutY="27.0" text="课程细节">
+      <Label layoutX="358.0" layoutY="27.0" text="achievement细节">
          <font>
             <Font size="39.0" />
          </font>
       </Label>
-      <Label layoutX="54.0" layoutY="170.0" text="内容">
+      <Label layoutX="45.0" layoutY="212.0" text="内容">
          <font>
             <Font size="53.0" />
          </font>
       </Label>
-      <Label layoutX="54.0" layoutY="257.0" text="时间">
+      <Label layoutX="490.0" layoutY="94.0" text="团队">
          <font>
             <Font size="53.0" />
          </font>
       </Label>
-      <Label layoutX="496.0" layoutY="197.0" text="成绩">
+      <Label layoutX="502.0" layoutY="186.0" text="责任">
          <font>
             <Font size="53.0" />
          </font>
       </Label>
-      <Label layoutX="496.0" layoutY="105.0" text="老师">
+      <Label layoutX="45.0" layoutY="332.0" text="时间">
          <font>
             <Font size="53.0" />
          </font>
       </Label>
-      <Label layoutX="496.0" layoutY="282.0" text="credit">
-         <font>
-            <Font size="53.0" />
-         </font>
-      </Label>
-      <Label layoutX="54.0" layoutY="340.0" text="类型">
-         <font>
-            <Font size="53.0" />
-         </font>
-      </Label>
-      <TextField fx:id="text1" layoutX="194.0" layoutY="185.0" />
-      <TextField fx:id="text2" layoutX="195.0" layoutY="280.0" />
-      <TextField fx:id="text3" layoutX="196.0" layoutY="374.0" />
-      <TextField fx:id="text4" layoutX="640.0" layoutY="128.0" />
-      <TextField fx:id="text5" layoutX="641.0" layoutY="219.0" />
-      <TextField fx:id="text6" layoutX="642.0" layoutY="314.0" />
+      <TextField fx:id="text1" layoutX="205.0" layoutY="243.0" />
+      <TextField fx:id="text2" layoutX="206.0" layoutY="354.0" />
+      <TextField fx:id="text3" layoutX="657.0" layoutY="109.0" />
+      <TextField fx:id="text4" layoutX="674.0" layoutY="212.0" />
    </children>
 </AnchorPane>

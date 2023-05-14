@@ -11,11 +11,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.Node;
-public class CourseDetailControler {
+public class AchievementDetailControler {
     String subjectContent = "";
     int type = 0;
     @FXML
     public TextField subjectFielder;
+
     @FXML
     private TextField text1;
 
@@ -27,19 +28,12 @@ public class CourseDetailControler {
 
     @FXML
     private TextField text4;
-
-    @FXML
-    private TextField text5;
-
-    @FXML
-    private TextField text6;
-
     @FXML
     void exit(ActionEvent event) throws IOException {
         // Alert alert = new Alert(Alert.AlertType.NONE);
         // alert.setContentText("成功退出");
         // alert.show();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("course.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("achievement.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
          Scene scene = new Scene(root);

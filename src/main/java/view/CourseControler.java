@@ -18,8 +18,8 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 public class CourseControler implements Initializable{
     String subject = "";
-    
-
+    int year = 1;
+    String type = "";
     @FXML
     private ListView<String> list;
     @FXML
@@ -30,7 +30,7 @@ public class CourseControler implements Initializable{
         Parent root = loader.load();
         CourseDetailControler CourseDetailControler = loader.getController();
         System.out.println(this.subject);
-        CourseDetailControler.getData(this.subject);
+        CourseDetailControler.getData(this.subject,1);
          Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
          Scene scene = new Scene(root);
          stage.setScene(scene);
@@ -47,21 +47,26 @@ public class CourseControler implements Initializable{
     }
 
     @FXML
-    void detail(ActionEvent event) throws IOException {
-
+    boolean detail(ActionEvent event) throws IOException {
+        if(this.subject==""){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("请选择对应内容");
+            alert.show();
+            return false;
+        }
         //跨区域调用函数
         FXMLLoader loader = new FXMLLoader(getClass().getResource("courseDetail.fxml"));
         Parent root = loader.load();
         CourseDetailControler CourseDetailControler = loader.getController();
         System.out.println(this.subject);
-        CourseDetailControler.getData(this.subject);
+        CourseDetailControler.getData(this.subject,2);
          Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
          Scene scene = new Scene(root);
          stage.setScene(scene);
          stage.show();
         // App.setRoot("courseDetail");
         this.subject = "";
-
+        return true;
     }
     @FXML
     private void gotoHome(ActionEvent event) throws IOException {
@@ -128,8 +133,8 @@ public class CourseControler implements Initializable{
     }
     @FXML
     private void gotoGPA(ActionEvent event) throws IOException {
-        App.setRoot("GPA");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("course.fxml"));
+        // App.setRoot("GPA");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GPA.fxml"));
         Parent root = loader.load();
          Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
          Scene scene = new Scene(root);
@@ -138,8 +143,8 @@ public class CourseControler implements Initializable{
     }
     @FXML
     private void gotoCV(ActionEvent event) throws IOException {
-        App.setRoot("CV");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("course.fxml"));
+        // App.setRoot("CV");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CV.fxml"));
         Parent root = loader.load();
          Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
          Scene scene = new Scene(root);
@@ -165,5 +170,44 @@ public class CourseControler implements Initializable{
     public void changeData(String subject){
         this.subject = subject;
         System.out.println( this.subject);
+    }
+    @FXML
+    void time1(ActionEvent event) {
+
+    }
+
+    @FXML
+    void time2(ActionEvent event) {
+
+    }
+
+    @FXML
+    void type1(ActionEvent event) {
+
+    }
+
+    @FXML
+    void type2(ActionEvent event) {
+
+    }
+
+    @FXML
+    void year1(ActionEvent event) {
+
+    }
+
+    @FXML
+    void year2(ActionEvent event) {
+
+    }
+
+    @FXML
+    void year3(ActionEvent event) {
+
+    }
+
+    @FXML
+    void year4(ActionEvent event) {
+
     }
 }

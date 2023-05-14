@@ -50,7 +50,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#gotoHome" prefHeight="44.8" prefWidth="84.0" text="home" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Button mnemonicParsing="false" onAction="#gotoHome" prefHeight="44.8" prefWidth="84.0" style="-fx-background-color: cyan;" text="home" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font size="25.0" />
                            </font></Button>

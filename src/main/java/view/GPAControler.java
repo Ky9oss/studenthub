@@ -95,8 +95,8 @@ import javafx.scene.Node;
     }
     @FXML
     private void gotoGPA(ActionEvent event) throws IOException {
-        App.setRoot("GPA");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("course.fxml"));
+        // App.setRoot("GPA");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GPA.fxml"));
         Parent root = loader.load();
          Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
          Scene scene = new Scene(root);
@@ -105,8 +105,8 @@ import javafx.scene.Node;
     }
     @FXML
     private void gotoCV(ActionEvent event) throws IOException {
-        App.setRoot("CV");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("course.fxml"));
+        // App.setRoot("CV");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CV.fxml"));
         Parent root = loader.load();
          Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
          Scene scene = new Scene(root);
