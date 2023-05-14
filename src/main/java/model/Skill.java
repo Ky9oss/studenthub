@@ -42,10 +42,7 @@ public class Skill {
      */
     private String project;
 
-    public static String getSkillsForCV() {
-        return "";
-    }
-
+    
     private String skillpath;
 
     public void setAchievementPath(String path) {
@@ -83,9 +80,17 @@ public class Skill {
         Gson gson = new Gson();
         Skill[] skills = gson.fromJson(skilljson, Skill[].class);
         ArrayList<Skill> skillList = new ArrayList<>(Arrays.asList(skills));
+        if(this.proficiency.isEmpty()||this.title.isEmpty()||this.content.isEmpty()||this.project.isEmpty()){
+            return -1;
+        }
 
         // Constructor
         Skill newSkill = new Skill(this.title, this.content, this.proficiency, this.project);
+        for(int i = 0; i < skillList.size(); i++){
+            if(skillList.get(i).title.equals(newSkill.title)){
+               return -2;
+            }
+          }
         skillList.add(newSkill);
 
         String savedSkills = gson.toJson(skillList);
@@ -267,6 +272,42 @@ public class Skill {
         return allSkills;
     }
 
+    public static String getSkillsForCV() throws URISyntaxException {
+        // -------------done, waiting for changing the JSON path---------------
+        java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
+        Path classDirectory = Paths.get(classResource.toURI());
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        // 获取resources的文件目录
+
+        String jsonPath = mainResourcesPath.toString() + "/skill.json";
+        Path filePath = Paths.get(jsonPath);
+        String pathStr = filePath.toString();
+        String json = getStr(pathStr);
+        Gson gson = new Gson();
+        Skill[] skillList = gson.fromJson(json, Skill[].class);
+
+        String allSkills = "";
+        if(skillList.length<3)
+        {
+            return null;
+        }
+        for (int i = 0; i < 3; i++) {
+            allSkills = allSkills + "{\n"; // 转义字符
+            allSkills = allSkills + "\"title\": \"" + skillList[i].title + "\",\n";
+            allSkills = allSkills + "\"content\": \"" + skillList[i].content + "\",\n";
+            allSkills = allSkills + "\"proficiency\": \"" + skillList[i].proficiency + "\",\n";
+            allSkills = allSkills + "\"project\": \"" + skillList[i].project + "\",\n";
+
+            if (i == skillList.length - 1) {
+                allSkills = allSkills + "}\n";
+            } else {
+                allSkills = allSkills + "},\n";
+            }
+        }
+        allSkills = "["+allSkills+"]";
+        return allSkills;
+    }
     public static String getStr(String jsonFile) {
         String jsonStr = "";
         try {

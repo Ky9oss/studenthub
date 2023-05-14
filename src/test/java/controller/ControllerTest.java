@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 
@@ -84,15 +85,15 @@ class ControllerTest {
         JSONArray json_array = new JSONArray(json_str);
         System.out.println(json_array);
 
-        //String json_str3 = Controller.getSkillsForCV();
-        //JSONArray json_array3 = new JSONArray(json_str3);
-        //System.out.println(json_array3);
+        String json_str3 = Controller.getSkillsForCV();
+        JSONArray json_array3 = new JSONArray(json_str3);
+        System.out.println(json_array3);
     }
 
 
 
     @Test
-    void testAchievement() throws URISyntaxException, ParseException{
+    void testAchievement() throws URISyntaxException, ParseException, IOException{
         int istrue = controllerUnderTest.createAchievement("title1", "content", "2022-11-15", "team", "responsibility");
         assertEquals(istrue, 1);
         int istrue2 = controllerUnderTest.createAchievement("title2", "content", "2023-1-21", "team", "responsibility");
@@ -146,15 +147,15 @@ class ControllerTest {
         JSONArray json_array2 = new JSONArray(json_str2);
         System.out.println(json_array2);
 
-        //String json_str3 = Controller.getRolesForCV();
-        //JSONArray json_array3 = new JSONArray(json_str3);
-        //System.out.println(json_array3);
+        String json_str3 = Controller.getRolesForCV();
+        JSONArray json_array3 = new JSONArray(json_str3);
+        System.out.println(json_array3);
     }
 
 
 
     @Test
-    void testActivity() throws URISyntaxException, ParseException{
+    void testActivity() throws URISyntaxException, ParseException, IOException{
         int istrue = controllerUnderTest.createActivity("title1", "content", "2022-11-15", "type", "location");
         assertEquals(istrue, 1);
         int istrue2 = controllerUnderTest.createActivity("title2", "content", "2023-1-21", "type", "location");
@@ -254,7 +255,7 @@ class ControllerTest {
     */
 
     @Test
-    void testPanDuan1() throws URISyntaxException{
+    void testPanDuan1() throws URISyntaxException, IOException{
         int istrue = controllerUnderTest.createSkill("title", "111", "", "project");
         assertEquals(istrue, -1);
         int istrue3 = controllerUnderTest.createSkill("title", "", "111", "");
@@ -266,7 +267,7 @@ class ControllerTest {
     }
 
     @Test
-    void testPanDuan2() throws URISyntaxException{
+    void testPanDuan2() throws URISyntaxException, IOException{
 
         int istrue5 = controllerUnderTest.createAchievement("title1", "content", "2022-11-15", "", "");
         assertEquals(istrue5, -1);
@@ -277,7 +278,7 @@ class ControllerTest {
     }
 
     @Test
-    void testPanDuan3() throws URISyntaxException{
+    void testPanDuan3() throws URISyntaxException, IOException{
         int istrue8 = controllerUnderTest.createRole("title2", "content", "");
         assertEquals(istrue8, -1);
         int istrue9 = controllerUnderTest.createRole("title3", "111", "2022-5-25");
@@ -288,7 +289,7 @@ class ControllerTest {
     }
 
     @Test
-    void testPanDuan4() throws URISyntaxException{
+    void testPanDuan4() throws URISyntaxException, IOException{
         int istrue11 = controllerUnderTest.createActivity("title1", "", "2022-11-15", "type", "location");
         assertEquals(istrue11, -1);
         int istrue14 = controllerUnderTest.createActivity("title1", "11", "", "type", "location");
@@ -298,20 +299,17 @@ class ControllerTest {
         int istrue13 = controllerUnderTest.createActivity("title2", "content", "2023-1-21", "type", "location");
         assertEquals(istrue13, -2);
     }
-
+}
     //grade credit如果为0,则表示为空
-    /* 
-    @Test
+    /*@Test
     void testPanDuan5() throws URISyntaxException{
         int istrue = controllerUnderTest.createCourse("title1", "", "2022-11-15", "type", "", 1, 1);
         assertEquals(istrue, -1);
-        int istrue2 = controllerUnderTest.createCourse("title2", "content", "2023-1-21", "type", "teacher", 1, 0);
-        assertEquals(istrue2, -1);
         int istrue3 = controllerUnderTest.createCourse("title2", "content", "2023-1-21", "type", "teacher", 1, 1);
         assertEquals(istrue3, 1);
         int istrue4 = controllerUnderTest.createCourse("title2", "xxx", "2023-1-21", "type", "teacher", 1, 1);
         assertEquals(istrue4, -2);
     }
-    */
 
 }
+*/

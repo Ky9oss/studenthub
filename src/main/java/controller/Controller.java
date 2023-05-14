@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.core.*;
 import org.json.JSONArray;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
 
 
 
@@ -22,19 +24,19 @@ public class Controller {
     }
 
 
-    public static String getRolesForCV(){
+    public static String getRolesForCV()throws URISyntaxException{
         String s = Role.getRolesForCV();
         return s;
     }
-    public static String getSkillsForCV(){
+    public static String getSkillsForCV()throws URISyntaxException{
         String s = Skill.getSkillsForCV();
         return s;
     }
-    public static String getActivitiesForCV(){
+    public static String getActivitiesForCV()throws URISyntaxException{
         String s = Activity.getActivitiesForCV();
         return s;
     }
-    public static String getAchievementsForCV(){
+    public static String getAchievementsForCV() throws URISyntaxException{
         String s = Achievement.getAchievementsForCV();
         return s;
     }
@@ -126,7 +128,7 @@ public class Controller {
 
 
     //create achievement
-    public int createAchievement(String title, String content, String time, String team, String responsibility) throws URISyntaxException {
+    public int createAchievement(String title, String content, String time, String team, String responsibility) throws URISyntaxException, IOException {
         Achievement achievement = new Achievement(title, content, time, team, responsibility);
         int istrue = achievement.saveAchievement();
         return istrue;
@@ -134,7 +136,7 @@ public class Controller {
 
 
     //change achievement
-    public int changeAchievement(String title, String content, String time, String team, String responsibility) throws URISyntaxException {
+    public int changeAchievement(String title, String content, String time, String team, String responsibility) throws URISyntaxException, IOException {
         Achievement achievement = new Achievement(title, content, time, team, responsibility);
         boolean istrue = Achievement.deleteAchievement(title);
         if(istrue==false){
