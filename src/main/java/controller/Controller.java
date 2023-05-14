@@ -51,6 +51,12 @@ public class Controller {
         return image_path+"/image.png";
     }
 
+    public String newCreateBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, int selection) {
+        
+        BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);
+        String image_path = basic_information.newSaveBasicInformation(selection);
+        return image_path;
+    }
 
     //change basic information
     public String changeBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
@@ -64,6 +70,18 @@ public class Controller {
 
     }
 
+    //change basic information
+    public String newChangeBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, int selection) {
+        BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);            
+        boolean istrue1 = basic_information.deleteBasicInformation();
+        if(istrue1==false){
+            return null;
+        }     
+        String image_path = basic_information.newSaveBasicInformation(selection);
+        return image_path;
+
+    }
+
 
     //get basic information
     public String getBasicInformation() throws URISyntaxException {
@@ -73,7 +91,7 @@ public class Controller {
 
 
     //create skill
-    public int createSkill(String title, String content, String proficiency, String project) {
+    public int createSkill(String title, String content, String proficiency, String project) throws URISyntaxException {
         Skill skill = new Skill(title, content, proficiency, project);
         int istrue = skill.saveSkill();
         return istrue;
@@ -81,7 +99,7 @@ public class Controller {
 
 
     //change skill
-    public int changeSkill(String title, String content, String proficiency, String project) {
+    public int changeSkill(String title, String content, String proficiency, String project) throws URISyntaxException {
         Skill skill = new Skill(title, content, proficiency, project);
         boolean istrue = Skill.deleteSkill(title);
         if(istrue==false){
@@ -94,14 +112,14 @@ public class Controller {
 
 
     //delete skill
-    public boolean deleteSkill(String title) {
+    public boolean deleteSkill(String title) throws URISyntaxException {
         boolean istrue = Skill.deleteSkill(title);
         return istrue;
     }
 
 
     //get skills by proficiency
-    public String getSkillsByProficiency(String proficiency) {
+    public String getSkillsByProficiency(String proficiency) throws URISyntaxException {
         String skills = Skill.getSkillsByProficiency(proficiency);
         return skills;
     }
@@ -150,7 +168,7 @@ public class Controller {
 
 
     //create role
-    public int createRole(String title, String content, String time) {
+    public int createRole(String title, String content, String time) throws URISyntaxException {
         Role role = new Role(title, content, time);
         int istrue = role.saveRoles();
         return istrue;
@@ -159,7 +177,7 @@ public class Controller {
 
 
     //change role
-    public int changeRole(String title, String content, String time) {
+    public int changeRole(String title, String content, String time) throws URISyntaxException {
         Role role = new Role(title, content, time);
         boolean istrue1 = Role.deleteRoles(title);
         if(istrue1==false){
@@ -171,14 +189,14 @@ public class Controller {
 
 
     //delete role
-    public boolean deleteRole(String title) {
+    public boolean deleteRole(String title) throws URISyntaxException {
         boolean istrue = Role.deleteRoles(title);
         return istrue;
     }
 
 
     //get roles by year with forward sorting
-    public String getRolesByYearForwardSort(int year) throws ParseException {
+    public String getRolesByYearForwardSort(int year) throws ParseException, URISyntaxException {
         String json_str = Role.getRolesByYearForwardSort(year);
         return json_str;
     }
@@ -186,7 +204,7 @@ public class Controller {
 
 
     //get roles by year with reverse sorting
-    public String getRolesByYearReverseSort(int year) throws ParseException {
+    public String getRolesByYearReverseSort(int year) throws ParseException, URISyntaxException {
         String json_str = Role.getRolesByYearReverseSort(year);
         return json_str;
     }

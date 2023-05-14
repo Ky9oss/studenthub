@@ -1,7 +1,12 @@
 package model;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
+
+import org.json.JSONObject;
 
 import com.google.gson.Gson;
 
@@ -47,10 +52,13 @@ public class Skill {
         this.skillpath = path;
     }
 
+    public void setSkillPath(String path) {
+        this.skillpath = path;
+    }
     /**
      * @return
      */
-    public int saveSkill() throws URISyntaxExceptio {
+    public int saveSkill() throws URISyntaxException {
         // -------------done, waiting for changing the JSON path---------------
 
         java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
@@ -81,7 +89,7 @@ public class Skill {
         skillList.add(newSkill);
 
         String savedSkills = gson.toJson(skillList);
-        if (setStr(path, savedSkills) == true) {
+        if (setStr(SkillPath, savedSkills) == true) {
             return 1;
         } else {
             return 0;
@@ -91,8 +99,9 @@ public class Skill {
     /**
      * @param title
      * @return
+     * @throws URISyntaxException
      */
-    public static boolean deleteSkill(String title) {
+    public static boolean deleteSkill(String title) throws URISyntaxException {
         // -------------done, waiting for changing the JSON path---------------
 
         java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
@@ -118,14 +127,15 @@ public class Skill {
         }
 
         String deletedSkills = gson.toJson(skillList);
-        return setStr(path, deletedSkills);
+        return setStr(pathStr, deletedSkills);
     }
 
     /**
      * @param proficiency
      * @return
+     * @throws URISyntaxException
      */
-    public static String getSkillsByProficiency(String proficiency) {
+    public static String getSkillsByProficiency(String proficiency) throws URISyntaxException {
         // -------------done, waiting for changing the JSON path---------------
         if (proficiency == "")
             return "";
@@ -167,15 +177,17 @@ public class Skill {
                 allSkills = allSkills + "},\n";
             }
         }
+        allSkills = "["+allSkills+"]";
         return allSkills;
     }
 
     /**
      * @param skills_titles
      * @return
+     * @throws URISyntaxException
      */
     // skills_titles = "Peter,John"
-    public static String getSkillsByTitles(String skills_titles) {
+    public static String getSkillsByTitles(String skills_titles) throws URISyntaxException {
         // -------------done, waiting for changing the JSON path---------------
         if (skills_titles == "")
             return "";
@@ -218,10 +230,11 @@ public class Skill {
                 allSkills = allSkills + "},\n";
             }
         }
+        allSkills = "["+allSkills+"]";
         return allSkills;
     }
 
-    public static String getAllSkills() {
+    public static String getAllSkills() throws URISyntaxException {
         // -------------done, waiting for changing the JSON path---------------
         java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
@@ -250,6 +263,7 @@ public class Skill {
                 allSkills = allSkills + "},\n";
             }
         }
+        allSkills = "["+allSkills+"]";
         return allSkills;
     }
 
@@ -294,7 +308,7 @@ public class Skill {
     }
 
 }
-
+/*
 class Main {
     public static void main(String[] args) {
         Skill newSkill = new Skill("Marry", "ddd", "eee", "ffff");
@@ -304,4 +318,5 @@ class Main {
         // deleteSkill("Marry");
     }
 }
+*/
 

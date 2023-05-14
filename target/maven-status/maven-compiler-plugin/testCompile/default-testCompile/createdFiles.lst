@@ -1,2 +1,5 @@
-model/SkillTest.class
 model/RoleTest.class
+model/BasicInformationTest.class
+controller/ControllerTest.class
+model/CVTest.class
+model/SkillTest.class

@@ -123,7 +123,7 @@ class ControllerTest {
 
 
     @Test
-    void testRole() throws ParseException {
+    void testRole() throws ParseException, URISyntaxException {
         int istrue = controllerUnderTest.createRole("title1", "content", "2022-11-15");
         assertEquals(istrue, 1);
         int istrue2 = controllerUnderTest.createRole("title2", "content", "2023-1-21");
