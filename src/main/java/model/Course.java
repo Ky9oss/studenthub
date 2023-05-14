@@ -474,4 +474,23 @@ public class Course {
         }
     }
 
+    // 任务3 ： 根据所给的JSON格式的String，获取所有title;根据一个title获取一组数据
+    // public static String getRoleByTitle(String title){
+    // return "";
+    // }
+
+    // public static String[] getRolesTitles(String json_str){
+    // //下面是一个输出结果的格式的示例
+    // String[] results = {"title1", "title2", "title3", "title4", "title5"};
+    // return results;
+    // }
+    public static String getCourseByTitle(String title) {
+        return "";
+    }
+
+    public static String[] getCoursesTitles(String json_str) {
+        // 下面是一个输出结果的格式的示例
+        String[] results = { "title1", "title2", "title3", "title4", "title5" };
+        return results;
+    }
 }

@@ -41,11 +41,13 @@ public class Calculator {
      * @param grades_credits_types
      * @return
      */
-    public double calculateByStandard(JSONArray content) {
+    public double calculateByStandard(String cont) {
         double gpa = 0;
 
         double totalGradePoints = 0.0;
         int totalCredits = 0;
+
+        JSONArray content = new JSONArray(cont);
 
         List<Course> courseList = new ArrayList<>();
         JSONArray jsonArray = new JSONArray(content);
