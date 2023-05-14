@@ -190,6 +190,70 @@ public class BasicInformation {
         }
     }
     
+    public String newSaveBasicInformation(int selection) throws JSONException {
+        try {
+            // 获取程序文件所在的目录
+            java.net.URL classResource = BasicInformation.class.getProtectionDomain().getCodeSource().getLocation();
+            Path classDirectory = Paths.get(classResource.toURI());
+            Path resourcesPath = classDirectory.getParent().getParent();
+            Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+            //获取resources的文件目录
+
+            if(selection==1){
+                this.image_path = mainResourcesPath.toString() + "/head1.png";
+            }
+            if(selection==2){
+                this.image_path = mainResourcesPath.toString() + "/head2.png";
+            }
+            if(selection==3){
+                this.image_path = mainResourcesPath.toString() + "/head3.png";
+            }
+            if(selection==4){
+                this.image_path = mainResourcesPath.toString() + "/head4.png";
+            }
+
+
+
+
+
+            // 将BasicInformation对象的private变量转换成JSON格式
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("name", this.name);
+            jsonObject.put("age", this.age);
+            jsonObject.put("school", this.school);
+            jsonObject.put("major", this.major);
+            jsonObject.put("admission_time", this.admission_time);
+            jsonObject.put("graduation_time", this.graduation_time);
+            jsonObject.put("image_path", this.image_path);
+            String json = jsonObject.toString();
+    
+
+    
+            // 创建resources目录
+            File resourcesDirectory = new File(mainResourcesPath.toString());
+            if (!resourcesDirectory.exists()) {
+                resourcesDirectory.mkdir();
+            }
+    
+            // 将JSON字符串写入basicInformation.json文件
+            File jsonFile = new File(resourcesDirectory, "basicInformation.json");
+            if (jsonFile.exists()) {
+                // 如果文件已存在，删除它
+                jsonFile.delete();
+            }
+            if (jsonFile.createNewFile()) {
+                FileWriter writer = new FileWriter(jsonFile);
+                writer.write(json);
+                writer.close();
+            }    
+    
+            // 返回相对路径
+            return this.image_path ;
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+            return null; // 表示保存失败
+        }
+    }
 
 
     /**
