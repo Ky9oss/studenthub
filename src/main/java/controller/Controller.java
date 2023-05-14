@@ -91,7 +91,7 @@ public class Controller {
 
 
     //create skill
-    public int createSkill(String title, String content, String proficiency, String project) {
+    public int createSkill(String title, String content, String proficiency, String project) throws URISyntaxException {
         Skill skill = new Skill(title, content, proficiency, project);
         int istrue = skill.saveSkill();
         return istrue;
@@ -99,7 +99,7 @@ public class Controller {
 
 
     //change skill
-    public int changeSkill(String title, String content, String proficiency, String project) {
+    public int changeSkill(String title, String content, String proficiency, String project) throws URISyntaxException {
         Skill skill = new Skill(title, content, proficiency, project);
         boolean istrue = Skill.deleteSkill(title);
         if(istrue==false){
@@ -112,14 +112,14 @@ public class Controller {
 
 
     //delete skill
-    public boolean deleteSkill(String title) {
+    public boolean deleteSkill(String title) throws URISyntaxException {
         boolean istrue = Skill.deleteSkill(title);
         return istrue;
     }
 
 
     //get skills by proficiency
-    public String getSkillsByProficiency(String proficiency) {
+    public String getSkillsByProficiency(String proficiency) throws URISyntaxException {
         String skills = Skill.getSkillsByProficiency(proficiency);
         return skills;
     }
@@ -168,7 +168,7 @@ public class Controller {
 
 
     //create role
-    public int createRole(String title, String content, String time) {
+    public int createRole(String title, String content, String time) throws URISyntaxException {
         Role role = new Role(title, content, time);
         int istrue = role.saveRoles();
         return istrue;
@@ -177,7 +177,7 @@ public class Controller {
 
 
     //change role
-    public int changeRole(String title, String content, String time) {
+    public int changeRole(String title, String content, String time) throws URISyntaxException {
         Role role = new Role(title, content, time);
         boolean istrue1 = Role.deleteRoles(title);
         if(istrue1==false){
@@ -189,14 +189,14 @@ public class Controller {
 
 
     //delete role
-    public boolean deleteRole(String title) {
+    public boolean deleteRole(String title) throws URISyntaxException {
         boolean istrue = Role.deleteRoles(title);
         return istrue;
     }
 
 
     //get roles by year with forward sorting
-    public String getRolesByYearForwardSort(int year) throws ParseException {
+    public String getRolesByYearForwardSort(int year) throws ParseException, URISyntaxException {
         String json_str = Role.getRolesByYearForwardSort(year);
         return json_str;
     }
@@ -204,7 +204,7 @@ public class Controller {
 
 
     //get roles by year with reverse sorting
-    public String getRolesByYearReverseSort(int year) throws ParseException {
+    public String getRolesByYearReverseSort(int year) throws ParseException, URISyntaxException {
         String json_str = Role.getRolesByYearReverseSort(year);
         return json_str;
     }

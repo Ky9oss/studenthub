@@ -5,18 +5,24 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
+import org.json.JSONObject;
+
 import java.io.*;
 import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Role {
-    public Role(String title, String year, String roles_titles) {
+    public Role(String title, String content, String time) {
         this.title = title;
-        this.year = year;
-        this.roles_titles = roles_titles;
+
+        this.content = content;
+        this.time = time;
     }
 
     public Role() {
@@ -31,24 +37,25 @@ public class Role {
     /**
      *
      */
-    private String year;
+    private String time;
 
     /**
      *
      */
-    private String roles_titles;
+    private String content;
 
     public String getTitle() {
         return title;
     }
 
-    public String getYear() {
-        return year;
+    public String getTime() {
+        return time;
     }
 
     public String getRoles_titles() {
-        return roles_titles;
+        return content;
     }
+    
 
     /**
      * @return
@@ -124,17 +131,17 @@ public class Role {
         if (!resourcesDirectory.exists()) {
             resourcesDirectory.mkdir();
         }
-        String achjson = getStr(RoletPath);
+        String achjson = getStr(RolePath);
         Gson gson = new Gson();
-        Role[] roles = gson.fromJson(json, Role[].class);
+        Role[] roles = gson.fromJson(achjson, Role[].class);
         ArrayList<Role> roleList = new ArrayList<>(Arrays.asList(roles));
 
         // Constructor
-        Role newRole = new Role(this.title, this.year, this.roles_titles);
+        Role newRole = new Role(this.title, this.content, this.time);
         roleList.add(newRole);
 
         String savedRoles = gson.toJson(roleList);
-        if (setStr(path, savedRoles) == true) {
+        if (setStr(RolePath, savedRoles) == true) {
             return 1;
         } else {
             return 0;
@@ -145,8 +152,9 @@ public class Role {
     /**
      * @param title
      * @return
+     * @throws URISyntaxException
      */
-    public static boolean deleteRoles(String title) {
+    public static boolean deleteRoles(String title) throws URISyntaxException {
         java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
         Path resourcesPath = classDirectory.getParent().getParent();
@@ -168,15 +176,16 @@ public class Role {
             }
         }
         String deletedRoles = gson.toJson(roleList);
-        return setStr(path, deletedRoles);
+        return setStr(pathStr, deletedRoles);
     }
 
     /**
      * @param year
      * @return
      * @throws ParseException
+     * @throws URISyntaxException
      */
-    public static String getRolesByYearReverseSort(int year) throws ParseException {
+    public static String getRolesByYearReverseSort(int year) throws ParseException, URISyntaxException {
         java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
         Path resourcesPath = classDirectory.getParent().getParent();
@@ -190,9 +199,10 @@ public class Role {
         Gson gson = new Gson();
         Role[] roles = gson.fromJson(json, Role[].class);
         ArrayList<Role> roleList = new ArrayList<>(Arrays.asList(roles));
-
+        
+        String yearyear = String.valueOf(year);
         for (int i = roleList.size() - 1; i >= 0; i--) {
-            if (!roleList.get(i).year.substring(0, 4).equals(String.valueOf(year))) {
+            if (!roleList.get(i).getTime().contains(yearyear)) {
                 roleList.remove(i);
             }
         }
@@ -200,7 +210,7 @@ public class Role {
         for (int i = 0; i < roleList.size(); i++) {
             for (int j = 0; j < roleList.size() - 1 - i; j++) {
                 SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
-                if (ft.parse(roleList.get(j).year).compareTo(ft.parse(roleList.get(j + 1).year)) < 0) {
+                if (ft.parse(roleList.get(j).time).compareTo(ft.parse(roleList.get(j + 1).time)) < 0) {
                     Collections.swap(roleList, j, j + 1);
                 }
             }
@@ -210,8 +220,8 @@ public class Role {
         for (int i = 0; i < roleList.size(); i++) {
             allRoles = allRoles + "{\n";
             allRoles = allRoles + "\"title\": \"" + roleList.get(i).title + "\",\n";
-            allRoles = allRoles + "\"content\": \"" + roleList.get(i).roles_titles + "\",\n";
-            allRoles = allRoles + "\"time\": \"" + roleList.get(i).year + "\",\n";
+            allRoles = allRoles + "\"content\": \"" + roleList.get(i).content + "\",\n";
+            allRoles = allRoles + "\"time\": \"" + roleList.get(i).time + "\",\n";
 
             if (i == roleList.size() - 1) {
                 allRoles = allRoles + "}\n";
@@ -219,6 +229,7 @@ public class Role {
                 allRoles = allRoles + "},\n";
             }
         }
+        allRoles = "["+allRoles+"]";
         return allRoles;
     }
 
@@ -226,8 +237,9 @@ public class Role {
      * @param year
      * @return
      * @throws ParseException
+     * @throws URISyntaxException
      */
-    public static String getRolesByYearForwardSort(int year) throws ParseException {
+    public static String getRolesByYearForwardSort(int year) throws ParseException, URISyntaxException {
         java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
         Path resourcesPath = classDirectory.getParent().getParent();
@@ -242,8 +254,9 @@ public class Role {
         Role[] roles = gson.fromJson(json, Role[].class);
         ArrayList<Role> roleList = new ArrayList<>(Arrays.asList(roles));
 
+        String yearyear = String.valueOf(year);
         for (int i = roleList.size() - 1; i >= 0; i--) {
-            if (!roleList.get(i).year.substring(0, 4).equals(String.valueOf(year))) {
+            if (!roleList.get(i).getTime().contains(yearyear)) {
                 roleList.remove(i);
             }
         }
@@ -251,7 +264,7 @@ public class Role {
         for (int i = 0; i < roleList.size(); i++) {
             for (int j = 0; j < roleList.size() - 1 - i; j++) {
                 SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
-                if (ft.parse(roleList.get(j).year).compareTo(ft.parse(roleList.get(j + 1).year)) > 0) {
+                if (ft.parse(roleList.get(j).time).compareTo(ft.parse(roleList.get(j + 1).time)) > 0) {
                     Collections.swap(roleList, j, j + 1);
                 }
             }
@@ -261,8 +274,8 @@ public class Role {
         for (int i = 0; i < roleList.size(); i++) {
             allRoles = allRoles + "{\n";
             allRoles = allRoles + "\"title\": \"" + roleList.get(i).title + "\",\n";
-            allRoles = allRoles + "\"content\": \"" + roleList.get(i).roles_titles + "\",\n";
-            allRoles = allRoles + "\"time\": \"" + roleList.get(i).year + "\",\n";
+            allRoles = allRoles + "\"content\": \"" + roleList.get(i).content + "\",\n";
+            allRoles = allRoles + "\"time\": \"" + roleList.get(i).time + "\",\n";
 
             if (i == roleList.size() - 1) {
                 allRoles = allRoles + "}\n";
@@ -270,14 +283,16 @@ public class Role {
                 allRoles = allRoles + "},\n";
             }
         }
+        allRoles = "["+allRoles+"]";
         return allRoles;
     }
 
     /**
      * @param roles_titles
      * @return
+     * @throws URISyntaxException
      */
-    public static String getRolesByTitles(String roles_titles) {
+    public static String getRolesByTitles(String roles_titles) throws URISyntaxException {
         if (roles_titles == "")
             return "";
 
@@ -308,8 +323,8 @@ public class Role {
         for (int i = 0; i < roleList.size(); i++) {
             allRoles = allRoles + "{\n";
             allRoles = allRoles + "\"title\": \"" + roleList.get(i).title + "\",\n";
-            allRoles = allRoles + "\"content\": \"" + roleList.get(i).roles_titles + "\",\n";
-            allRoles = allRoles + "\"time\": \"" + roleList.get(i).year + "\",\n";
+            allRoles = allRoles + "\"content\": \"" + roleList.get(i).content + "\",\n";
+            allRoles = allRoles + "\"time\": \"" + roleList.get(i).time + "\",\n";
 
             if (i == roleList.size() - 1) {
                 allRoles = allRoles + "}\n";
@@ -317,10 +332,11 @@ public class Role {
                 allRoles = allRoles + "},\n";
             }
         }
+        allRoles = "["+allRoles+"]";
         return allRoles;
     }
 
-    public static String getAllRoles() {
+    public static String getAllRoles() throws URISyntaxException {
         java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
         Path resourcesPath = classDirectory.getParent().getParent();
@@ -338,8 +354,8 @@ public class Role {
         for (int i = 0; i < roleList.length; i++) {
             allRoles = allRoles + "{\n";
             allRoles = allRoles + "\"title\": \"" + roleList[i].title + "\",\n";
-            allRoles = allRoles + "\"content\": \"" + roleList[i].roles_titles + "\",\n";
-            allRoles = allRoles + "\"time\": \"" + roleList[i].year + "\",\n";
+            allRoles = allRoles + "\"content\": \"" + roleList[i].content + "\",\n";
+            allRoles = allRoles + "\"time\": \"" + roleList[i].time + "\",\n";
 
             if (i == roleList.length - 1) {
                 allRoles = allRoles + "}\n";
@@ -347,6 +363,7 @@ public class Role {
                 allRoles = allRoles + "},\n";
             }
         }
+        allRoles = "["+allRoles+"]";
         return allRoles;
 
     }
