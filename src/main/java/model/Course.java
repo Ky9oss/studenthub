@@ -419,8 +419,9 @@ public class Course {
             allCourses = allCourses + "\"content\": \"" + courseList.get(i).content + "\",\n";
             allCourses = allCourses + "\"time\": \"" + courseList.get(i).time + "\",\n";
             allCourses = allCourses + "\"type\": \"" + courseList.get(i).type + "\",\n";
-            allCourses = allCourses + "\"location\": \"" + courseList.get(i).location + "\",\n";
-            // @@
+            allCourses = allCourses + "\"teacher\": \"" + courseList.get(i).teacher + "\",\n";
+            allCourses = allCourses + "\"grade\": \"" + courseList.get(i).grade + "\",\n";
+            allCourses = allCourses + "\"credit\": \"" + courseList.get(i).credit + "\",\n";
 
             if (i == courseList.size() - 1) {
                 allCourses = allCourses + "}\n";
@@ -478,6 +479,7 @@ public class Course {
     // public static String getRoleByTitle(String title){
     // return "";
     // }
+    // 传入title3 返回不带[]的一整行
 
     // public static String[] getRolesTitles(String json_str){
     // //下面是一个输出结果的格式的示例
@@ -485,12 +487,59 @@ public class Course {
     // return results;
     // }
     public static String getCourseByTitle(String title) {
-        return "";
+        if (activities_titles == "")
+            return "";
+
+        java.net.URL classResource = Course.class.getProtectionDomain().getCodeSource().getLocation();
+        Path classDirectory = Paths.get(classResource.toURI());
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        // 获取resources的文件目录
+
+        String jsonPath = mainResourcesPath.toString() + "/course.json";
+        Path filePath = Paths.get(jsonPath);
+        String pathStr = filePath.toString();
+        String json = getStr(pathStr);
+        Gson gson = new Gson();
+        Course[] courses = gson.fromJson(json, Course[].class);
+        ArrayList<Course> courseList = new ArrayList<>(Arrays.asList(courses));
+
+        String theCourse = "";
+        for (int i = 0; i < courseList.size(); i++) {
+            if (courseList.get(i).title == title) {
+                theCourse = theCourse + "{\n";
+                theCourse = theCourse + "\"title\": \"" + courseList.get(i).title + "\",\n";
+                theCourse = theCourse + "\"content\": \"" + courseList.get(i).content + "\",\n";
+                theCourse = theCourse + "\"time\": \"" + courseList.get(i).time + "\",\n";
+                theCourse = theCourse + "\"type\": \"" + courseList.get(i).type + "\",\n";
+                theCourse = theCourse + "\"teacher\": \"" + courseList.get(i).teacher + "\",\n";
+                theCourse = theCourse + "\"grade\": \"" + courseList.get(i).grade + "\",\n";
+                theCourse = theCourse + "\"credit\": \"" + courseList.get(i).credit + "\",\n";
+                theCourse = theCourse + "}\n";
+            }
+        }
+
+        return theCourse;
     }
 
     public static String[] getCoursesTitles(String json_str) {
+        JSONArray jsonString = new JSONArray(json_str);
+
+        String titleList = "";
+        for (int i = 0; i < jsonString.length(); i++) {
+            JSONObject jsonObject = jsonString.getJSONObject(i);
+            String titles = jsonObject.getString("title");
+            titleList = titleList + "\"" + titles + "\"";
+        }
+        titleList = "{" + titleList + "}";
+        // input 一整个或好多行，输出{"title1", "title2", "title3", "title4", "title5"}
         // 下面是一个输出结果的格式的示例
-        String[] results = { "title1", "title2", "title3", "title4", "title5" };
-        return results;
+        // String[] results = { "title1", "title2", "title3", "title4", "title5" };
+        // return results;
+
+        // [{"responsibility":"responsibility","time":"2022-5-25","team":"team","title":"title3","content":"111"},
+        // {"responsibility":"responsibility","time":"2022-6-9","team":"team","title":"title1","content":"222"},
+        // {"responsibility":"responsibility","time":"2022-12-21","team":"team","title":"title5","content":"333"}]
+
     }
 }
