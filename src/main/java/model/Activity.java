@@ -647,7 +647,7 @@ public static String getActivityByTitle(String title) throws URISyntaxException 
     return theActivity;
 }
 
-public static String getCoursesTitles(String json_str) {
+public static String getActivitiesTitles(String json_str) {
     JSONArray jsonString = new JSONArray(json_str);
 
     String titleList = "{";

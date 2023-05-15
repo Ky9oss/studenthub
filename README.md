@@ -16,7 +16,7 @@
 
   
 # UML
-![](src/main/resources/UML.png)  
+![](src/main/resources/UML.jpg)  
   
 # TDD-Controller Done!
 ![](src/main/resources/C-tdd1.png)  
