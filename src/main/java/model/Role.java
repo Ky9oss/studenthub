@@ -451,9 +451,8 @@ public class Role {
             return false;
         }
     }
-}
 
-    public static String getActivityByTitle(String title) throws URISyntaxException {
+    public static String getRoleByTitle(String title) throws URISyntaxException {
         if (title == "")
             return "";
     
@@ -490,7 +489,7 @@ public class Role {
         return theActivity;
     }
     
-    public static String getCoursesTitles(String json_str) {
+    public static String getRolesTitles(String json_str) {
         JSONArray jsonString = new JSONArray(json_str);
     
         String titleList = "{";

@@ -350,7 +350,7 @@ public class Skill {
     }
 
 
-    public static String getActivityByTitle(String title) throws URISyntaxException {
+    public static String getSkillByTitle(String title) throws URISyntaxException {
         if (title == "")
             return "";
     
@@ -388,7 +388,7 @@ public class Skill {
         return theActivity;
     }
     
-    public static String getCoursesTitles(String json_str) {
+    public static String getSkillsTitles(String json_str) {
         JSONArray jsonString = new JSONArray(json_str);
     
         String titleList = "{";

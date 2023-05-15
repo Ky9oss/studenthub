@@ -440,7 +440,7 @@ public class Achievement {
         Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
         //获取resources的文件目录
 
-             String jsonPath = mainResourcesPath.toString() + "/Achievement.json";
+             String jsonPath = mainResourcesPath.toString() + "/achievement.json";
              Path filePath = Paths.get(jsonPath);
              String pathStr = filePath.toString();
              String json = getStr(pathStr);
@@ -517,7 +517,7 @@ public static boolean setStr(String jsonFile, String text){
     }
 }
 
-public static String getActivityByTitle(String title) throws URISyntaxException {
+public static String getAchievementByTitle(String title) throws URISyntaxException {
     if (title == "")
         return "";
 
@@ -556,7 +556,7 @@ public static String getActivityByTitle(String title) throws URISyntaxException 
     return theActivity;
 }
 
-public static String getCoursesTitles(String json_str) {
+public static String getAchievementsTitles(String json_str) {
     JSONArray jsonString = new JSONArray(json_str);
 
     String titleList = "{";

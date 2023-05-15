@@ -5,6 +5,8 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import model.Course;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -185,9 +187,9 @@ class ControllerTest {
     }
 
 
-/* 
+ 
     @Test
-    void testCourse() {
+    void testCourse() throws URISyntaxException, ParseException {
         int istrue = controllerUnderTest.createCourse("title1", "content", "2022-11-15", "type", "teacher", 0, 0);
         assertEquals(istrue, 1);
         int istrue2 = controllerUnderTest.createCourse("title2", "content", "2023-1-21", "type", "teacher", 0, 0);
@@ -212,15 +214,20 @@ class ControllerTest {
         JSONArray json_array2 = new JSONArray(json_str2);
         System.out.println(json_array2);
 
-        //String json_str3 = Controller.getCoursesForCV();
-        //JSONArray json_array3 = new JSONArray(json_str3);
-        //System.out.println(json_array3);
+        String json_str333 = controllerUnderTest.getCourseByTitle("title1");
+        //String json_array333 = new String(json_str333);
+        System.out.println("1111"+json_str333);
+
+        String json_str444 = Course.getCoursesTitles(json_str);
+        //String json_array444 = new String(json_str444);
+        System.out.println("2222"+json_str444);
+
     }
 
 
 
     @Test
-    void testCalculater() {
+    void testCalculater() throws URISyntaxException {
         double result = controllerUnderTest.calculateGradePointAverage(4);
         assertEquals(result, 0, 0.01);
 
@@ -237,22 +244,21 @@ class ControllerTest {
         assertEquals(istrue5, 1);
         int istrue6 = controllerUnderTest.createCourse("title6", "content", "2022-12-22", "type222", "teacher", 60, 5);
         assertEquals(istrue6, 1);
-        int istrue7 = controllerUnderTest.createCourse("title6", "content", "2022-12-22", "type222", "teacher", 98, 3);
+        int istrue7 = controllerUnderTest.createCourse("title7", "content", "2022-12-22", "type222", "teacher", 98, 3);
         assertEquals(istrue7, 1);
-        int istrue8 = controllerUnderTest.createCourse("title6", "content", "2022-12-22", "type222", "teacher", 84, 2);
+        int istrue8 = controllerUnderTest.createCourse("title8", "content", "2022-12-22", "type222", "teacher", 84, 2);
         assertEquals(istrue8, 1);
-        int istrue9 = controllerUnderTest.createCourse("title6", "content", "2022-12-22", "type222", "teacher", 86, 4);
+        int istrue9 = controllerUnderTest.createCourse("title9", "content", "2022-12-22", "type222", "teacher", 86, 4);
         assertEquals(istrue9, 1);
-        int istrue10 = controllerUnderTest.createCourse("title6", "content", "2022-12-22", "type222", "teacher", 86, 2);
+        int istrue10 = controllerUnderTest.createCourse("title10", "content", "2022-12-22", "type222", "teacher", 86, 2);
         assertEquals(istrue10, 1);
         double result1 = controllerUnderTest.calculateGradePointAverage(1);
-        assertEquals(result1, 3.28, 0.01);
+        assertEquals(result1, 2.77, 0.01);
         double result2 = controllerUnderTest.calculateGradePointAverage(2);
         assertEquals(result2, 3.13, 0.2);
         double result3 = controllerUnderTest.calculateGradePointAverage(3);
         assertEquals(result3, 3.31, 0.1);
     }
-    */
 
     @Test
     void testPanDuan1() throws URISyntaxException, IOException{
@@ -299,9 +305,9 @@ class ControllerTest {
         int istrue13 = controllerUnderTest.createActivity("title2", "content", "2023-1-21", "type", "location");
         assertEquals(istrue13, -2);
     }
-}
+
     //grade credit如果为0,则表示为空
-    /*@Test
+    @Test
     void testPanDuan5() throws URISyntaxException{
         int istrue = controllerUnderTest.createCourse("title1", "", "2022-11-15", "type", "", 1, 1);
         assertEquals(istrue, -1);
@@ -312,4 +318,3 @@ class ControllerTest {
     }
 
 }
-*/
