@@ -61,10 +61,10 @@ public class Calculator {
         for (Course course : courseList) {
             double grade = course.getGrade();
             int credit = course.getCredit();
-            if (course.getType() != "type1") {
+            /*if (course.getType() != "type1") {
                 grade = 0;
                 credit = 0;
-            }
+            }*/
             double gradeToGPA;
             if (grade >= 90.0) {
                 gradeToGPA = 4.0;
@@ -95,7 +95,7 @@ public class Calculator {
      * @param grades_credits_types
      * @return
      */
-    public double calculateByBeida4_0(JSONArray content) {
+    public double calculateByBeida4_0(String content) {
         double gpa = 0;
 
         double totalGradePoints = 0.0;
@@ -113,10 +113,10 @@ public class Calculator {
         for (Course course : courseList) {
             double grade = course.getGrade();
             int credit = course.getCredit();
-            if (course.getType() != "type1") {
+            /*if (course.getType() != "type1") {
                 grade = 0;
                 credit = 0;
-            }
+            }*/
             double gradeToGPA;
             if (grade >= 90.0) {
                 gradeToGPA = 4.0;
@@ -153,7 +153,7 @@ public class Calculator {
      * @param grades_credits_types
      * @return
      */
-    public double calculateByWorldEducationScore(JSONArray content) {
+    public double calculateByWorldEducationScore(String content) {
         double gpa = 0;
 
         double totalGradePoints = 0.0;
@@ -176,7 +176,7 @@ public class Calculator {
             if (grade >= 85.0) {
                 gradeToGPA = 4.0;
             } else if (grade >= 75.0) {
-                gradeToGPA = 2.0;
+                gradeToGPA = 3.0;
             } else if (grade >= 60.0) {
                 gradeToGPA = 2.0;
             } else {

@@ -200,16 +200,16 @@ public class BasicInformation {
             //获取resources的文件目录
 
             if(selection==1){
-                this.image_path = mainResourcesPath.toString() + "/head1.png";
+                this.image_path = mainResourcesPath.toString() + "/head1.jpeg";
             }
             if(selection==2){
-                this.image_path = mainResourcesPath.toString() + "/head2.png";
+                this.image_path = mainResourcesPath.toString() + "/head2.jpeg";
             }
             if(selection==3){
-                this.image_path = mainResourcesPath.toString() + "/head3.png";
+                this.image_path = mainResourcesPath.toString() + "/head3.jpeg";
             }
             if(selection==4){
-                this.image_path = mainResourcesPath.toString() + "/head4.png";
+                this.image_path = mainResourcesPath.toString() + "/head4.jpeg";
             }
 
 

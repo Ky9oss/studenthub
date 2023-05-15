@@ -41,11 +41,7 @@ public class Controller {
         return s;
     }
 
-    //public static String getCoursesForCV(){
-    //    String s = Course.getCoursesForCV();
-    //    return s;
-    //}
-    //create basic information
+
     public String createBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
         
         BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);
@@ -87,8 +83,13 @@ public class Controller {
 
     //get basic information
     public static String getBasicInformation() throws URISyntaxException {
-        String basic_information = BasicInformation.getBasicInformation();
-        return basic_information;
+        try {
+            String basic_information = BasicInformation.getBasicInformation();
+            return basic_information;
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return "";
     }
 
 
@@ -121,10 +122,45 @@ public class Controller {
 
 
     //get skills by proficiency
-    public String getSkillsByProficiency(String proficiency) throws URISyntaxException {
+    public static String getSkillsByProficiency(String proficiency) throws URISyntaxException {
         String skills = Skill.getSkillsByProficiency(proficiency);
         return skills;
     }
+
+    public String getSkillsTitlesByProficiency(String proficiency) throws URISyntaxException {
+        String skills = Skill.getSkillsByProficiency(proficiency);
+        String skills_titles = Skill.getSkillsTitles(skills);
+        return skills_titles;
+    }
+
+
+
+    public static String getSkillByTitle(String title) throws URISyntaxException{
+        String s = Skill.getSkillByTitle(title);
+        return s;
+    }
+
+    public static String getAchivementByTitle(String title) throws URISyntaxException{
+        String s = Achievement.getAchievementByTitle(title);
+        return s;
+    }
+
+    public static String getActivityByTitle(String title) throws URISyntaxException{
+        String s = Activity.getActivityByTitle(title);
+        return s;
+    }
+
+    public static String getRoleByTitle(String title) throws URISyntaxException{
+        String s = Role.getRoleByTitle(title);
+        return s;
+    }
+
+    public static String getCourseByTitle(String title) throws URISyntaxException{
+        String s = Course.getCourseByTitle(title);
+        return s;
+    }
+
+
 
 
     //create achievement
@@ -156,15 +192,27 @@ public class Controller {
 
 
     //With foraward sorting, get achivement by year
-    public String getAchievementsByYearForwardSort(int year) throws URISyntaxException, ParseException{
+    public static String getAchievementsByYearForwardSort(int year) throws URISyntaxException, ParseException{
         String json_str = Achievement.getAchievementsByYearForwardSort(year);
         return json_str;
     }
 
+    //With foraward sorting, get achivement by year
+    public String getAchievementsTitlesByYearForwardSort(int year) throws URISyntaxException, ParseException{
+        String json_str = Achievement.getAchievementsByYearForwardSort(year);
+        String titles = Achievement.getAchievementsTitles(json_str);
+        return titles;
+    }
+
     //With reverse sorting, get achivement by year
-    public String getAchievementsByYearReverseSort(int year) throws URISyntaxException, ParseException{
+    public static String getAchievementsByYearReverseSort(int year) throws URISyntaxException, ParseException{
         String json_str = Achievement.getAchievementsByYearReverseSort(year);
         return json_str;
+    }
+    public String getAchievementsTitlesByYearReverseSort(int year) throws URISyntaxException, ParseException{
+        String json_str = Achievement.getAchievementsByYearReverseSort(year);
+        String titles = Achievement.getAchievementsTitles(json_str);
+        return titles;
     }
 
 
@@ -198,17 +246,29 @@ public class Controller {
 
 
     //get roles by year with forward sorting
-    public String getRolesByYearForwardSort(int year) throws ParseException, URISyntaxException {
+    public static String getRolesByYearForwardSort(int year) throws ParseException, URISyntaxException {
         String json_str = Role.getRolesByYearForwardSort(year);
         return json_str;
+    }
+
+    public String getRolesTitlesByYearForwardSort(int year) throws ParseException, URISyntaxException {
+        String json_str = Role.getRolesByYearForwardSort(year);
+        String titles = Role.getRolesTitles(json_str);
+        return titles;
     }
 
 
 
     //get roles by year with reverse sorting
-    public String getRolesByYearReverseSort(int year) throws ParseException, URISyntaxException {
+    public static String getRolesByYearReverseSort(int year) throws ParseException, URISyntaxException {
         String json_str = Role.getRolesByYearReverseSort(year);
         return json_str;
+    }
+
+    public String getRolesTitlesByYearReverseSort(int year) throws ParseException, URISyntaxException {
+        String json_str = Role.getRolesByYearReverseSort(year);
+        String titles = Role.getRolesTitles(json_str);
+        return titles;
     }
 
 
@@ -243,24 +303,37 @@ public class Controller {
 
 
     //get activities by year and type with forward sorting
-    public String getActivitiesByYearAndByTypeForwardSort(int year, String type) throws URISyntaxException, ParseException{
+    public static String getActivitiesByYearAndByTypeForwardSort(int year, String type) throws URISyntaxException, ParseException{
         String json_str = Activity.getActivitiesByYearAndByTypeForwardSort(year, type);
         return json_str;
+    }
+
+    public String getActivitiesTitlesByYearAndByTypeForwardSort(int year, String type) throws URISyntaxException, ParseException{
+        String json_str = Activity.getActivitiesByYearAndByTypeForwardSort(year, type);
+        String titles = Activity.getActivitiesTitles(json_str);
+        return titles;
     }
 
 
 
     //get activities by year and type with reverse sorting
-    public String getActivitiesByYearAndByTypeReverseSort(int year, String type) throws URISyntaxException, ParseException{
+    public static String getActivitiesByYearAndByTypeReverseSort(int year, String type) throws URISyntaxException, ParseException{
         String json_str = Activity.getActivitiesByYearAndByTypeReverseSort(year, type);
         return json_str;
     }
-}
+
+    public String getActivitiesTitlesByYearAndByTypeReverseSort(int year, String type) throws URISyntaxException, ParseException{
+        String json_str = Activity.getActivitiesByYearAndByTypeReverseSort(year, type);
+        String titles = Activity.getActivitiesTitles(json_str);
+        return titles;
+    }
+    
 
 
-        /*
+
+
     //create course
-    public int createCourse(String title, String content, String time, String type, String teacher, int grade, int credit) {
+    public static int createCourse(String title, String content, String time, String type, String teacher, int grade, int credit) throws URISyntaxException {
         Course course = new Course(title, content, time, type, teacher, grade, credit);
         int istrue = course.saveCourse();
         return istrue;
@@ -268,7 +341,7 @@ public class Controller {
 
 
     //change course
-    public int changeCourse(String title, String content, String time, String type, String teacher, int grade, int credit) {
+    public static int changeCourse(String title, String content, String time, String type, String teacher, int grade, int credit) throws URISyntaxException {
         Course course = new Course(title, content, time, type, teacher, grade, credit);
         boolean istrue = Course.deleteCourse(title);
         if(istrue==false){
@@ -281,7 +354,7 @@ public class Controller {
 
 
     //delete course
-    public boolean deleteCourse(String title) {
+    public static boolean deleteCourse(String title) throws URISyntaxException {
         boolean istrue = Course.deleteCourse(title);
         return istrue;
     }
@@ -289,26 +362,36 @@ public class Controller {
 
 
     //get courses by year and type with forward sorting
-    public String getCoursesByYearAndByTypeForwardSort(int year, String type) {
+    public static String getCoursesByYearAndByTypeForwardSort(int year, String type) throws URISyntaxException, ParseException {
         String json_str = Course.getCoursesByYearAndByTypeForwardSort(year, type);
         return json_str;
     }
 
+    public String getCoursesTitlesByYearAndByTypeForwardSort(int year, String type) throws URISyntaxException, ParseException {
+        String json_str = Course.getCoursesByYearAndByTypeForwardSort(year, type);
+        String titles = Course.getCoursesTitles(json_str);
+        return titles;
+    }
 
     //get courses by year and type with reverse sorting
-    public String getCoursesByYearAndByTypeReverseSort(int year, String type) {
+    public static String getCoursesByYearAndByTypeReverseSort(int year, String type) throws URISyntaxException, ParseException {
         String json_str = Course.getCoursesByYearAndByTypeReverseSort(year, type);
         return json_str;
     }
 
+    public String getCoursesTitlesByYearAndByTypeReverseSort(int year, String type) throws URISyntaxException, ParseException {
+        String json_str = Course.getCoursesByYearAndByTypeReverseSort(year, type);
+        String titles = Course.getCoursesTitles(json_str);
+        return titles;
+    }
 
 
 
     //calculate GPA
 
-    public double calculateGradePointAverage(int method) {
+    public static double calculateGradePointAverage(int method) throws URISyntaxException {
         Calculator calculator = new Calculator();
-        JSONArray grades_credits_types = Course.getAllGradesAndCreditsAndType();
+        String grades_credits_types = Course.getAllGradesAndCreditsAndType();
         switch (method) {
             case 1:
                 double result1 = calculator.calculateByStandard(grades_credits_types);
@@ -324,27 +407,33 @@ public class Controller {
         }
  
     }
-}
-    /*
+
+
 
 
     //createCV
     public String createCV() throws URISyntaxException {
         CV cv = new CV();
         String basic_information = BasicInformation.getBasicInformation();
-        String skills = Skill.getSkillsByTitles(getSkillsTitles());
-        String achievements = Achievement.getAchievementsByTitles(getAchievementsTitles());
-        String roles = Role.getRolesByTitles(getRolesTitles());
-        String activities = Activity.getActivitiesByTitles(getActivitiesTitles());
-        basic_information = "{\"major\":\"major2\",\"school\":\"school2\",\"image_path\":\"/home/kadrex/Study/codes/java/jiti_lab/studenthub/src/main/resources/image.png\",\"name\":\"name2\",\"graduation_time\":\"graduation_time2\",\"admission_time\":\"admission_time2\",\"age\":0}";
-        skills = "[{\"title\": \"hahahaha\", \"content\": \"contentetetete\", \"proficiency\": \"Advanced\", \"project\": \"java\"},{\"title\": \"hahahaha22\", \"content\": \"conten22\", \"proficiency\": \"Advanced\", \"project\": \"java22\"}]";
-        activities = "[{\"title\": \"hahahaha\", \"content\": \"contentetetete\", \"time\": \"xxxx-xx-xx\", \"type\": \"111\", \"location\": \"beijing\"},{\"title\": \"hahahaha\", \"content\": \"contentetetete\", \"time\": \"xxxx-xx-xx\", \"type\": \"111\", \"location\": \"beijing\"}]";
-        roles = "[{\"title\": \"hahahaha\", \"content\": \"contentetetete\", \"time\": \"xxxx-xx-xx\"},{\"title\": \"hahahaha\", \"content\": \"contentetetete\", \"time\": \"xxxx-xx-xx\"}]";
-        achievements = "[{\"title\": \"hahahaha\", \"content\": \"contentetetete\", \"time\": \"xxxx-xx-xx\", \"team\": \"111\", \"responsibility\": \"beijing\"},{\"title\": \"hahahaha\", \"content\": \"contentetetete\", \"time\": \"xxxx-xx-xx\", \"team\": \"111\", \"responsibility\": \"beijing\"}]";
+        String skills = Skill.getSkillsForCV();
+        String achievements = Achievement.getAchievementsForCV();
+        String roles = Role.getRolesForCV();
+        String activities = Activity.getActivitiesForCV();
         String pdf_path = cv.createCV(basic_information, skills, achievements, roles, activities);
         return pdf_path;
     }
-     */
+
+
+    public static String getSkillsByYearReverseSort(String prof) {
+        return null;
+    }
+
+
+    public static String getSkillsByYearForwardSort(String prof) {
+        return null;
+    }
+}
+
 
 /* 
     //get skills all titles

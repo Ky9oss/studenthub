@@ -2,6 +2,11 @@ package view;
 import controller.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,12 +54,16 @@ public class CourseDetailControler {
     }
 
     @FXML
-    void save(ActionEvent event) {
+    void save(ActionEvent event) throws URISyntaxException {
         if(this.type==1){
-        // subjectFielder.setText("保存成功");
         Integer int5 = Integer.parseInt(text5.getText());
         Integer int6 = Integer.parseInt(text6.getText());
-        // Controller.createCourse(this.subjectContent,text1.getText(),text2.getText(),text3.getText(),text4.getText(),int5,int6);
+        String title = subjectFielder.getText();
+        // Controller.createCourse("bbbbbbbbb","1","1","1","1",1,1);
+        // System.out.println("测试");
+        // System.out.println(Controller.getCourseByTitle("bbbbbbbbb"));
+        Controller.createCourse(title,text1.getText(),text2.getText(),text3.getText(),text4.getText(),int5,int6);
+        // System.out.println(Controller.getCourseByTitle(subjectFielder.getText()));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("添加成功");
         alert.show();
@@ -62,21 +71,35 @@ public class CourseDetailControler {
         // subjectFielder.setText("保存成功");
         Integer int5 = Integer.parseInt(text5.getText());
         Integer int6 = Integer.parseInt(text6.getText());
-        // Controller.changeCourse(this.subjectContent,text1.getText(),text2.getText(),text3.getText(),text4.getText(),int5,int6);
+        Controller.changeCourse(this.subjectContent,text1.getText(),text2.getText(),text3.getText(),text4.getText(),int5,int6);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("修改成功");
         alert.show();
         }
 
     }
+    //跨页面传递参数
     @FXML
-     void getData(String subjectContent,int type) throws IOException{
+     void getData(String subjectContent,int type) throws IOException, URISyntaxException{
         this.type = type;
         //   System.out.println("++++++++++++++++++++++++");
         //   subjectFielder.setText(subjectContent);
         this.subjectContent = subjectContent;
           subjectFielder.setText(subjectContent);
-          System.out.println("调用成功");
+        //   System.out.println("调用成功");
+        if(type==2){
+          String detail = Controller.getCourseByTitle(subjectContent);
+          JSONObject rawObject = JSON.parseObject(detail);
+        System.out.println("++++++++++++++++++++++++");
+      //   System.out.println(rawObject);
+          text1.setText(rawObject.getString("content"));
+          text2.setText(rawObject.getString("time"));
+          text3.setText(rawObject.getString("type"));
+          text4.setText(rawObject.getString("teacher"));
+          text5.setText(""+rawObject.getString("grade"));
+          text6.setText(""+rawObject.getString("credit"));
+
+      }
         // this.subjectContent = subjectContent;
     }
 

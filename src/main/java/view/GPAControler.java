@@ -2,6 +2,7 @@ package view;
 import controller.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -115,22 +116,22 @@ import javafx.scene.Node;
          stage.show();
     }
     @FXML
-    void sf1(ActionEvent event) throws IOException{
+    void sf1(ActionEvent event) throws IOException, URISyntaxException{
 
-          detail.setText("Controller.calculateGradePointAverage(1)");
-          gpa.setText("100分");
+          detail.setText("算法1");
+          gpa.setText(""+Controller.calculateGradePointAverage(1));
     }
 
     @FXML
-    void sf2(ActionEvent event) throws IOException{
-        detail.setText("Controller.calculateGradePointAverage(2)");
-        gpa.setText("59分");
+    void sf2(ActionEvent event) throws IOException, URISyntaxException{
+        detail.setText("算法2");
+        gpa.setText(""+Controller.calculateGradePointAverage(2));
     }
 
     @FXML
-    void sf3(ActionEvent event) throws IOException{
-        detail.setText("Controller.calculateGradePointAverage(3)");
-        gpa.setText("88分");
+    void sf3(ActionEvent event) throws IOException, URISyntaxException{
+        detail.setText("算法3");
+        gpa.setText(""+Controller.calculateGradePointAverage(3));
     }
  }
  

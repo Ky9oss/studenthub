@@ -4,6 +4,9 @@ import controller.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,7 +45,7 @@ public class RoleDetailControler {
         if(this.type==1){
         // subjectFielder.setText("保存成功");
         //有bug
-        // Controller.createRole(this.subjectContent,text1.getText(),text2.getText());
+        Controller.createRole(subjectFielder.getText(),text1.getText(),text2.getText());
         // Controller.createRole("1","1","1");
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("添加成功");
@@ -50,7 +53,7 @@ public class RoleDetailControler {
         }else if(this.type==2){
         // subjectFielder.setText("保存成功");
         //有bug
-        // Controller.changeRole(this.subjectContent,text1.getText(),text2.getText());
+        Controller.changeRole(this.subjectContent,text1.getText(),text2.getText());
         // Controller.createRole("1","1","1");
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("修改成功");
@@ -59,7 +62,7 @@ public class RoleDetailControler {
 
     }
     @FXML
-     void getData(String subjectContent,int type) throws IOException{
+     void getData(String subjectContent,int type) throws IOException, URISyntaxException{
         this.type = type;
         //   System.out.println("++++++++++++++++++++++++");
         //   subjectFielder.setText(subjectContent);
@@ -67,6 +70,16 @@ public class RoleDetailControler {
           subjectFielder.setText(subjectContent);
           System.out.println("调用成功");
         // this.subjectContent = subjectContent;
+        if(type==2){
+            String detail = Controller.getRoleByTitle(subjectContent);
+            JSONObject rawObject = JSON.parseObject(detail);
+          System.out.println("++++++++++++++++++++++++");
+        //   System.out.println(rawObject);
+            text1.setText(rawObject.getString("content"));
+            text2.setText(rawObject.getString("time"));
+
+  
+        }
     }
 
 }

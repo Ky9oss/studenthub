@@ -34,10 +34,13 @@ public class HomeControler {
     
     @FXML
     private ImageView tx;
-        
-    Image tx2 = new Image(getClass().getResourceAsStream("tx2.jpg")); 
+    Image tx3 = new Image(getClass().getResourceAsStream("tx3.jpeg")); 
     
-    Image tx1 = new Image(getClass().getResourceAsStream("tx1.jpg")); 
+    Image tx4 = new Image(getClass().getResourceAsStream("tx4.jpeg")); 
+        
+    Image tx2 = new Image(getClass().getResourceAsStream("tx2.jpeg")); 
+    
+    Image tx1 = new Image(getClass().getResourceAsStream("tx1.jpeg")); 
 
     @FXML
     private Button changeButton;
@@ -186,19 +189,35 @@ public class HomeControler {
     private void changetx2(ActionEvent event) throws IOException{
             tx.setImage(tx2);
     }
+    @FXML
+    private void changetx3(ActionEvent event) throws IOException{
+            tx.setImage(tx3);
+    }
+    @FXML
+    private void changetx4(ActionEvent event) throws IOException{
+            tx.setImage(tx4);
+    }
     public void initialize() throws URISyntaxException {
+try {
+    String data = Controller.getBasicInformation();
+    //    System.out.print(data);
+       JSONObject jsonObject = JSONObject.parseObject(data);
+       System.out.print(jsonObject);
+    //    System.out.print(jsonObject.getString("name"));
+    f1.setText(jsonObject.getString("name"));
+    f2.setText(jsonObject.getString("age"));
+    f3.setText(jsonObject.getString("school"));
+    f4.setText(jsonObject.getString("major"));
+    f5.setText(jsonObject.getString("admission_time"));
+    f6.setText(jsonObject.getString("graduation_time"));
+    //暂时这样
+    tx.setImage(tx1);
 
-           String data = Controller.getBasicInformation();
-        //    System.out.print(data);
-           JSONObject jsonObject = JSONObject.parseObject(data);
-           System.out.print(jsonObject);
-        //    System.out.print(jsonObject.getString("name"));
-        f1.setText(jsonObject.getString("name"));
-        f2.setText(jsonObject.getString("age"));
-        f3.setText(jsonObject.getString("school"));
-        f4.setText(jsonObject.getString("major"));
-        f5.setText(jsonObject.getString("admission_time"));
-        f6.setText(jsonObject.getString("graduation_time"));
+} catch (Exception e) {
+    System.out.print("请新建信息");
+
+}
+
 
 
     }

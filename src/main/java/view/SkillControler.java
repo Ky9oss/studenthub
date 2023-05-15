@@ -1,9 +1,13 @@
 package view;
 import controller.*;
-
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonArray;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -20,12 +24,11 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 public class SkillControler implements Initializable{
     String subject = "";
-    String prof = "";
-
+    String prof = "1";
     @FXML
     private ListView<String> list;
     @FXML
-    void add(ActionEvent event) throws IOException {
+    void add(ActionEvent event) throws IOException, URISyntaxException {
         //跨区域调用函数
         this.subject = "";
         FXMLLoader loader = new FXMLLoader(getClass().getResource("skillDetail.fxml"));
@@ -42,13 +45,16 @@ public class SkillControler implements Initializable{
     }
 
     @FXML
-    boolean delete(ActionEvent event) throws URISyntaxException {
+    boolean delete(ActionEvent event) throws URISyntaxException, ParseException {
         if(this.subject==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("请选择对应内容");
             alert.show();
             return false;
         }
+
+        Controller.deleteSkill(this.subject);
+            time1();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("成功删除!");
         alert.show();
@@ -56,7 +62,7 @@ public class SkillControler implements Initializable{
         return true;
     }
     @FXML
-    boolean detail(ActionEvent event) throws IOException {
+    boolean detail(ActionEvent event) throws IOException, URISyntaxException {
         if(this.subject==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("请选择对应内容");
@@ -160,12 +166,41 @@ public class SkillControler implements Initializable{
          stage.setScene(scene);
          stage.show();
     }
-    String[] skill = {"点击想要的排序方式"};
+    // String[] skill = {"点击想要的排序方式"};
     String choose;
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-          list.getItems().addAll(skill);
-          list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+        try {
+            Controller.createSkill("ccccc","1","1","1");
+            Controller.createSkill("ccccsdfc","1","1","1");
+            Controller.createSkill("cccsdfcc","1","2","1");
+            Controller.createSkill("ccfdgdccc","1","2","1");
+            Controller.createSkill("cchjghjccc","1","1","1");
+        } catch (URISyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        String rawList;
+        try {
+            rawList = Controller.getSkillsByProficiency(this.prof);
+                    System.out.print(rawList);
+
+        JSONArray rawArray = JSON.parseArray(rawList);
+        String[] strs = new String[rawArray.size()];
+        for(int i=0;i<rawArray.size();i++){
+            JSONObject object = rawArray.getJSONObject(i);
+            // System.out.print(object);
+            String title = object.getString("title");
+            strs[i]=title;
+        }
+        list.getItems().addAll(strs);
+        } catch (URISyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
                 choose = list.getSelectionModel().getSelectedItem();
@@ -180,16 +215,40 @@ public class SkillControler implements Initializable{
         this.subject = subject;
         System.out.println( this.subject);
     }
-    
     @FXML
-    void prof1(ActionEvent event) {
-        //  Controller.getSkillsByProficiency();
+    void time1() throws URISyntaxException, ParseException {
+        transferDataList(Controller.getSkillsByProficiency(this.prof));
     }
 
     @FXML
-    void prof2(ActionEvent event) {
-        //  Controller.getSkillsByProficiency();
+    void prof1(ActionEvent event) throws URISyntaxException, ParseException {
+        this.prof = "1";
+            time1();
+
     }
+
+    @FXML
+    void prof2(ActionEvent event) throws URISyntaxException, ParseException {
+        this.prof = "2";
+            time1();
+
+
+    }
+
+    void transferDataList(String rawList){
+        System.out.println(rawList);
+        list.getItems().clear();
+        JSONArray rawArray = JSON.parseArray(rawList);
+        String[] strs = new String[rawArray.size()];
+        for(int i=0;i<rawArray.size();i++){
+        JSONObject object = rawArray.getJSONObject(i);
+        String title = object.getString("title");
+        strs[i]=title;
+        // System.out.println(strs);
+          }
+list.getItems().addAll(strs);
+    }
+
 
 
 }

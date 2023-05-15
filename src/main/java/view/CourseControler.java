@@ -1,10 +1,17 @@
+
 package view;
 import controller.*;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ResourceBundle;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonArray;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,13 +27,15 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 public class CourseControler implements Initializable{
     String subject = "";
-    int year = 1;
-    String type = "";
+    int year = 2023;
+    String type = "1";
     int timelist = 1;
+    String[] course = {};
+    String choose;
     @FXML
     private ListView<String> list;
     @FXML
-    void add(ActionEvent event) throws IOException {
+    void add(ActionEvent event) throws IOException, URISyntaxException {
         //跨区域调用函数
         this.subject = "";
         FXMLLoader loader = new FXMLLoader(getClass().getResource("courseDetail.fxml"));
@@ -43,13 +52,19 @@ public class CourseControler implements Initializable{
     }
 
     @FXML
-    boolean delete(ActionEvent event) throws URISyntaxException {
+    boolean delete(ActionEvent event) throws URISyntaxException, ParseException {
         if(this.subject==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("请选择对应内容");
             alert.show();
             return false;
         }
+        Controller.deleteCourse(this.subject);
+        if(this.timelist==1){
+            time1(event);
+         }else if(this.timelist==2){
+            time2(event);
+         }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("成功删除!");
         alert.show();
@@ -58,7 +73,7 @@ public class CourseControler implements Initializable{
     }
 
     @FXML
-    boolean detail(ActionEvent event) throws IOException {
+    boolean detail(ActionEvent event) throws IOException, URISyntaxException {
         if(this.subject==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("请选择对应内容");
@@ -162,12 +177,46 @@ public class CourseControler implements Initializable{
          stage.setScene(scene);
          stage.show();
     }
-    String[] course = {"课程2","课程3","课程5","课程7","课程9"};
-    String choose;
+    // public void changeList(){
+    //     this.course[3] = "title";
+    // }
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-          list.getItems().addAll(course);
-          list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            // System.out.println(this.course[1]);
+                
+        try {
+            Controller.createCourse("ccccc","1","2023-8-9","1","1",1,1);
+            Controller.createCourse("kkkk","1","2023-9-10","1","1",1,1);
+            Controller.createCourse("ccccc","1","2023-10-11","1","1",1,1);
+            Controller.createCourse("jjjj","1","2023-11-12","1","1",1,1);
+            Controller.createCourse("uuuu","1","2023-8-9","1","1",1,1);
+            Controller.createCourse("ddd","1","2021-8-8","2","1",1,1);
+            Controller.createCourse("eee","1","2022-8-10","1","1",1,1);
+            Controller.createCourse("fff","1","2020-7-7","2","1",1,1);
+        } catch (URISyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        // System.out.println("111");
+//-----------------------------------------------------------------------------------------------
+        try {
+            String rawList = Controller.getCoursesByYearAndByTypeForwardSort(this.year,this.type);
+            // String rawList = Controller.getCoursesByYearAndByTypeForwardSort(2022,this.type);
+            JSONArray rawArray = JSON.parseArray(rawList);
+            String[] strs = new String[rawArray.size()];
+            for(int i=0;i<rawArray.size();i++){
+                JSONObject object = rawArray.getJSONObject(i);
+                String title = object.getString("title");
+                strs[i]=title;
+            }
+            list.getItems().addAll(strs);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
                 choose = list.getSelectionModel().getSelectedItem();
@@ -177,85 +226,106 @@ public class CourseControler implements Initializable{
             
 
           });
+//-------------------------------------------------------------------------------------------------
     }
     public void changeData(String subject){
         this.subject = subject;
         System.out.println( this.subject);
     }
     @FXML
-    void time1(ActionEvent event) {
-            //   Controller.getCoursesByYearForwardSort();
-
+    void time1(ActionEvent event) throws URISyntaxException, ParseException {
+        this.timelist=1;
+        transferDataList(Controller.getCoursesByYearAndByTypeForwardSort(this.year,this.type));
     }
 
     @FXML
-    void time2(ActionEvent event) {
-        // Controller.getRolesByYearReverseSort();
+    void time2(ActionEvent event) throws URISyntaxException, ParseException {
+        // System.out.println( "逆时间排序");
+        this.timelist=2;
+        transferDataList(Controller.getCoursesByYearAndByTypeReverseSort(this.year,this.type));
     }
 
     @FXML
-    void type1(ActionEvent event) {
-        if(this.timelist==1){
-            //   Controller.getCoursesByYearForwardSort();
+    void type1(ActionEvent event) throws URISyntaxException, ParseException {
+        this.type = "1";
+        if(this.timelist==1){            
+            time1(event);
              }else if(this.timelist==2){
-            // Controller.getRolesByYearReverseSort();
+                time2(event);
              }else{
              }
-             this.type="1";
+
     }
 
     @FXML
-    void type2(ActionEvent event) {
-        if(this.timelist==1){
-            //   Controller.getCoursesByYearForwardSort();
+    void type2(ActionEvent event) throws URISyntaxException, ParseException {
+        this.type = "2";
+        if(this.timelist==1){            
+            time1(event);
              }else if(this.timelist==2){
-            // Controller.getRolesByYearReverseSort();
+                time2(event);
              }else{
              }
-             this.type="2";
+
     }
 
     @FXML
-    void year1(ActionEvent event) {
+    void year1(ActionEvent event) throws URISyntaxException, ParseException {
+        this.year = 2020;
          if(this.timelist==1){
-        //   Controller.getCoursesByYearForwardSort();
+            time1(event);
          }else if(this.timelist==2){
-        // Controller.getRolesByYearReverseSort();
+            time2(event);
          }else{
          }
-         this.year=1;
+
     }
 
     @FXML
-    void year2(ActionEvent event) {
-        if(this.timelist==1){
-            //   Controller.getCoursesByYearForwardSort();
-             }else if(this.timelist==2){
-            // Controller.getRolesByYearReverseSort();
-             }else{
-             }
-             this.year=2;
+    void year2(ActionEvent event) throws URISyntaxException, ParseException {
+        this.year = 2021;
+         if(this.timelist==1){
+            time1(event);
+         }else if(this.timelist==2){
+            time2(event);
+         }else{
+         }
+
     }
 
     @FXML
-    void year3(ActionEvent event) {
-        if(this.timelist==1){
-            //   Controller.getCoursesByYearForwardSort();
-             }else if(this.timelist==2){
-            // Controller.getRolesByYearReverseSort();
-             }else{
-             }
-             this.year=3;
+    void year3(ActionEvent event) throws URISyntaxException, ParseException {
+        this.year = 2022;
+         if(this.timelist==1){
+            time1(event);
+         }else if(this.timelist==2){
+            time2(event);
+         }else{
+         }
+
     }
 
     @FXML
-    void year4(ActionEvent event) {
-        if(this.timelist==1){
-            //   Controller.getCoursesByYearForwardSort();
-             }else if(this.timelist==2){
-            // Controller.getRolesByYearReverseSort();
-             }else{
-             }
-             this.year=4;
+    void year4(ActionEvent event) throws URISyntaxException, ParseException {
+        this.year = 2023;
+         if(this.timelist==1){
+            time1(event);
+         }else if(this.timelist==2){
+            time2(event);
+         }else{
+         }
+    }
+    void transferDataList(String rawList){
+        System.out.println(rawList);
+        list.getItems().clear();
+        JSONArray rawArray = JSON.parseArray(rawList);
+        String[] strs = new String[rawArray.size()];
+        for(int i=0;i<rawArray.size();i++){
+        JSONObject object = rawArray.getJSONObject(i);
+        String title = object.getString("title");
+        strs[i]=title;
+        // System.out.println(strs);
+}
+list.getItems().addAll(strs);
     }
 }
