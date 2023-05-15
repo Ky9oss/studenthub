@@ -1,6 +1,9 @@
 package view;
+import controller.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+
 import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,13 +45,15 @@ public class AchievementDetailControler {
     }
 
     @FXML
-    void save(ActionEvent event) {
+    void save(ActionEvent event) throws URISyntaxException, IOException {
         if(this.type==1){
         // subjectFielder.setText("保存成功");
+        Controller.createAchievement(this.subjectContent,text1.getText(),text2.getText(),text3.getText(),text4.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("添加成功");
         alert.show();
         }else if(this.type==2){
+        Controller.changeAchievement(this.subjectContent,text1.getText(),text2.getText(),text3.getText(),text4.getText());
         // subjectFielder.setText("保存成功");
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("修改成功");
@@ -61,6 +66,7 @@ public class AchievementDetailControler {
         this.type = type;
         //   System.out.println("++++++++++++++++++++++++");
         //   subjectFielder.setText(subjectContent);
+        this.subjectContent=subjectContent;
           subjectFielder.setText(subjectContent);
           System.out.println("调用成功");
         // this.subjectContent = subjectContent;

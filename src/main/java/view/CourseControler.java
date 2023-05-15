@@ -1,6 +1,8 @@
 package view;
+import controller.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,6 +22,7 @@ public class CourseControler implements Initializable{
     String subject = "";
     int year = 1;
     String type = "";
+    int timelist = 1;
     @FXML
     private ListView<String> list;
     @FXML
@@ -40,10 +43,18 @@ public class CourseControler implements Initializable{
     }
 
     @FXML
-    void delete(ActionEvent event) {
+    boolean delete(ActionEvent event) throws URISyntaxException {
+        if(this.subject==""){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("请选择对应内容");
+            alert.show();
+            return false;
+        }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("成功删除!");
         alert.show();
+        // Controller.deleteCourse(this.subject);
+        return true;
     }
 
     @FXML
@@ -173,41 +184,78 @@ public class CourseControler implements Initializable{
     }
     @FXML
     void time1(ActionEvent event) {
+            //   Controller.getCoursesByYearForwardSort();
 
     }
 
     @FXML
     void time2(ActionEvent event) {
-
+        // Controller.getRolesByYearReverseSort();
     }
 
     @FXML
     void type1(ActionEvent event) {
-
+        if(this.timelist==1){
+            //   Controller.getCoursesByYearForwardSort();
+             }else if(this.timelist==2){
+            // Controller.getRolesByYearReverseSort();
+             }else{
+             }
+             this.type="1";
     }
 
     @FXML
     void type2(ActionEvent event) {
-
+        if(this.timelist==1){
+            //   Controller.getCoursesByYearForwardSort();
+             }else if(this.timelist==2){
+            // Controller.getRolesByYearReverseSort();
+             }else{
+             }
+             this.type="2";
     }
 
     @FXML
     void year1(ActionEvent event) {
-
+         if(this.timelist==1){
+        //   Controller.getCoursesByYearForwardSort();
+         }else if(this.timelist==2){
+        // Controller.getRolesByYearReverseSort();
+         }else{
+         }
+         this.year=1;
     }
 
     @FXML
     void year2(ActionEvent event) {
-
+        if(this.timelist==1){
+            //   Controller.getCoursesByYearForwardSort();
+             }else if(this.timelist==2){
+            // Controller.getRolesByYearReverseSort();
+             }else{
+             }
+             this.year=2;
     }
 
     @FXML
     void year3(ActionEvent event) {
-
+        if(this.timelist==1){
+            //   Controller.getCoursesByYearForwardSort();
+             }else if(this.timelist==2){
+            // Controller.getRolesByYearReverseSort();
+             }else{
+             }
+             this.year=3;
     }
 
     @FXML
     void year4(ActionEvent event) {
-
+        if(this.timelist==1){
+            //   Controller.getCoursesByYearForwardSort();
+             }else if(this.timelist==2){
+            // Controller.getRolesByYearReverseSort();
+             }else{
+             }
+             this.year=4;
     }
 }

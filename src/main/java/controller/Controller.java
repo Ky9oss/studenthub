@@ -61,7 +61,7 @@ public class Controller {
     }
 
     //change basic information
-    public String changeBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
+    public static String changeBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, File head) {
         BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);            
         boolean istrue1 = basic_information.deleteBasicInformation();
         if(istrue1==false){
@@ -86,14 +86,14 @@ public class Controller {
 
 
     //get basic information
-    public String getBasicInformation() throws URISyntaxException {
+    public static String getBasicInformation() throws URISyntaxException {
         String basic_information = BasicInformation.getBasicInformation();
         return basic_information;
     }
 
 
     //create skill
-    public int createSkill(String title, String content, String proficiency, String project) throws URISyntaxException {
+    public static int createSkill(String title, String content, String proficiency, String project) throws URISyntaxException {
         Skill skill = new Skill(title, content, proficiency, project);
         int istrue = skill.saveSkill();
         return istrue;
@@ -101,7 +101,7 @@ public class Controller {
 
 
     //change skill
-    public int changeSkill(String title, String content, String proficiency, String project) throws URISyntaxException {
+    public static int changeSkill(String title, String content, String proficiency, String project) throws URISyntaxException {
         Skill skill = new Skill(title, content, proficiency, project);
         boolean istrue = Skill.deleteSkill(title);
         if(istrue==false){
@@ -114,7 +114,7 @@ public class Controller {
 
 
     //delete skill
-    public boolean deleteSkill(String title) throws URISyntaxException {
+    public static boolean deleteSkill(String title) throws URISyntaxException {
         boolean istrue = Skill.deleteSkill(title);
         return istrue;
     }
@@ -128,7 +128,7 @@ public class Controller {
 
 
     //create achievement
-    public int createAchievement(String title, String content, String time, String team, String responsibility) throws URISyntaxException, IOException {
+    public static int createAchievement(String title, String content, String time, String team, String responsibility) throws URISyntaxException, IOException {
         Achievement achievement = new Achievement(title, content, time, team, responsibility);
         int istrue = achievement.saveAchievement();
         return istrue;
@@ -136,7 +136,7 @@ public class Controller {
 
 
     //change achievement
-    public int changeAchievement(String title, String content, String time, String team, String responsibility) throws URISyntaxException, IOException {
+    public static int changeAchievement(String title, String content, String time, String team, String responsibility) throws URISyntaxException, IOException {
         Achievement achievement = new Achievement(title, content, time, team, responsibility);
         boolean istrue = Achievement.deleteAchievement(title);
         if(istrue==false){
@@ -149,7 +149,7 @@ public class Controller {
 
  
     //delete achivement
-    public boolean deleteAchievement(String title) throws URISyntaxException, ParseException{
+    public static boolean deleteAchievement(String title) throws URISyntaxException, ParseException{
         boolean istrue = Achievement.deleteAchievement(title);
         return istrue;
     }
@@ -170,7 +170,7 @@ public class Controller {
 
 
     //create role
-    public int createRole(String title, String content, String time) throws URISyntaxException {
+    public static int createRole(String title, String content, String time) throws URISyntaxException {
         Role role = new Role(title, content, time);
         int istrue = role.saveRoles();
         return istrue;
@@ -179,7 +179,7 @@ public class Controller {
 
 
     //change role
-    public int changeRole(String title, String content, String time) throws URISyntaxException {
+    public static int changeRole(String title, String content, String time) throws URISyntaxException {
         Role role = new Role(title, content, time);
         boolean istrue1 = Role.deleteRoles(title);
         if(istrue1==false){
@@ -191,7 +191,7 @@ public class Controller {
 
 
     //delete role
-    public boolean deleteRole(String title) throws URISyntaxException {
+    public static boolean deleteRole(String title) throws URISyntaxException {
         boolean istrue = Role.deleteRoles(title);
         return istrue;
     }
@@ -214,7 +214,7 @@ public class Controller {
 
 
     //create activity
-    public int createActivity(String title, String content, String time, String type, String location) throws URISyntaxException {
+    public static int createActivity(String title, String content, String time, String type, String location) throws URISyntaxException {
         Activity activity = new Activity(title, content, time, type, location);
         int istrue = activity.saveActivity();
         return istrue;
@@ -222,7 +222,7 @@ public class Controller {
 
 
     //change activity
-    public int changeActivity(String title, String content, String time, String type, String location) throws URISyntaxException {
+    public static int changeActivity(String title, String content, String time, String type, String location) throws URISyntaxException {
         Activity activity = new Activity(title, content, time, type, location);
         boolean istrue = Activity.deleteActivity(title);
         if(istrue==false){
@@ -235,7 +235,7 @@ public class Controller {
 
 
     //delete activity
-    public boolean deleteActivity(String title) throws URISyntaxException {
+    public static boolean deleteActivity(String title) throws URISyntaxException {
         boolean istrue = Activity.deleteActivity(title);
         return istrue;
     }

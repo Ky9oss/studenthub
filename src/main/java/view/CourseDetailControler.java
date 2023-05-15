@@ -1,4 +1,5 @@
 package view;
+import controller.*;
 
 import java.io.IOException;
 import javafx.scene.control.Label;
@@ -51,11 +52,17 @@ public class CourseDetailControler {
     void save(ActionEvent event) {
         if(this.type==1){
         // subjectFielder.setText("保存成功");
+        Integer int5 = Integer.parseInt(text5.getText());
+        Integer int6 = Integer.parseInt(text6.getText());
+        // Controller.createCourse(this.subjectContent,text1.getText(),text2.getText(),text3.getText(),text4.getText(),int5,int6);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("添加成功");
         alert.show();
         }else if(this.type==2){
         // subjectFielder.setText("保存成功");
+        Integer int5 = Integer.parseInt(text5.getText());
+        Integer int6 = Integer.parseInt(text6.getText());
+        // Controller.changeCourse(this.subjectContent,text1.getText(),text2.getText(),text3.getText(),text4.getText(),int5,int6);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("修改成功");
         alert.show();
@@ -67,6 +74,7 @@ public class CourseDetailControler {
         this.type = type;
         //   System.out.println("++++++++++++++++++++++++");
         //   subjectFielder.setText(subjectContent);
+        this.subjectContent = subjectContent;
           subjectFielder.setText(subjectContent);
           System.out.println("调用成功");
         // this.subjectContent = subjectContent;

@@ -1,6 +1,8 @@
 package view;
+import controller.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -40,12 +42,19 @@ public class SkillControler implements Initializable{
     }
 
     @FXML
-    void delete(ActionEvent event) {
+    boolean delete(ActionEvent event) throws URISyntaxException {
+        if(this.subject==""){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("请选择对应内容");
+            alert.show();
+            return false;
+        }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("成功删除!");
         alert.show();
+        Controller.deleteSkill(this.subject);
+        return true;
     }
-
     @FXML
     boolean detail(ActionEvent event) throws IOException {
         if(this.subject==""){
@@ -151,7 +160,7 @@ public class SkillControler implements Initializable{
          stage.setScene(scene);
          stage.show();
     }
-    String[] skill = {"课程2","课程3","课程5","课程7","课程9"};
+    String[] skill = {"点击想要的排序方式"};
     String choose;
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -174,12 +183,12 @@ public class SkillControler implements Initializable{
     
     @FXML
     void prof1(ActionEvent event) {
-
+        //  Controller.getSkillsByProficiency();
     }
 
     @FXML
     void prof2(ActionEvent event) {
-
+        //  Controller.getSkillsByProficiency();
     }
 
 

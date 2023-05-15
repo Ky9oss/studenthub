@@ -1,6 +1,20 @@
 package view;
+import controller.*;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+// import com.alibaba.fastjson.JSON;
+import org.checkerframework.checker.initialization.qual.Initialized;
+import org.checkerframework.common.initializedfields.qual.InitializedFields;
+// import org.json.JSONArray;
+import org.json.JSONArray;
+
+import com.google.gson.JsonObject;
+// import org.json.JSONException;
+// import org.json.JSONObject;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -147,7 +161,9 @@ public class HomeControler {
             this.status=1;
         }
             else{
-                testlabel.setText("修改成功!");
+                Integer int2 = Integer.parseInt(f2.getText());
+                File file=new File("");
+                Controller.changeBasicInformation(f1.getText(),int2,f3.getText(),f4.getText(),f5.getText(),f6.getText(),file);
                 f1.setDisable(true);
                 f2.setDisable(true);
                 f3.setDisable(true);
@@ -156,6 +172,7 @@ public class HomeControler {
                 f6.setDisable(true);
                 changeButton.setText("MODIFY");
                 this.status=0;
+                testlabel.setText("修改成功!");
             }     
 
     }
@@ -168,5 +185,21 @@ public class HomeControler {
     @FXML
     private void changetx2(ActionEvent event) throws IOException{
             tx.setImage(tx2);
+    }
+    public void initialize() throws URISyntaxException {
+
+           String data = Controller.getBasicInformation();
+        //    System.out.print(data);
+           JSONObject jsonObject = JSONObject.parseObject(data);
+           System.out.print(jsonObject);
+        //    System.out.print(jsonObject.getString("name"));
+        f1.setText(jsonObject.getString("name"));
+        f2.setText(jsonObject.getString("age"));
+        f3.setText(jsonObject.getString("school"));
+        f4.setText(jsonObject.getString("major"));
+        f5.setText(jsonObject.getString("admission_time"));
+        f6.setText(jsonObject.getString("graduation_time"));
+
+
     }
 }
