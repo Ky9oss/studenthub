@@ -1,11 +1,59 @@
 package model;
+import java.util.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+
+import java.io.*;
+import com.google.gson.Gson;
+
+ import java.io.File;
+ import java.io.FileWriter;
+ import java.io.IOException;
+ import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
+import java.io.File;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
+
 
 /**
  * 
  */
 public class Achievement {
+
+    
+    public Achievement(String title, String content, String time, String team, String responsibility) {
+        this.title = title;
+        this.content = content;
+        this.time = time;
+        this.team = team;
+        this.responsibility = responsibility;
+    }
 
     /**
      * 
@@ -52,37 +100,33 @@ public class Achievement {
         return responsibility;
     }
 
-    private String actievementpath;
+    private String achievementpath;
 
     public void setAchievementPath(String path) {
-        this.achievement_path = path;
-    }
-
-    public Achievement(String title, String content, String time, String team, String responsibility) {
-        this.title = title;
-        this.content = content;
-        this.time = time;
-        this.team = team;
-        this.responsibility = responsibility;
+        this.achievementpath = path;
     }
 
     /**
      * @return
+     * @throws IOException
      */
-    public boolean saveAchievement() {
-        try {
+    public int saveAchievement() throws URISyntaxException, IOException {
+        try{
             // 获取程序文件所在的目录
-            java.net.URL classResource = BasicInformation.class.getProtectionDomain().getCodeSource().getLocation();
+            java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
             Path classDirectory = Paths.get(classResource.toURI());
             Path resourcesPath = classDirectory.getParent().getParent();
             Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
 
             // 获取resources的文件目录
-            String activityPath = mainResourcesPath.toString() + "achievement.json";
+            String AchievementPath = mainResourcesPath.toString() + "/achievement.json";
+            File file = new File(AchievementPath);
+            String content = FileUtils.readFileToString(file, "UTF-8");
 
-            // 设置achievement_path变量
+            // 设置Achievement_path变量
 
-            this.setAchievementPath(achievementPath);
+            this.setAchievementPath(AchievementPath);
+
             // 将Achievement对象转换成JSON格式
             JSONObject jsonObject = new JSONObject(this);
             String json = jsonObject.toString();
@@ -92,219 +136,447 @@ public class Achievement {
             if (!resourcesDirectory.exists()) {
                 resourcesDirectory.mkdir();
             }
-            if (jsonFile.exists()) {
-                // 如果文件已存在，删除它
-                jsonFile.delete();
+            String achjson = getStr(AchievementPath);
+            Gson gson = new Gson();
+            Achievement[] Achievements = gson.fromJson(achjson, Achievement[].class);
+            ArrayList<Achievement> achievementList = new ArrayList<>(Arrays.asList(Achievements));
+            if(this.team.isEmpty()||this.title.isEmpty()||this.content.isEmpty()||this.time.isEmpty()||this.responsibility.isEmpty()){
+                return -1;
             }
-            if (jsonFile.createNewFile()) {
-                FileWriter writer = new FileWriter(jsonFile);
-                writer.write(json);
-                writer.close();
+    
+            // Constructor
+            Achievement newAchievement = new Achievement(this.title, this.content, this.time,this.team,this.responsibility);
+            for(int i = 0; i < achievementList.size(); i++){
+                if(achievementList.get(i).title.equals(newAchievement.title)){
+                   return -2;
+                }
+              }
+            achievementList.add(newAchievement);
+    
+            String savedAchievements = gson.toJson(achievementList);
+            if(setStr(AchievementPath, savedAchievements)==true){
+                return 1;
             }
-            // 将JSON字符串写入
-            FileWriter writer = new FileWriter("achivevement.json");
-            writer.write(json);
-            writer.close();
-
-            // 返回相对路径
-            return resourcesDirectory.getPath();
-        } catch (IOException | URISyntaxException e) {
+            else {
+                return 0;
+            }
+        } catch (URISyntaxException e) {
             e.printStackTrace();
-            return null; // 表示保存失败
+            return 0;
         }
     }
+
 
     /**
      * @param title
      * @return
      */
-    public static boolean deleteAchievement(String title) {
-        // 根据标题获取文件路径
-        String filePath = title + ".json";
+    public static boolean deleteAchievement(String title) throws URISyntaxException{
+       //try{
+        // 获取程序文件所在的目录
+        java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
+        Path classDirectory = Paths.get(classResource.toURI());
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        //获取resources的文件目录
 
-        // 创建对应的文件对象
-        File file = new File(filePath);
+         String jsonPath = mainResourcesPath.toString() + "/achievement.json";
+         Path filePath = Paths.get(jsonPath);
+         String pathStr = filePath.toString();
+         String json = getStr(pathStr);
+         Gson gson = new Gson();
+         Achievement[] Achievements = gson.fromJson(json, Achievement[].class);
+         ArrayList<Achievement> results = new ArrayList<>(Arrays.asList(Achievements));
 
-        // 如果文件存在且删除成功，返回true
-        if (file.exists() && file.delete()) {
-            return true;
-        } else {
-            return false;
+        for(int i = 0; i < results.size(); i++){
+          if(results.get(i).title.equals(title)){
+            results.remove(i);
+            break;
         }
+        }
+    String deletedAchievements = gson.toJson(results);
+    return setStr(pathStr, deletedAchievements);}
+
+    /**
+     * @param year
+     * @return
+     */
+    public static String getAchievementsByYearForwardSort(int year) throws URISyntaxException,ParseException{
+        String yearyear = String.valueOf(year);
+        //JSONArray results = new JSONArray();
+
+        java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
+        Path classDirectory = Paths.get(classResource.toURI());
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        //获取resources的文件目录
+
+             String jsonPath = mainResourcesPath.toString() + "/achievement.json";
+             Path filePath = Paths.get(jsonPath);
+             String pathStr = filePath.toString();
+             String json = getStr(pathStr);
+        Gson gson = new Gson();
+        Achievement[] Achievements = gson.fromJson(json, Achievement[].class);
+        ArrayList<Achievement> achievementList = new ArrayList<>(Arrays.asList(Achievements));
+
+        for(int i = achievementList.size() - 1; i >= 0 ; i--){
+            if(!achievementList.get(i).getTime().contains(yearyear)){
+                achievementList.remove(i);
+            }
+        }
+        for(int i = 0; i < achievementList.size(); i++){
+            for(int j = 0; j < achievementList.size() - 1 - i; j++){
+                SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
+                if (ft.parse(achievementList.get(j).time).compareTo (ft.parse(achievementList.get(j + 1).time)) > 0){
+                    Collections.swap(achievementList, j, j+1);
+                }
+            }
+        }
+        /*Collections.sort(achievementList, new Comparator<Object>() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                JSONObject obj1 = (JSONObject) o1;
+                JSONObject obj2 = (JSONObject) o2;
+                return obj1.getString("time").compareTo(obj2.getString("time"));
+            }
+        });
+       /* for(int i = 0; i < achievementList.size(); i++){
+            for(int j = 0; j < achievementList.size() - 1 - i; j++){
+                SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
+                if (ft.parse(achievementList.get(j).getTime().contains(yearyear)).compareTo(ft.parse(achievementList.get(j + 1).getTime().contains(yearyear))) > 0){
+                    Collections.swap(achievementList, j, j+1);
+                }
+            }
+        }*/ 
+
+        String allAchievements = "";
+        for(int i = 0; i < achievementList.size(); i++) {
+            allAchievements = allAchievements + "{\n";
+            allAchievements = allAchievements + "\"title\": \"" + achievementList.get(i).title + "\",\n";
+            allAchievements = allAchievements + "\"content\": \"" + achievementList.get(i).content+ "\",\n";
+            allAchievements = allAchievements + "\"time\": \"" + achievementList.get(i).time + "\",\n";
+            allAchievements = allAchievements + "\"team\": \"" + achievementList.get(i).team + "\",\n";
+            allAchievements = allAchievements + "\"responsibility\": \"" + achievementList.get(i).responsibility+ "\",\n";
+
+            if (i == achievementList.size() - 1) {
+                allAchievements = allAchievements + "}\n";
+            }
+            else {
+                allAchievements = allAchievements + "},\n";
+            }
+        }
+        allAchievements="["+allAchievements+"]";
+        return allAchievements;
+
     }
 
     /**
      * @param year
      * @return
      */
-    public static string getAchievementsByYearForwardSort(int year) {
-        yearyear = String.valueOf(year);
-        List<Achievement> results = new ArrayList<>();
+    public static String getAchievementsByYearReverseSort(int year)throws URISyntaxException,ParseException {
+        String yearyear = String.valueOf(year);
+        //JSONArray results = new JSONArray();
 
-        // 遍历当前目录下的所有文件
-        File folder = new File(".");
-        for (File file : folder.listFiles()) {
-            // 如果文件是一个Achievement文件，读取文件内容并检查关键字是否匹配
-            if (file.getName().endsWith(".json")) {
-                try {
-                    String json = new String(Files.readAllBytes(file.toPath()));
-                    JSONObject jsonObject = new JSONObject(json);
-                    Achievement achievement = new Achievement(
-                            jsonObject.getString("title"),
-                            jsonObject.getString("content"),
-                            jsonObject.getString("time"),
-                            jsonObject.getString("team"),
-                            jsonObject.getString("responsibility"));
+        java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
+        Path classDirectory = Paths.get(classResource.toURI());
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        //获取resources的文件目录
 
-                    if (achievement.getTime().contains(yearyear)) {
-                        results.add(achievement);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+             String jsonPath = mainResourcesPath.toString() + "/achievement.json";
+             Path filePath = Paths.get(jsonPath);
+             String pathStr = filePath.toString();
+             String json = getStr(pathStr);
+        Gson gson = new Gson();
+        Achievement[] Achievements = gson.fromJson(json, Achievement[].class);
+        ArrayList<Achievement> achievementList = new ArrayList<>(Arrays.asList(Achievements));
+
+        for(int i = achievementList.size() - 1; i >= 0 ; i--){
+            if(!achievementList.get(i).getTime().contains(yearyear)){
+                achievementList.remove(i);
             }
         }
-        for (int i = results.size() - 1; i >= 0; i--) {
-            if (!results.get(i).year.substring(0, 4).equals(String.valueOf(year))) {
-                results.remove(i);
-            }
-        }
-
-        for (int i = 0; i < results.size(); i++) {
-            for (int j = 0; j < results.size() - 1 - i; j++) {
+        for(int i = 0; i < achievementList.size(); i++){
+            for(int j = 0; j < achievementList.size() - 1 - i; j++){
                 SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
-                if (ft.parse(results.get(j).year).compareTo(ft.parse(results.get(j + 1).year)) > 0) {
-                    Collections.swap(results, j, j + 1);
+                if (ft.parse(achievementList.get(j).time).compareTo (ft.parse(achievementList.get(j + 1).time)) < 0){
+                    Collections.swap(achievementList, j, j+1);
                 }
             }
         }
-
-        for (int i = 0; i < results.size(); i++) {
-            str = str + "{\n";
-            String str = String.join(",", results.get(i));// StringUtils.join(list, ",");
-            return str;
-
-            if (i == results.size() - 1) {
-                str = str + "}\n";
-            } else {
-                str = str + "},\n";
+        /*Collections.sort(achievementList, new Comparator<Object>() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                JSONObject obj1 = (JSONObject) o1;
+                JSONObject obj2 = (JSONObject) o2;
+                return obj1.getString("time").compareTo(obj2.getString("time"));
             }
-        }
-        return str;
-
-    }
-
-    /**
-     * @param year
-     * @return
-     */
-    public static String getAchievementsByYearReverseSort(int year) {
-        yearyear = String.valueOf(year);
-        List<Achievement> results = new ArrayList<>();
-
-        // 遍历当前目录下的所有文件
-        File folder = new File(".");
-        for (File file : folder.listFiles()) {
-            // 如果文件是一个Achievement文件，读取文件内容并检查关键字是否匹配
-            if (file.getName().endsWith(".json")) {
-                try {
-                    String json = new String(Files.readAllBytes(file.toPath()));
-                    JSONObject jsonObject = new JSONObject(json);
-                    Achievement achievement = new Achievement(
-                            jsonObject.getString("title"),
-                            jsonObject.getString("content"),
-                            jsonObject.getString("time"),
-                            jsonObject.getString("team"),
-                            jsonObject.getString("responsibility"));
-
-                    if (achievement.getTime().contains(yearyear)) {
-                        results.add(achievement);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        for (int i = results.size() - 1; i >= 0; i--) {
-            if (!results.get(i).year.substring(0, 4).equals(String.valueOf(year))) {
-                results.remove(i);
-            }
-        }
-
-        for (int i = 0; i < results.size(); i++) {
-            for (int j = 0; j < results.size() - 1 - i; j++) {
+        });
+       /* for(int i = 0; i < achievementList.size(); i++){
+            for(int j = 0; j < achievementList.size() - 1 - i; j++){
                 SimpleDateFormat ft = new SimpleDateFormat("yy-MM-dd");
-                if (ft.parse(results.get(j).year).compareTo(ft.parse(results.get(j + 1).year)) > 0) {
-                    Collections.swap(results, j, j + 1);
+                if (ft.parse(achievementList.get(j).getTime().contains(yearyear)).compareTo(ft.parse(achievementList.get(j + 1).getTime().contains(yearyear))) > 0){
+                    Collections.swap(achievementList, j, j+1);
                 }
             }
-        }
+        }*/ 
 
-        for (int i = 0; i < results.size(); i++) {
-            str = str + "{\n";
-            String str = String.join(",", results.get(i));// StringUtils.join(list, ",");
-            return str;
+        String allAchievements = "";
+        for(int i = 0; i < achievementList.size(); i++) {
+            allAchievements = allAchievements + "{\n";
+            allAchievements = allAchievements + "\"title\": \"" + achievementList.get(i).title + "\",\n";
+            allAchievements = allAchievements + "\"content\": \"" + achievementList.get(i).content+ "\",\n";
+            allAchievements = allAchievements + "\"time\": \"" + achievementList.get(i).time + "\",\n";
+            allAchievements = allAchievements + "\"team\": \"" + achievementList.get(i).team + "\",\n";
+            allAchievements = allAchievements + "\"responsibility\": \"" + achievementList.get(i).responsibility+ "\",\n";
 
-            if (i == results.size() - 1) {
-                str = str + "}\n";
-            } else {
-                str = str + "},\n";
+            if (i == achievementList.size() - 1) {
+                allAchievements = allAchievements + "}\n";
+            }
+            else {
+                allAchievements = allAchievements + "},\n";
             }
         }
-        return str;
-
+        allAchievements="["+allAchievements+"]";
+        return allAchievements;
     }
 
     /**
      * @param achievements_titles
      * @return
      */
-    public static String getAchievementsByTitles(String achievements_titles) {
+    public static String getAchievementsByTitles(String achievements_titles)throws URISyntaxException {
+        if (achievements_titles == "") return "";
+
+        String[] titles = achievements_titles.split(",");
+        ArrayList<String> titlesList = new ArrayList<>(Arrays.asList(titles));
+
+        java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
+        Path classDirectory = Paths.get(classResource.toURI());
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        //获取resources的文件目录
+
+        String jsonPath = mainResourcesPath.toString() + "/achievement.json";
+        Path filePath = Paths.get(jsonPath);
+        String pathStr = filePath.toString();
+        String json = getStr(pathStr);
+        Gson gson = new Gson();
+        Achievement[] achievements = gson.fromJson(json, Achievement[].class);
+        ArrayList<Achievement> achievementList = new ArrayList<>(Arrays.asList(achievements));
+
+        for (int i = titlesList.size() - 1; i >= 0; i--) {
+            if(!titlesList.contains(achievementList.get(i).title) ) {
+                achievementList.remove(i);
+            }
+        }
+
+        String allachievements = "";
+        for(int i = 0; i < achievementList.size(); i++) {
+            allachievements = allachievements + "{\n";
+            allachievements = allachievements + "\"title\": \"" + achievementList.get(i).title + "\",\n";
+            allachievements = allachievements + "\"content\": \"" + achievementList.get(i).content+ "\",\n";
+            allachievements = allachievements + "\"time\": \"" + achievementList.get(i).time + "\",\n";
+            allachievements = allachievements + "\"team\": \"" + achievementList.get(i).team + "\",\n";
+            allachievements = allachievements + "\"responsibility\": \"" + achievementList.get(i).responsibility+ "\",\n";
+
+            if (i == achievementList.size() - 1) {
+                allachievements = allachievements + "}\n";
+            }
+            else {
+                allachievements = allachievements + "},\n";
+            }
+        }
+        allachievements="["+allachievements+"]";
+        return allachievements;
+    }
+
+    public static String getAllAchivements()throws URISyntaxException{
+	    java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
+        Path classDirectory = Paths.get(classResource.toURI());
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        //获取resources的文件目录
+
+             String jsonPath = mainResourcesPath.toString() + "/Achievement.json";
+             Path filePath = Paths.get(jsonPath);
+             String pathStr = filePath.toString();
+             String json = getStr(pathStr);
+        Gson gson = new Gson();
+        Achievement[] activities = gson.fromJson(json, Achievement[].class);
+        ArrayList<Achievement> AchievementList = new ArrayList<>(Arrays.asList(activities));
+
+        String allAchievements = "";
+        for(int i = 0; i < AchievementList.size(); i++) {
+            allAchievements = allAchievements + "{\n";
+            allAchievements = allAchievements + "\"title\": \"" + AchievementList.get(i).title + "\",\n";
+            allAchievements = allAchievements + "\"content\": \"" + AchievementList.get(i).content+ "\",\n";
+            allAchievements = allAchievements + "\"time\": \"" + AchievementList.get(i).time + "\",\n";
+            allAchievements = allAchievements + "\"team\": \"" + AchievementList.get(i).team + "\",\n";
+            allAchievements = allAchievements + "\"responsibility\": \"" + AchievementList.get(i).responsibility+ "\",\n";
+
+
+            if (i == AchievementList.size() - 1) {
+                allAchievements = allAchievements + "}\n";
+            }
+            else {
+                allAchievements = allAchievements + "},\n";
+            }
+        }
+        allAchievements="["+allAchievements+"]";
+        return allAchievements;
+          }
+
+
+
+
+
+    public static String getAchievementsForCV()throws URISyntaxException {
+        java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
+        Path classDirectory = Paths.get(classResource.toURI());
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        //获取resources的文件目录
+
+             String jsonPath = mainResourcesPath.toString() + "/Achievement.json";
+             Path filePath = Paths.get(jsonPath);
+             String pathStr = filePath.toString();
+             String json = getStr(pathStr);
+        Gson gson = new Gson();
+        Achievement[] activities = gson.fromJson(json, Achievement[].class);
+        ArrayList<Achievement> AchievementList = new ArrayList<>(Arrays.asList(activities));
+
+        String allAchievements = "";
+        if(AchievementList.size()<3)
+        {
+            return null;
+        }
+        for(int i = 0; i <3; i++) {
+            allAchievements = allAchievements + "{\n";
+            allAchievements = allAchievements + "\"title\": \"" + AchievementList.get(i).title + "\",\n";
+            allAchievements = allAchievements + "\"content\": \"" + AchievementList.get(i).content+ "\",\n";
+            allAchievements = allAchievements + "\"time\": \"" + AchievementList.get(i).time + "\",\n";
+            allAchievements = allAchievements + "\"team\": \"" + AchievementList.get(i).team + "\",\n";
+            allAchievements = allAchievements + "\"responsibility\": \"" + AchievementList.get(i).responsibility+ "\",\n";
+
+
+            if (i == AchievementList.size() - 1) {
+                allAchievements = allAchievements + "}\n";
+            }
+            else {
+                allAchievements = allAchievements + "},\n";
+            }
+        }
+        allAchievements="["+allAchievements+"]";
+        return allAchievements;
+          }
+          
+    public static String getStr(String jsonFile){
+        String jsonStr = "";
         try {
-            // 根据标题获取文件路径
-            String filePath = achievements_titles + ".json";
+        File file = new File(jsonFile);
+        FileReader fileReader = new FileReader(file);
+        Reader reader = new InputStreamReader(new FileInputStream(jsonFile),"utf-8");
+        int ch = 0;
+        StringBuffer sb = new StringBuffer();
+        while ((ch = reader.read()) != -1) {
+            if(ch != 13){ //\r need to be eliminated
+                sb.append((char) ch);
+            }
+        }
+        fileReader.close();
+        reader.close();
+        jsonStr = sb.toString();
+        return jsonStr;
+    } catch (IOException e) {
+        e.printStackTrace();
+        return null;
+    }
+    }
 
-            // 读取文件内容并转换成achievements对象
-            String json = new String(Files.readAllBytes(Paths.get(filePath)));
-            JSONObject jsonObject = new JSONObject(json);
-            Achievement achievement = new Achievement(
-                    jsonObject.getString("title"),
-                    jsonObject.getString("content"),
-                    jsonObject.getString("time"),
-                    jsonObject.getString("team"),
-                    jsonObject.getString("responsibility"));
 
-            return achievements; // 返回读取到的achievements对象
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null; // 表示读取失败
+
+public static boolean setStr(String jsonFile, String text){
+    try{
+        File file = new File(jsonFile);
+        FileWriter fileWriter = new FileWriter(file);
+        // clean the file
+        fileWriter.write("");
+        BufferedWriter bw = new BufferedWriter(fileWriter);
+        bw.write(text);
+        fileWriter.flush();
+        bw.flush();
+        fileWriter.close();
+        bw.close();
+        return true;
+    }catch(Exception e ){
+        e.printStackTrace();
+        return false;
+    }
+}
+
+public static String getActivityByTitle(String title) throws URISyntaxException {
+    if (title == "")
+        return "";
+
+    
+    java.net.URL classResource = Course.class.getProtectionDomain().getCodeSource().getLocation();
+    
+    Path classDirectory = Paths.get(classResource.toURI());
+    
+    Path resourcesPath = classDirectory.getParent().getParent();
+    Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+    
+    // 获取resources的文件目录
+
+    String jsonPath = mainResourcesPath.toString() + "/achievement.json";
+    Path filePath = Paths.get(jsonPath);
+    String pathStr = filePath.toString();
+    String json = getStr(pathStr);
+    Gson gson = new Gson();
+    Achievement[] activities = gson.fromJson(json, Achievement[].class);
+    ArrayList<Achievement> courseList = new ArrayList<>(Arrays.asList(activities));
+    
+
+    String theActivity = "";
+    for (int i = 0; i < courseList.size(); i++) {
+        if (courseList.get(i).title.equals(title)) {
+            theActivity = theActivity + "{\n";
+            theActivity = theActivity + "\"title\": \"" + courseList.get(i).title + "\",\n";
+            theActivity = theActivity + "\"content\": \"" + courseList.get(i).content + "\",\n";
+            theActivity = theActivity + "\"time\": \"" + courseList.get(i).time + "\",\n";
+            theActivity = theActivity + "\"team\": \"" + courseList.get(i).team + "\",\n";
+            theActivity = theActivity + "\"responsibility\": \"" + courseList.get(i).responsibility + "\",\n";
+            theActivity = theActivity + "}\n";
         }
     }
 
-    public static string getAllAchivements(){
-	    List<Achivement> results = new ArrayList<>();
-        
-            // 遍历当前目录下的所有文件
-            File folder = new File(".");
-            for (File file : folder.listFiles()) {
-              // 如果文件是一个Achivement文件，读取文件内容并检查关键字是否匹配
-              if (file.getName().endsWith(".json")) {
-                try {
-                  String json = new String(Files.readAllBytes(file.toPath()));
-                  JSONObject jsonObject = new JSONObject(json);
-                  Achivement achivement = new Achivement(
-                    jsonObject.getString("title"),
-                    jsonObject.getString("content"),
-                    jsonObject.getString("time"),
-                    jsonObject.getString("team"),
-                    jsonObject.getString("responsibility")
-                  );
-                    results.add(Achivement);
-              }
-            }
-        
-            String str = String.join(",", results);// StringUtils.join(list, ",");
-            return str;
-          }
-          }
+    return theActivity;
+}
+
+public static String getCoursesTitles(String json_str) {
+    JSONArray jsonString = new JSONArray(json_str);
+
+    String titleList = "{";
+    //List<String> tempList = new ArrayList<>(Arrays.asList(jsonString));
+    for (int i = 0; i < jsonString.length(); i++) {
+
+
+        JSONObject jsonObject = jsonString.getJSONObject(i);
+        String titles = jsonObject.getString("title");
+        titleList = titleList +"\"" +titles +"\"";
+        if (i == jsonString.length() - 1) {
+            titleList = titleList + "";
+        }
+        else {
+            titleList = titleList + ",";
+        }
+    }
+    titleList = titleList + "}";
+    return titleList;
+
+    
+
+}
 }
