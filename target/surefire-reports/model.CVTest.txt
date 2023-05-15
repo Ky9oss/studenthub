@@ -1,10 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: model.CVTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.026 s <<< FAILURE! - in model.CVTest
-createCVTest  Time elapsed: 0.018 s  <<< ERROR!
-java.lang.NoClassDefFoundError: org/apache/commons/io/output/UnsynchronizedByteArrayOutputStream
-	at model.CVTest.createCVTest(CVTest.java:28)
-Caused by: java.lang.ClassNotFoundException: org.apache.commons.io.output.UnsynchronizedByteArrayOutputStream
-	at model.CVTest.createCVTest(CVTest.java:28)
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.334 s - in model.CVTest
