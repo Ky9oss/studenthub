@@ -89,6 +89,7 @@ public class Course {
      */
     private int credit;
 
+
     public String getTitle() {
         return title;
     }
@@ -109,11 +110,11 @@ public class Course {
         return teacher;
     }
 
-    public String getGrade() {
+    public int getGrade() {
         return grade;
     }
 
-    public String getCredit() {
+    public int getCredit() {
         return credit;
     }
 
@@ -154,11 +155,17 @@ public class Course {
             Gson gson = new Gson();
             Course[] Courses = gson.fromJson(coursejson, Course[].class);
             ArrayList<Course> courseList = new ArrayList<>(Arrays.asList(Courses));
+            if(this.type.isEmpty()||this.title.isEmpty()||this.content.isEmpty()||this.time.isEmpty()||this.teacher.isEmpty()){
+                return -1;
+            }
 
             // Constructor
-            Course newCourse = new Course(this.title, this.content, this.time, this.type, this.teacher);
-            // @@to be added
-            // @@to be added
+            Course newCourse = new Course(this.title, this.content, this.time, this.type, this.teacher, this.grade, this.credit);
+            for(int i = 0; i < courseList.size(); i++){
+                if(courseList.get(i).title.equals(newCourse.title)){
+                   return -2;
+                }
+              }
             courseList.add(newCourse);
 
             String savedCourses = gson.toJson(courseList);
@@ -486,14 +493,18 @@ public class Course {
     // String[] results = {"title1", "title2", "title3", "title4", "title5"};
     // return results;
     // }
-    public static String getCourseByTitle(String title) {
-        if (activities_titles == "")
+    public static String getCourseByTitle(String title) throws URISyntaxException {
+        if (title == "")
             return "";
 
+        
         java.net.URL classResource = Course.class.getProtectionDomain().getCodeSource().getLocation();
+        
         Path classDirectory = Paths.get(classResource.toURI());
+        
         Path resourcesPath = classDirectory.getParent().getParent();
         Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        
         // 获取resources的文件目录
 
         String jsonPath = mainResourcesPath.toString() + "/course.json";
@@ -503,10 +514,11 @@ public class Course {
         Gson gson = new Gson();
         Course[] courses = gson.fromJson(json, Course[].class);
         ArrayList<Course> courseList = new ArrayList<>(Arrays.asList(courses));
+        
 
         String theCourse = "";
         for (int i = 0; i < courseList.size(); i++) {
-            if (courseList.get(i).title == title) {
+            if (courseList.get(i).title.equals(title)) {
                 theCourse = theCourse + "{\n";
                 theCourse = theCourse + "\"title\": \"" + courseList.get(i).title + "\",\n";
                 theCourse = theCourse + "\"content\": \"" + courseList.get(i).content + "\",\n";
@@ -522,16 +534,28 @@ public class Course {
         return theCourse;
     }
 
-    public static String[] getCoursesTitles(String json_str) {
+    public static String getCoursesTitles(String json_str) {
         JSONArray jsonString = new JSONArray(json_str);
 
-        String titleList = "";
+        String titleList = "{";
+        //List<String> tempList = new ArrayList<>(Arrays.asList(jsonString));
         for (int i = 0; i < jsonString.length(); i++) {
+
+
             JSONObject jsonObject = jsonString.getJSONObject(i);
             String titles = jsonObject.getString("title");
-            titleList = titleList + "\"" + titles + "\"";
+            titleList = titleList +"\"" +titles +"\"";
+            if (i == jsonString.length() - 1) {
+                titleList = titleList + "";
+            }
+            else {
+                titleList = titleList + ",";
+            }
         }
-        titleList = "{" + titleList + "}";
+        titleList = titleList + "}";
+        return titleList;
+
+        
         // input 一整个或好多行，输出{"title1", "title2", "title3", "title4", "title5"}
         // 下面是一个输出结果的格式的示例
         // String[] results = { "title1", "title2", "title3", "title4", "title5" };

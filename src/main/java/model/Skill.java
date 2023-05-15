@@ -7,7 +7,8 @@ import java.nio.file.Paths;
 import java.util.*;
 
 import org.json.JSONObject;
-
+import org.json.JSONArray;
+import org.json.JSONException;
 import com.google.gson.Gson;
 
 /**
@@ -348,6 +349,69 @@ public class Skill {
         }
     }
 
+
+    public static String getActivityByTitle(String title) throws URISyntaxException {
+        if (title == "")
+            return "";
+    
+        
+        java.net.URL classResource = Course.class.getProtectionDomain().getCodeSource().getLocation();
+        
+        Path classDirectory = Paths.get(classResource.toURI());
+        
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        
+        // 获取resources的文件目录
+    
+        String jsonPath = mainResourcesPath.toString() + "/skill.json";
+        Path filePath = Paths.get(jsonPath);
+        String pathStr = filePath.toString();
+        String json = getStr(pathStr);
+        Gson gson = new Gson();
+        Skill[] activities = gson.fromJson(json, Skill[].class);
+        ArrayList<Skill> courseList = new ArrayList<>(Arrays.asList(activities));
+        
+    
+        String theActivity = "";
+        for (int i = 0; i < courseList.size(); i++) {
+            if (courseList.get(i).title.equals(title)) {
+                theActivity = theActivity + "{\n";
+                theActivity = theActivity + "\"title\": \"" + courseList.get(i).title + "\",\n";
+                theActivity = theActivity + "\"content\": \"" + courseList.get(i).content + "\",\n";
+                theActivity = theActivity + "\"proficiency\": \"" + courseList.get(i).proficiency + "\",\n";
+                theActivity = theActivity + "\"project\": \"" + courseList.get(i).project + "\",\n";
+                theActivity = theActivity + "}\n";
+            }
+        }
+    
+        return theActivity;
+    }
+    
+    public static String getCoursesTitles(String json_str) {
+        JSONArray jsonString = new JSONArray(json_str);
+    
+        String titleList = "{";
+        //List<String> tempList = new ArrayList<>(Arrays.asList(jsonString));
+        for (int i = 0; i < jsonString.length(); i++) {
+    
+    
+            JSONObject jsonObject = jsonString.getJSONObject(i);
+            String titles = jsonObject.getString("title");
+            titleList = titleList +"\"" +titles +"\"";
+            if (i == jsonString.length() - 1) {
+                titleList = titleList + "";
+            }
+            else {
+                titleList = titleList + ",";
+            }
+        }
+        titleList = titleList + "}";
+        return titleList;
+    
+        
+    
+    }
 }
 /*
 class Main {
