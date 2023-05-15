@@ -89,9 +89,6 @@ public class Course {
      */
     private int credit;
 
-    public static String getCoursesForCV(){
-        return "";
-    }
 
     public String getTitle() {
         return title;

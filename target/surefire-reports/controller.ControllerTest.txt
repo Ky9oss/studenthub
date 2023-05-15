@@ -1,0 +1,36 @@
+-------------------------------------------------------------------------------
+Test set: controller.ControllerTest
+-------------------------------------------------------------------------------
+Tests run: 10, Failures: 3, Errors: 5, Skipped: 0, Time elapsed: 0.124 s <<< FAILURE! - in controller.ControllerTest
+testSkill  Time elapsed: 0.016 s  <<< ERROR!
+java.lang.NullPointerException
+	at controller.ControllerTest.testSkill(ControllerTest.java:71)
+
+testRole  Time elapsed: 0.017 s  <<< ERROR!
+java.lang.StringIndexOutOfBoundsException: begin 0, end 4, length 3
+	at controller.ControllerTest.testRole(ControllerTest.java:142)
+
+testActivity  Time elapsed: 0.064 s  <<< ERROR!
+org.json.JSONException: A JSONArray text must start with '[' at 0 [character 1 line 1]
+	at controller.ControllerTest.testActivity(ControllerTest.java:182)
+
+testAchievement  Time elapsed: 0.015 s  <<< ERROR!
+org.json.JSONException: A JSONArray text must start with '[' at 0 [character 1 line 1]
+	at controller.ControllerTest.testAchievement(ControllerTest.java:119)
+
+testPanDuan1  Time elapsed: 0.002 s  <<< ERROR!
+java.lang.NullPointerException
+	at controller.ControllerTest.testPanDuan1(ControllerTest.java:258)
+
+testPanDuan2  Time elapsed: 0.002 s  <<< FAILURE!
+java.lang.AssertionError: expected:<1> but was:<-1>
+	at controller.ControllerTest.testPanDuan2(ControllerTest.java:272)
+
+testPanDuan3  Time elapsed: 0.001 s  <<< FAILURE!
+java.lang.AssertionError: expected:<1> but was:<-1>
+	at controller.ControllerTest.testPanDuan3(ControllerTest.java:282)
+
+testPanDuan4  Time elapsed: 0.002 s  <<< FAILURE!
+java.lang.AssertionError: expected:<1> but was:<-1>
+	at controller.ControllerTest.testPanDuan4(ControllerTest.java:293)
+

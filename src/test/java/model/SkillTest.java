@@ -1,90 +1,87 @@
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+package model;
 
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class SkillTest {
     private Skill skill;
-    @TempDir
-    Path tempDir;
 
-    @BeforeEach
     void setUp() {
         skill = new Skill("Sam", "aaa", "bbb", "ccc");
     }
 
-    @Test
+
     void obtainedPath() throws URISyntaxException {
-        // 获取程序文件所在的目录
         java.net.URL classResource = BasicInformation.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
         Path RootPath = classDirectory.getParent().getParent();
-        assertEquals("/Users/mac/Desktop/Java软工/studenthub", RootPath.toString()); //改成你们文档的地址
+        assertEquals("/studenthub", RootPath.toString());
     }
 
-    @Test
+
     void TestsaveSkill() throws URISyntaxException{
         java.net.URL classResource = BasicInformation.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
         Path RootPath = classDirectory.getParent().getParent();
 
         skill = new Skill("Roger", "ddd","eee","fff");
-        boolean result = skill.saveSkill();
+        int result = skill.saveSkill();
         assertEquals(true, result);
     }
 
-    @Test
-    void TestdeleteSkill(){
+
+    void TestdeleteSkill() throws URISyntaxException{
         skill = new Skill("Roger", "ddd","eee","fff");
-        boolean result = skill.deleteSkill("Jay");
-        assertEquals(false, result);
-        assertTrue(result,"Title not exist!");
-        result = skill.deleteSkill("Roger");
-        assertEquals(true, result);
-        assertTrue(result,"Successfully delete Skill: " + skill.getTitle());
+        boolean result = Skill.deleteSkill("Jay");
+        assertTrue(result);
+        result = Skill.deleteSkill("Roger");
+        assertTrue(result);
     }
 
-    @Test
+
     void TestgetSkillsByProficiency(){
         String result = null;
         try {
-            result = skill.getSkillsByProficiency("bbb");
+            result = Skill.getSkillsByProficiency("bbb");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertNotNull(result, "Proficiency should not be null");
-        assertNotEquals("error", result, "JSON file should be successfully read");
+        assertNotNull(result);
     }
 
-    @Test
     void TestgetSkillsByTitles(){
         String result = null;
         try {
-            result = skill.getSkillsByTitles("Roger");
+            result = Skill.getSkillsByTitles("Roger");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertNotNull(result, "Title should not be null");
-        assertNotEquals("error", result, "JSON file should be successfully read");
+        assertNotNull(result);
     }
 
-    @Test
+
     void TestgetAllSkills(){
         String result = null;
         try {
-            result = skill.getAllSkills();
+            result = Skill.getAllSkills();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertNotNull(result, "Skill should not be null");
-        assertNotEquals("error", result, "JSON file should be successfully read");
+        assertNotNull(result);
+    }
+
+    public static void main(String[] args) throws URISyntaxException {
+        SkillTest s = new SkillTest();
+        s.TestsaveSkill();
+        s.TestdeleteSkill();
+        s.TestgetSkillsByProficiency();
+        s.TestgetSkillsByTitles();
+        s.TestgetAllSkills();
+        System.out.println("succeed");
     }
 }

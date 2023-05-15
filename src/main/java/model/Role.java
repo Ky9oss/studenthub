@@ -451,6 +451,7 @@ public class Role {
             return false;
         }
     }
+}
 
     public static String getActivityByTitle(String title) throws URISyntaxException {
         if (title == "")

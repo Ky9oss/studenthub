@@ -157,6 +157,7 @@ public class Achievement {
             if(setStr(AchievementPath, savedAchievements)==true){
                 return 1;
             }
+
             else {
                 return 0;
             }

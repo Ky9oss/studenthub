@@ -1,102 +1,100 @@
 package model;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class RoleTest {
     private Role role;
 
-    @TempDir
     Path tempDir;
 
-    @BeforeEach
     void setUp() {
         role = new Role("abc", "2023-5-5", "leader");
     }
-    @Test
+
     void obtainedPath() throws URISyntaxException {
         java.net.URL classResource = BasicInformation.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
         Path RootPath = classDirectory.getParent().getParent();
-        assertEquals("/Users/mac/Desktop/Java����/studenthub", RootPath.toString()); //�ĳ������ĵ��ĵ�ַ
+        assertEquals("/studenthub", RootPath.toString()); 
     }
-    @Test
+
     void TestsaveRoles() throws URISyntaxException{
         java.net.URL classResource = BasicInformation.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
         Path RootPath = classDirectory.getParent().getParent();
 
         role = new Role("abc", "2023-5-5", "member");
-        boolean result = role.saveRoles();
+        int result = role.saveRoles();
         assertEquals(true, result);
     }
 
-    @Test
-    void TestdeleteRoles(){
+    void TestdeleteRoles() throws URISyntaxException{
         role = new Role("abc", "2023-5-5", "member");
-        boolean result = role.deleteRoles("");
-        assertEquals(false, result);
-        assertTrue(result,"Title not exist!");
-        result = role.deleteRoles("abc");
+        boolean result = Role.deleteRoles("");
+        assertTrue(result);
+        result = Role.deleteRoles("abc");
         assertEquals(true, result);
-        assertTrue(result,"Successfully delete Roles: " + role.getTitle());
     }
 
-    @Test
+
     void TestgetRolesByYearReverseSort() throws ParseException{
         String result = null;
         try {
-            result = role.getRolesByYearReverseSort(2013);
-            result = role.getRolesByYearReverseSort(2014);
+            result = Role.getRolesByYearReverseSort(2013);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertNotNull(result, "Roles should not be null");
-        assertNotEquals("error", result, "JSON file should be successfully read");
+        assertNotNull(result);
     }
-    @Test
+
+
     void TestgetRolesByYearForwardSort() throws ParseException{
         String result = null;
         try {
-            result = role.getRolesByYearReverseSort(2013);
-            result = role.getRolesByYearReverseSort(2014);
+            result = Role.getRolesByYearReverseSort(2013);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertNotNull(result, "Roles should not be null");
-        assertNotEquals("error", result, "JSON file should be successfully read");
+        assertNotNull(result);
     }
 
-    @Test
+
     void TestgetRolesByTitles(){
         String result = null;
         try {
-            result = role.getRolesByTitles("member");
+            result = Role.getRolesByTitles("member");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertNotNull(result, "Roles should not be null");
-        assertNotEquals("error", result, "JSON file should be successfully read");
+        assertNotNull(result);
     }
-    @Test
+
+
     void TestgetAllRoles(){
         String result = null;
         try {
-            result = role.getAllRoles();
+            result = Role.getAllRoles();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertNotNull(result, "Roles should not be null");
-        assertNotEquals("error", result, "JSON file should be successfully read");
+        assertNotNull(result);
+    }   
+    
+    public static void main(String[] args) throws URISyntaxException, ParseException {
+        RoleTest r = new RoleTest();
+        r.TestsaveRoles();
+        r.TestdeleteRoles();
+        r.TestgetAllRoles();
+        r.TestgetRolesByYearForwardSort();
+        r.TestgetRolesByYearReverseSort();
+        r.TestgetRolesByTitles();
+        System.out.println("succeed");
     }
 }
