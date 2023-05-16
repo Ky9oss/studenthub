@@ -1,9 +1,9 @@
 model\Course.class
 model\Achievement.class
-model\BasicInformation.class
 model\CV.class
 model\Activity.class
 model\Role.class
 model\Calculator.class
 model\Calculator$Course.class
 model\Skill.class
+model\BasicInformation.class
