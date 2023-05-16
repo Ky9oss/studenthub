@@ -613,7 +613,7 @@ public static String getActivityByTitle(String title) throws URISyntaxException 
         return "";
 
     
-    java.net.URL classResource = Course.class.getProtectionDomain().getCodeSource().getLocation();
+    java.net.URL classResource = Activity.class.getProtectionDomain().getCodeSource().getLocation();
     
     Path classDirectory = Paths.get(classResource.toURI());
     
@@ -639,7 +639,7 @@ public static String getActivityByTitle(String title) throws URISyntaxException 
             theActivity = theActivity + "\"content\": \"" + courseList.get(i).content + "\",\n";
             theActivity = theActivity + "\"time\": \"" + courseList.get(i).time + "\",\n";
             theActivity = theActivity + "\"type\": \"" + courseList.get(i).type + "\",\n";
-            theActivity = theActivity + "\"teacher\": \"" + courseList.get(i).location + "\",\n";
+            theActivity = theActivity + "\"location\": \"" + courseList.get(i).location + "\",\n";
             theActivity = theActivity + "}\n";
         }
     }
