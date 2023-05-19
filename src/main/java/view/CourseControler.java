@@ -323,7 +323,8 @@ public class CourseControler implements Initializable{
         for(int i=0;i<rawArray.size();i++){
         JSONObject object = rawArray.getJSONObject(i);
         String title = object.getString("title");
-        strs[i]=title;
+        // strs[i]=title;
+        strs[i]=title + ":\n" + "1111111111";
         // System.out.println(strs);
 }
 list.getItems().addAll(strs);
