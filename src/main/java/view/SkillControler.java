@@ -24,7 +24,7 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 public class SkillControler implements Initializable{
     String subject = "";
-    String prof = "1";
+    String prof = "Experted";
     @FXML
     private ListView<String> list;
     @FXML
@@ -171,11 +171,11 @@ public class SkillControler implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
-            Controller.createSkill("ccccc","1","1","1");
-            Controller.createSkill("ccccsdfc","1","1","1");
-            Controller.createSkill("cccsdfcc","1","2","1");
-            Controller.createSkill("ccfdgdccc","1","2","1");
-            Controller.createSkill("cchjghjccc","1","1","1");
+            Controller.createSkill("ccccc","1","Experted","1");
+            Controller.createSkill("ccccsdfc","1","Experted","1");
+            Controller.createSkill("cccsdfcc","1","Experted","1");
+            Controller.createSkill("ccfdgdccc","1","Experted","1");
+            Controller.createSkill("cchjghjccc","1","Experted","1");
         } catch (URISyntaxException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -192,7 +192,9 @@ public class SkillControler implements Initializable{
             JSONObject object = rawArray.getJSONObject(i);
             // System.out.print(object);
             String title = object.getString("title");
-            strs[i]=title;
+            String proficiency = object.getString("proficiency");
+            // strs[i]=title;
+            strs[i]=title+":"+proficiency;
         }
         list.getItems().addAll(strs);
         } catch (URISyntaxException e) {
@@ -212,8 +214,10 @@ public class SkillControler implements Initializable{
           });
     }
     public void changeData(String subject){
-        this.subject = subject;
-        System.out.println( this.subject);
+        String[] temp = subject.split(":");
+        String tempsubject = temp[0];
+        this.subject = tempsubject;
+        System.out.println( this.subject );
     }
     @FXML
     void time1() throws URISyntaxException, ParseException {
@@ -222,30 +226,38 @@ public class SkillControler implements Initializable{
 
     @FXML
     void prof1(ActionEvent event) throws URISyntaxException, ParseException {
-        this.prof = "1";
+        this.prof = "Experted";
             time1();
-
     }
 
     @FXML
     void prof2(ActionEvent event) throws URISyntaxException, ParseException {
-        this.prof = "2";
+        this.prof = "Advanced";
             time1();
-
-
     }
-
+    @FXML
+    void prof3(ActionEvent event) throws URISyntaxException, ParseException {
+        this.prof = "Intermediate";
+            time1();
+    }
+    @FXML
+    void prof4(ActionEvent event) throws URISyntaxException, ParseException {
+        this.prof = "Novice";
+            time1();
+    }
     void transferDataList(String rawList){
         System.out.println(rawList);
         list.getItems().clear();
         JSONArray rawArray = JSON.parseArray(rawList);
         String[] strs = new String[rawArray.size()];
         for(int i=0;i<rawArray.size();i++){
-        JSONObject object = rawArray.getJSONObject(i);
-        String title = object.getString("title");
-        strs[i]=title;
-        // System.out.println(strs);
-          }
+            JSONObject object = rawArray.getJSONObject(i);
+            // System.out.print(object);
+            String title = object.getString("title");
+            String proficiency = object.getString("proficiency");
+            // strs[i]=title;
+            strs[i]=title+":"+proficiency;
+        }
 list.getItems().addAll(strs);
     }
 

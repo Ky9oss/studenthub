@@ -77,8 +77,27 @@ public class SkillDetailControler {
             text1.setText(rawObject.getString("content"));
             text2.setText(rawObject.getString("proficiency"));
             text3.setText(rawObject.getString("project"));
+            subjectFielder.setDisable(true); 
   
         }
     }
+    @FXML
+    void type1(ActionEvent event) {
+        text2.setText("Experted");
+    }
 
+    @FXML
+    void type2(ActionEvent event) {
+        text2.setText("Advanced");
+    }
+
+    @FXML
+    void type3(ActionEvent event) {
+        text2.setText("Intermediate");
+    }
+
+    @FXML
+    void type4(ActionEvent event) {
+        text2.setText("Novice");
+    }
 }

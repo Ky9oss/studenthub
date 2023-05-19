@@ -200,8 +200,11 @@ public class RoleControler implements Initializable{
                 String[] strs = new String[rawArray.size()];
                 for(int i=0;i<rawArray.size();i++){
                     JSONObject object = rawArray.getJSONObject(i);
+                    // System.out.print(object);
                     String title = object.getString("title");
-                    strs[i]=title;
+                    String time = object.getString("time");
+                    // strs[i]=title;
+                    strs[i]=title+":"+time;
                 }
                 list.getItems().addAll(strs);
             } catch (URISyntaxException e) {
@@ -222,8 +225,10 @@ public class RoleControler implements Initializable{
               });
     }
     public void changeData(String subject){
-        this.subject = subject;
-        System.out.println( this.subject);
+        String[] temp = subject.split(":");
+        String tempsubject = temp[0];
+        this.subject = tempsubject;
+        System.out.println( this.subject );
     }
     
     @FXML
@@ -291,11 +296,13 @@ public class RoleControler implements Initializable{
         JSONArray rawArray = JSON.parseArray(rawList);
         String[] strs = new String[rawArray.size()];
         for(int i=0;i<rawArray.size();i++){
-        JSONObject object = rawArray.getJSONObject(i);
-        String title = object.getString("title");
-        strs[i]=title;
-        // System.out.println(strs);
-          }
+            JSONObject object = rawArray.getJSONObject(i);
+            // System.out.print(object);
+            String title = object.getString("title");
+            String time = object.getString("time");
+            // strs[i]=title;
+            strs[i]=title+":"+time;
+        }
 list.getItems().addAll(strs);
     }
 }

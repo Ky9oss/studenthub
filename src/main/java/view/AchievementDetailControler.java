@@ -3,6 +3,8 @@ import controller.*;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -16,10 +18,12 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.scene.Node;
 public class AchievementDetailControler {
     String subjectContent = "";
     int type = 0;
+    String dataString;
     @FXML
     public TextField subjectFielder;
 
@@ -27,8 +31,8 @@ public class AchievementDetailControler {
     private TextField text1;
 
     @FXML
-    private TextField text2;
-
+    private DatePicker datepicker;
+    
     @FXML
     private TextField text3;
 
@@ -51,12 +55,12 @@ public class AchievementDetailControler {
     void save(ActionEvent event) throws URISyntaxException, IOException {
         if(this.type==1){
         // subjectFielder.setText("保存成功");
-        Controller.createAchievement(subjectFielder.getText(),text1.getText(),text2.getText(),text3.getText(),text4.getText());
+        Controller.createAchievement(subjectFielder.getText(),text1.getText(),getDate(),text3.getText(),text4.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("添加成功");
         alert.show();
         }else if(this.type==2){
-        Controller.changeAchievement(this.subjectContent,text1.getText(),text2.getText(),text3.getText(),text4.getText());
+        Controller.changeAchievement(this.subjectContent,text1.getText(),getDate(),text3.getText(),text4.getText());
         // subjectFielder.setText("保存成功");
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("修改成功");
@@ -79,10 +83,26 @@ public class AchievementDetailControler {
           System.out.println("++++++++++++++++++++++++");
         //   System.out.println(rawObject);
             text1.setText(rawObject.getString("content"));
-            text2.setText(rawObject.getString("time"));
+            setDate(rawObject.getString("time"));
             text3.setText(rawObject.getString("team"));
             text4.setText(rawObject.getString("responsibility"));
+          subjectFielder.setDisable(true); 
+
         }
     }
-
+    @FXML
+     String getDate() {
+         LocalDate date = datepicker.getValue();
+         String dataString = date.toString();
+         dataString = Controller.deleteZeroToDate(dataString);
+        //  System.out.println(dataString);
+        // this.dataString = dataString;
+        return  dataString;
+    }
+    @FXML
+    void setDate(String rawDate) {
+      String stringDate = Controller.addZeroToDate(rawDate);
+      LocalDate datapick = LocalDate.parse(stringDate);
+      datepicker.setValue(datapick);
+    }
 }

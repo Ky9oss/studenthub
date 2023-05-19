@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 public class CourseControler implements Initializable{
     String subject = "";
     int year = 2023;
-    String type = "1";
+    String type = "compulsory";
     int timelist = 1;
     String[] course = {};
     String choose;
@@ -185,14 +185,14 @@ public class CourseControler implements Initializable{
             // System.out.println(this.course[1]);
                 
         try {
-            Controller.createCourse("ccccc","1","2023-8-9","1","1",1,1);
-            Controller.createCourse("kkkk","1","2023-9-10","1","1",1,1);
-            Controller.createCourse("ccccc","1","2023-10-11","1","1",1,1);
-            Controller.createCourse("jjjj","1","2023-11-12","1","1",1,1);
-            Controller.createCourse("uuuu","1","2023-8-9","1","1",1,1);
-            Controller.createCourse("ddd","1","2021-8-8","2","1",1,1);
-            Controller.createCourse("eee","1","2022-8-10","1","1",1,1);
-            Controller.createCourse("fff","1","2020-7-7","2","1",1,1);
+            Controller.createCourse("ccccc","1","2023-8-9","compulsory","1",1,1);
+            Controller.createCourse("kkkk","1","2023-9-10","compulsory","1",1,1);
+            Controller.createCourse("ccccc","1","2023-10-11","compulsory","1",1,1);
+            Controller.createCourse("jjjj","1","2023-11-12","compulsory","1",1,1);
+            Controller.createCourse("uuuu","1","2023-8-9","optional","1",1,1);
+            Controller.createCourse("ddd","1","2021-8-8","optional","1",1,1);
+            Controller.createCourse("eee","1","2022-8-10","other","1",1,1);
+            Controller.createCourse("fff","1","2020-7-7","other","1",1,1);
         } catch (URISyntaxException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -207,7 +207,10 @@ public class CourseControler implements Initializable{
             for(int i=0;i<rawArray.size();i++){
                 JSONObject object = rawArray.getJSONObject(i);
                 String title = object.getString("title");
-                strs[i]=title;
+                String time = object.getString("time");
+                String type = object.getString("type");
+                // strs[i]=title;
+                strs[i]=title + ":\n" + type+","+ time;
             }
             list.getItems().addAll(strs);
         } catch (URISyntaxException e) {
@@ -229,8 +232,10 @@ public class CourseControler implements Initializable{
 //-------------------------------------------------------------------------------------------------
     }
     public void changeData(String subject){
-        this.subject = subject;
-        System.out.println( this.subject);
+        String[] temp = subject.split(":");
+        String tempsubject = temp[0];
+        this.subject = tempsubject;
+        System.out.println( this.subject );
     }
     @FXML
     void time1(ActionEvent event) throws URISyntaxException, ParseException {
@@ -247,7 +252,7 @@ public class CourseControler implements Initializable{
 
     @FXML
     void type1(ActionEvent event) throws URISyntaxException, ParseException {
-        this.type = "1";
+        this.type = "compulsory";
         if(this.timelist==1){            
             time1(event);
              }else if(this.timelist==2){
@@ -259,7 +264,18 @@ public class CourseControler implements Initializable{
 
     @FXML
     void type2(ActionEvent event) throws URISyntaxException, ParseException {
-        this.type = "2";
+        this.type = "optional";
+        if(this.timelist==1){            
+            time1(event);
+             }else if(this.timelist==2){
+                time2(event);
+             }else{
+             }
+
+    }   
+     @FXML
+    void type3(ActionEvent event) throws URISyntaxException, ParseException {
+        this.type = "other";
         if(this.timelist==1){            
             time1(event);
              }else if(this.timelist==2){
@@ -268,7 +284,6 @@ public class CourseControler implements Initializable{
              }
 
     }
-
     @FXML
     void year1(ActionEvent event) throws URISyntaxException, ParseException {
         this.year = 2020;
@@ -323,8 +338,11 @@ public class CourseControler implements Initializable{
         for(int i=0;i<rawArray.size();i++){
         JSONObject object = rawArray.getJSONObject(i);
         String title = object.getString("title");
+        String time = object.getString("time");
+        String type = object.getString("type");
         // strs[i]=title;
-        strs[i]=title + ":\n" + "1111111111";
+        strs[i]=title + ":"+"\n" + type+","+ time;
+        // strs[i]=title;
         // System.out.println(strs);
 }
 list.getItems().addAll(strs);

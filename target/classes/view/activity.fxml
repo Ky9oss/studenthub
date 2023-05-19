@@ -141,8 +141,9 @@
             <Button layoutX="558.0" layoutY="247.0" mnemonicParsing="false" onAction="#year2" prefHeight="36.0" prefWidth="86.0" text="2021" />
             <Button layoutX="558.0" layoutY="283.0" mnemonicParsing="false" onAction="#year3" prefHeight="36.0" prefWidth="86.0" text="2022" />
             <Button layoutX="558.0" layoutY="319.0" mnemonicParsing="false" onAction="#year4" prefHeight="36.0" prefWidth="86.0" text="2023" />
-            <Button layoutX="567.0" layoutY="146.0" mnemonicParsing="false" onAction="#type1" text="类型1" />
-            <Button layoutX="567.0" layoutY="169.0" mnemonicParsing="false" onAction="#type2" text="类型2" />
+            <Button layoutX="567.0" layoutY="146.0" mnemonicParsing="false" onAction="#type1" text="volunteer" />
+            <Button layoutX="567.0" layoutY="169.0" mnemonicParsing="false" onAction="#type2" text="community" />
+            <Button layoutX="562.0" layoutY="192.0" mnemonicParsing="false" onAction="#type3" text="else" />
          </children>
       </AnchorPane>
    </children>

@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 public class ActivityControler implements Initializable{
     String subject = "";
     int year = 2023;
-    String type = "1";
+    String type = "volunteer";
     int timelist = 1;
     @FXML
     private ListView<String> list;
@@ -181,14 +181,14 @@ public class ActivityControler implements Initializable{
              // System.out.println(this.course[1]);
                 
              try {
-                Controller.createActivity("ccc7c756c","1","2023-8-9","1","1");
-                Controller.createActivity("ccc8456cc","1","2023-9-9","1","1");
-                Controller.createActivity("ccc545cc","1","2022-6-9","1","1");
-                Controller.createActivity("ccc4560cc","1","2022-7-9","2","1");
-                Controller.createActivity("ccc456c2c","1","2023-4-9","1","1");
-                Controller.createActivity("cc64564ccc","1","2023-6-9","1","1");
-                Controller.createActivity("cc6456ccc","1","2021-8-9","2","1");
-                Controller.createActivity("cc3456ccc","1","2020-8-9","1","1");
+                Controller.createActivity("ccc7c756c","1","2023-8-9","volunteer","1");
+                Controller.createActivity("ccc8456cc","1","2023-9-9","volunteer","1");
+                Controller.createActivity("ccc545cc","1","2022-6-9","volunteer","1");
+                Controller.createActivity("ccc4560cc","1","2022-7-9","volunteer","1");
+                Controller.createActivity("ccc456c2c","1","2023-4-9","volunteer","1");
+                Controller.createActivity("cc64564ccc","1","2023-6-9","volunteer","1");
+                Controller.createActivity("cc6456ccc","1","2021-8-9","else","1");
+                Controller.createActivity("cc3456ccc","1","2020-8-9","else","1");
 
             } catch (URISyntaxException e) {
                 // TODO Auto-generated catch block
@@ -204,7 +204,10 @@ public class ActivityControler implements Initializable{
                 for(int i=0;i<rawArray.size();i++){
                     JSONObject object = rawArray.getJSONObject(i);
                     String title = object.getString("title");
-                    strs[i]=title;
+                    String time = object.getString("time");
+                    String type = object.getString("type");
+                    // strs[i]=title;
+                    strs[i]=title+":"+"\n"+type+","+time;
                 }
                 list.getItems().addAll(strs);
             } catch (URISyntaxException e) {
@@ -225,8 +228,10 @@ public class ActivityControler implements Initializable{
               });
     }
     public void changeData(String subject){
-        this.subject = subject;
-        System.out.println( this.subject);
+        String[] temp = subject.split(":");
+        String tempsubject = temp[0];
+        this.subject = tempsubject;
+        System.out.println( this.subject );
     }
     @FXML
     void time1(ActionEvent event) throws URISyntaxException, ParseException {
@@ -243,7 +248,7 @@ public class ActivityControler implements Initializable{
 
     @FXML
     void type1(ActionEvent event) throws URISyntaxException, ParseException {
-        this.type = "1";
+        this.type = "volunteer";
         if(this.timelist==1){            
             time1(event);
              }else if(this.timelist==2){
@@ -255,7 +260,7 @@ public class ActivityControler implements Initializable{
 
     @FXML
     void type2(ActionEvent event) throws URISyntaxException, ParseException {
-        this.type = "2";
+        this.type = "community";
         if(this.timelist==1){            
             time1(event);
              }else if(this.timelist==2){
@@ -264,7 +269,17 @@ public class ActivityControler implements Initializable{
              }
 
     }
+    @FXML
+    void type3(ActionEvent event) throws URISyntaxException, ParseException {
+        this.type = "else";
+        if(this.timelist==1){            
+            time1(event);
+             }else if(this.timelist==2){
+                time2(event);
+             }else{
+             }
 
+    }
     @FXML
     void year1(ActionEvent event) throws URISyntaxException, ParseException {
         this.year = 2020;
@@ -317,11 +332,13 @@ public class ActivityControler implements Initializable{
         JSONArray rawArray = JSON.parseArray(rawList);
         String[] strs = new String[rawArray.size()];
         for(int i=0;i<rawArray.size();i++){
-        JSONObject object = rawArray.getJSONObject(i);
-        String title = object.getString("title");
-        strs[i]=title;
-        // System.out.println(strs);
-}
+            JSONObject object = rawArray.getJSONObject(i);
+            String title = object.getString("title");
+            String time = object.getString("time");
+            String type = object.getString("type");
+            // strs[i]=title;
+            strs[i]=title+":"+"\n"+type+","+time;
+        }
 list.getItems().addAll(strs);
     }
 }

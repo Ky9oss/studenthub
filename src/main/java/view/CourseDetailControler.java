@@ -21,6 +21,8 @@ import java.time.LocalDate;
 public class CourseDetailControler {
     String subjectContent = "";
     int type = 0;
+    String dataString;
+    // String typeString;
     @FXML
     private DatePicker datepicker;
     @FXML
@@ -28,8 +30,7 @@ public class CourseDetailControler {
     @FXML
     private TextField text1;
 
-    @FXML
-    private TextField text2;
+
 
     @FXML
     private TextField text3;
@@ -65,7 +66,12 @@ public class CourseDetailControler {
         // Controller.createCourse("bbbbbbbbb","1","1","1","1",1,1);
         // System.out.println("测试");
         // System.out.println(Controller.getCourseByTitle("bbbbbbbbb"));
-        Controller.createCourse(title,text1.getText(),text2.getText(),text3.getText(),text4.getText(),int5,int6);
+
+
+        Controller.createCourse(title,text1.getText(),this.dataString,text3.getText(),text4.getText(),int5,int6);
+        // Controller.createCourse(title,text1.getText(),this.dataString,this.typeString,text4.getText(),int5,int6);
+
+
         // System.out.println(Controller.getCourseByTitle(subjectFielder.getText()));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("添加成功");
@@ -74,7 +80,9 @@ public class CourseDetailControler {
         // subjectFielder.setText("保存成功");
         Integer int5 = Integer.parseInt(text5.getText());
         Integer int6 = Integer.parseInt(text6.getText());
-        Controller.changeCourse(this.subjectContent,text1.getText(),text2.getText(),text3.getText(),text4.getText(),int5,int6);
+        Controller.changeCourse(this.subjectContent,text1.getText(),this.dataString,text3.getText(),text4.getText(),int5,int6);
+        // Controller.changeCourse(this.subjectContent,text1.getText(),this.dataString,"111",text4.getText(),int5,int6);
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("修改成功");
         alert.show();
@@ -93,25 +101,55 @@ public class CourseDetailControler {
         if(type==2){
           String detail = Controller.getCourseByTitle(subjectContent);
           JSONObject rawObject = JSON.parseObject(detail);
-        System.out.println("++++++++++++++++++++++++");
+        // System.out.println("++++++++++++++++++++++++");
       //   System.out.println(rawObject);
           text1.setText(rawObject.getString("content"));
-          text2.setText(rawObject.getString("time"));
+          // text2.setText(rawObject.getString("time"));
+
+          setDate(rawObject.getString("time"));
           text3.setText(rawObject.getString("type"));
+
           text4.setText(rawObject.getString("teacher"));
           text5.setText(""+rawObject.getString("grade"));
           text6.setText(""+rawObject.getString("credit"));
-
+          subjectFielder.setDisable(true); 
       }
+
         // this.subjectContent = subjectContent;
         // LocalDate datatest = LocalDate.parse("2020-3-3");
-        LocalDate datatest = LocalDate.parse("2020-03-03");
-        datepicker.setValue(datatest);
+
     }
     @FXML
-    void getDate(ActionEvent event) {
+     String getDate(ActionEvent event) {
          LocalDate date = datepicker.getValue();
-        //  String dataString = date.format(null);
-         System.out.println(date);;
+         String dataString = date.toString();
+         dataString = Controller.deleteZeroToDate(dataString);
+        //  System.out.println(dataString);
+        this.dataString = dataString;
+        return  dataString;
+    }
+    @FXML
+    void setDate(String rawDate) {
+      String stringDate = Controller.addZeroToDate(rawDate);
+      LocalDate datapick = LocalDate.parse(stringDate);
+      datepicker.setValue(datapick);
+    }
+    
+    @FXML
+    void type1(ActionEvent event) {
+      text3.setText("compulsory");
+
+    }
+
+    @FXML
+    void type2(ActionEvent event) {
+      text3.setText("optional");
+
+    }
+
+    @FXML
+    void type3(ActionEvent event) {
+      text3.setText("other");
+
     }
 }

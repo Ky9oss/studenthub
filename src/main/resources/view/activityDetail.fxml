@@ -55,9 +55,11 @@
          </font>
       </Label>
       <TextField fx:id="text1" layoutX="212.0" layoutY="215.0" />
-      <TextField fx:id="text2" layoutX="32.0" layoutY="27.0" />
-      <TextField fx:id="text3" layoutX="617.0" layoutY="117.0" />
+      <TextField fx:id="text3" disable="true" layoutX="617.0" layoutY="117.0" />
       <TextField fx:id="text4" layoutX="640.0" layoutY="205.0" />
-      <DatePicker layoutX="200.0" layoutY="323.0" />
+      <DatePicker fx:id="datepicker" layoutX="200.0" layoutY="323.0" />
+      <Button layoutX="794.0" layoutY="83.0" mnemonicParsing="false" onAction="#type1" text="volunteer" />
+      <Button layoutX="794.0" layoutY="117.0" mnemonicParsing="false" onAction="#type2" text="community" />
+      <Button layoutX="794.0" layoutY="150.0" mnemonicParsing="false" onAction="#type3" text="else" />
    </children>
 </AnchorPane>

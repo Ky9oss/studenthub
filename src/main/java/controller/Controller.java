@@ -49,7 +49,7 @@ public class Controller {
         return image_path+"/image.png";
     }
 
-    public String newCreateBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, int selection) {
+    public static String newCreateBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, int selection) {
         
         BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);
         String image_path = basic_information.newSaveBasicInformation(selection);
@@ -69,7 +69,7 @@ public class Controller {
     }
 
     //change basic information
-    public String newChangeBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, int selection) {
+    public static String newChangeBasicInformation(String name, int age, String school, String major, String admission_time, String graduation_time, int selection) {
         BasicInformation basic_information = new BasicInformation(name, age, school, major, admission_time, graduation_time);            
         boolean istrue1 = basic_information.deleteBasicInformation();
         if(istrue1==false){
@@ -432,7 +432,26 @@ public class Controller {
     public static String getSkillsByYearForwardSort(String prof) {
         return null;
     }
+
+    public static String addZeroToDate(String date) {
+        String[] dateParts = date.split("-");
+        int year = Integer.parseInt(dateParts[0]);
+        int month = Integer.parseInt(dateParts[1]);
+        int day = Integer.parseInt(dateParts[2]);
+    
+        return String.format("%04d-%02d-%02d", year, month, day);
+    }
+    
+    public static String deleteZeroToDate(String date) {
+        String[] dateParts = date.split("-");
+        int year = Integer.parseInt(dateParts[0]);
+        int month = Integer.parseInt(dateParts[1]);
+        int day = Integer.parseInt(dateParts[2]);
+    
+        return String.format("%d-%d-%d", year, month, day);
+    }
 }
+
 
 
 /* 

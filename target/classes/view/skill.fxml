@@ -135,10 +135,10 @@
                </font>
             </Button>
             <ListView fx:id="list" layoutX="54.0" layoutY="100.0" prefHeight="458.0" prefWidth="422.0" style="-fx-font-size: 25px;" />
-            <Button layoutX="566.0" layoutY="239.0" mnemonicParsing="false" onAction="#prof1" prefHeight="36.0" prefWidth="110.0" text="Intermediate" />
-            <Button layoutX="562.0" layoutY="275.0" mnemonicParsing="false" onAction="#prof2" prefHeight="36.0" prefWidth="86.0" text="novice" />
-            <Button layoutX="574.0" layoutY="203.0" mnemonicParsing="false" text="advanced" />
-            <Button layoutX="568.0" layoutY="172.0" mnemonicParsing="false" text="expert" />
+            <Button layoutX="566.0" layoutY="239.0" mnemonicParsing="false" onAction="#prof3" prefHeight="36.0" prefWidth="110.0" text="Intermediate" />
+            <Button layoutX="562.0" layoutY="275.0" mnemonicParsing="false" onAction="#prof4" prefHeight="36.0" prefWidth="86.0" text="Novice" />
+            <Button layoutX="574.0" layoutY="203.0" mnemonicParsing="false" onAction="#prof2" text="Advanced" />
+            <Button layoutX="568.0" layoutY="172.0" mnemonicParsing="false" onAction="#prof1" text="Experted" />
          </children>
       </AnchorPane>
    </children>

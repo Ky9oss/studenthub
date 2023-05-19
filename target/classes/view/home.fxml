@@ -289,10 +289,10 @@
                               <Font size="29.0" />
                            </font>
                         </Button>
-                        <Button layoutX="188.0" layoutY="30.0" mnemonicParsing="false" onAction="#changetx1" text="头像1" />
-                        <Button layoutX="188.0" layoutY="73.0" mnemonicParsing="false" onAction="#changetx2" text="头像2" />
-                        <Button layoutX="188.0" layoutY="109.0" mnemonicParsing="false" onAction="#changetx3" text="头像3" />
-                        <Button layoutX="188.0" layoutY="150.0" mnemonicParsing="false" onAction="#changetx4" text="头像4" />
+                        <Button fx:id="bt1" disable="true" layoutX="188.0" layoutY="30.0" mnemonicParsing="false" onAction="#changetx1" text="头像1" />
+                        <Button fx:id="bt2" disable="true" layoutX="188.0" layoutY="73.0" mnemonicParsing="false" onAction="#changetx2" text="头像2" />
+                        <Button fx:id="bt3" disable="true" layoutX="188.0" layoutY="109.0" mnemonicParsing="false" onAction="#changetx3" text="头像3" />
+                        <Button fx:id="bt4" disable="true" layoutX="188.0" layoutY="150.0" mnemonicParsing="false" onAction="#changetx4" text="头像4" />
                      </children>
                   </AnchorPane>
                </children>

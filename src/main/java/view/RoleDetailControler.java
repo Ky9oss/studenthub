@@ -3,6 +3,7 @@ import controller.*;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.scene.Node;
 public class RoleDetailControler {
     String subjectContent = "";
@@ -24,9 +26,9 @@ public class RoleDetailControler {
     public TextField subjectFielder;
     @FXML
     private TextField text1;
-
     @FXML
-    private TextField text2;
+    private DatePicker datepicker;
+    
     @FXML
     void exit(ActionEvent event) throws IOException {
         // Alert alert = new Alert(Alert.AlertType.NONE);
@@ -45,7 +47,7 @@ public class RoleDetailControler {
         if(this.type==1){
         // subjectFielder.setText("保存成功");
         //有bug
-        Controller.createRole(subjectFielder.getText(),text1.getText(),text2.getText());
+        Controller.createRole(subjectFielder.getText(),text1.getText(),getDate());
         // Controller.createRole("1","1","1");
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("添加成功");
@@ -53,7 +55,7 @@ public class RoleDetailControler {
         }else if(this.type==2){
         // subjectFielder.setText("保存成功");
         //有bug
-        Controller.changeRole(this.subjectContent,text1.getText(),text2.getText());
+        Controller.changeRole(this.subjectContent,text1.getText(),getDate());
         // Controller.createRole("1","1","1");
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("修改成功");
@@ -76,10 +78,25 @@ public class RoleDetailControler {
           System.out.println("++++++++++++++++++++++++");
         //   System.out.println(rawObject);
             text1.setText(rawObject.getString("content"));
-            text2.setText(rawObject.getString("time"));
+           setDate(rawObject.getString("time"));
+           subjectFielder.setDisable(true); 
 
   
         }
     }
-
+    @FXML
+     String getDate() {
+         LocalDate date = datepicker.getValue();
+         String dataString = date.toString();
+         dataString = Controller.deleteZeroToDate(dataString);
+        //  System.out.println(dataString);
+        // this.dataString = dataString;
+        return  dataString;
+    }
+    @FXML
+    void setDate(String rawDate) {
+      String stringDate = Controller.addZeroToDate(rawDate);
+      LocalDate datapick = LocalDate.parse(stringDate);
+      datepicker.setValue(datapick);
+    }
 }
