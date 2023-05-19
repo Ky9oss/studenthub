@@ -6,7 +6,7 @@ import java.net.URISyntaxException;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,9 +17,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.Node;
+import java.time.LocalDate;
 public class CourseDetailControler {
     String subjectContent = "";
     int type = 0;
+    @FXML
+    private DatePicker datepicker;
     @FXML
     public TextField subjectFielder;
     @FXML
@@ -101,6 +104,14 @@ public class CourseDetailControler {
 
       }
         // this.subjectContent = subjectContent;
+        // LocalDate datatest = LocalDate.parse("2020-3-3");
+        LocalDate datatest = LocalDate.parse("2020-03-03");
+        datepicker.setValue(datatest);
     }
-
+    @FXML
+    void getDate(ActionEvent event) {
+         LocalDate date = datepicker.getValue();
+        //  String dataString = date.format(null);
+         System.out.println(date);;
+    }
 }

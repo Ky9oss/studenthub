@@ -48,8 +48,12 @@
             <Font size="53.0" />
          </font>
       </Label>
-      <TextField fx:id="text2" layoutX="242.0" layoutY="312.0" />
+      <TextField fx:id="text2" editable="false" layoutX="242.0" layoutY="312.0" />
       <TextField fx:id="text1" layoutX="229.0" layoutY="211.0" />
       <TextField fx:id="text3" layoutX="229.0" layoutY="392.0" />
+      <Button layoutX="459.0" layoutY="289.0" mnemonicParsing="false" text="Expert" />
+      <Button layoutX="544.0" layoutY="289.0" mnemonicParsing="false" text="Advanced" />
+      <Button layoutX="634.0" layoutY="289.0" mnemonicParsing="false" text="Intermediate" />
+      <Button layoutX="731.0" layoutY="289.0" mnemonicParsing="false" text="Novice" />
    </children>
 </AnchorPane>

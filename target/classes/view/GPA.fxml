@@ -143,7 +143,7 @@
                   <Font size="37.0" />
                </font>
             </Label>
-            <Label fx:id="detail" alignment="TOP_LEFT" layoutX="100.0" layoutY="308.0" prefHeight="146.0" prefWidth="261.0" text="请选择一个算法" />
+            <Label fx:id="detail" alignment="TOP_LEFT" layoutX="100.0" layoutY="308.0" prefHeight="146.0" prefWidth="261.0" text="此处写功能简介" />
             <Label layoutX="492.0" layoutY="208.0" prefHeight="50.0" prefWidth="78.0" text="GPA">
                <font>
                   <Font name="System Bold Italic" size="29.0" />
