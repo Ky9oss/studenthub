@@ -211,21 +211,21 @@ class ControllerTest {
  
     @Test
     void testCourse() throws URISyntaxException, ParseException {
-        int istrue = controllerUnderTest.createCourse("title1", "content", "2022-11-15", "type", "teacher", 0, 0);
+        int istrue = controllerUnderTest.createCourse("tit1", "content", "2022-11-15", "type", "teacher", 0, 0);
         assertEquals(istrue, 1);
-        int istrue2 = controllerUnderTest.createCourse("title2", "content", "2023-1-21", "type", "teacher", 0, 0);
+        int istrue2 = controllerUnderTest.createCourse("tit2", "content", "2023-1-21", "type", "teacher", 0, 0);
         assertEquals(istrue2, 1);
-        int istrue3 = controllerUnderTest.createCourse("title3", "111", "2022-5-25", "type", "teacher", 0, 0);
+        int istrue3 = controllerUnderTest.createCourse("tit3", "111", "2022-5-25", "type", "teacher", 0, 0);
         assertEquals(istrue3, 1);
-        int istrue4 = controllerUnderTest.changeCourse("title1", "222", "2022-6-9", "type", "teacher", 0, 0);
+        int istrue4 = controllerUnderTest.changeCourse("tit1", "222", "2022-6-9", "type", "teacher", 0, 0);
         assertEquals(istrue4, 1);
-        int istrue5 = controllerUnderTest.createCourse("title5", "333", "2022-12-21", "type", "teacher", 0, 0);
+        int istrue5 = controllerUnderTest.createCourse("tit5", "333", "2022-12-21", "type", "teacher", 0, 0);
         assertEquals(istrue5, 1);
-        int istrue6 = controllerUnderTest.createCourse("title6", "content", "2022-12-22", "type222", "teacher", 0, 0);
+        int istrue6 = controllerUnderTest.createCourse("tit6", "content", "2022-12-22", "type222", "teacher", 0, 0);
         assertEquals(istrue6, 1);
-        int istrue7 = controllerUnderTest.createCourse("title7", "content", "2022-12-22", "type", "teacher", 0, 0);
+        int istrue7 = controllerUnderTest.createCourse("tit7", "content", "2022-12-22", "type", "teacher", 0, 0);
         assertEquals(istrue7, 1);
-        boolean istrue8 = controllerUnderTest.deleteCourse("title7");
+        boolean istrue8 = controllerUnderTest.deleteCourse("tit7");
         assertEquals(istrue8, true);
 
         String json_str = controllerUnderTest.getCoursesByYearAndByTypeForwardSort(2022, "type");
@@ -235,7 +235,7 @@ class ControllerTest {
         JSONArray json_array2 = new JSONArray(json_str2);
         System.out.println(json_array2);
 
-        String json_str333 = controllerUnderTest.getCourseByTitle("title1");
+        String json_str333 = controllerUnderTest.getCourseByTitle("tit1");
         //String json_array333 = new String(json_str333);
         System.out.println("1111"+json_str333);
 
@@ -243,11 +243,11 @@ class ControllerTest {
         //String json_array444 = new String(json_str444);
         System.out.println("2222"+json_str444);
 
-        controllerUnderTest.deleteCourse("title1");
-        controllerUnderTest.deleteCourse("title2");
-        controllerUnderTest.deleteCourse("title3");
-        controllerUnderTest.deleteCourse("title5");
-        controllerUnderTest.deleteCourse("title6");
+        controllerUnderTest.deleteCourse("tit1");
+        controllerUnderTest.deleteCourse("tit2");
+        controllerUnderTest.deleteCourse("tit3");
+        controllerUnderTest.deleteCourse("tit5");
+        controllerUnderTest.deleteCourse("tit6");
     }
 
 
@@ -258,25 +258,25 @@ class ControllerTest {
         assertEquals(result, 0, 0.01);
 
 
-        int istrue = controllerUnderTest.createCourse("title1", "content", "2022-11-15", "type", "teacher", 85, 2);
+        int istrue = controllerUnderTest.createCourse("tit1", "content", "2022-11-15", "type", "teacher", 85, 2);
         assertEquals(istrue, 1);
-        int istrue2 = controllerUnderTest.createCourse("title2", "content", "2023-1-21", "type", "teacher", 82, 4);
+        int istrue2 = controllerUnderTest.createCourse("tit2", "content", "2023-1-21", "type", "teacher", 82, 4);
         assertEquals(istrue2, 1);
-        int istrue3 = controllerUnderTest.createCourse("title3", "content", "2022-5-25", "type", "teacher", 95, 3);
+        int istrue3 = controllerUnderTest.createCourse("tit3", "content", "2022-5-25", "type", "teacher", 95, 3);
         assertEquals(istrue3, 1);
-        int istrue4 = controllerUnderTest.changeCourse("title4", "content", "2022-6-9", "type", "teacher", 72, 3);
+        int istrue4 = controllerUnderTest.changeCourse("tit4", "content", "2022-6-9", "type", "teacher", 72, 3);
         assertEquals(istrue4, 1);
-        int istrue5 = controllerUnderTest.createCourse("title5", "content", "2022-12-21", "type", "teacher", 86, 4);
+        int istrue5 = controllerUnderTest.createCourse("tit5", "content", "2022-12-21", "type", "teacher", 86, 4);
         assertEquals(istrue5, 1);
-        int istrue6 = controllerUnderTest.createCourse("title6", "content", "2022-12-22", "type222", "teacher", 60, 5);
+        int istrue6 = controllerUnderTest.createCourse("tit6", "content", "2022-12-22", "type222", "teacher", 60, 5);
         assertEquals(istrue6, 1);
-        int istrue7 = controllerUnderTest.createCourse("title7", "content", "2022-12-22", "type222", "teacher", 98, 3);
+        int istrue7 = controllerUnderTest.createCourse("tit7", "content", "2022-12-22", "type222", "teacher", 98, 3);
         assertEquals(istrue7, 1);
-        int istrue8 = controllerUnderTest.createCourse("title8", "content", "2022-12-22", "type222", "teacher", 84, 2);
+        int istrue8 = controllerUnderTest.createCourse("tit8", "content", "2022-12-22", "type222", "teacher", 84, 2);
         assertEquals(istrue8, 1);
-        int istrue9 = controllerUnderTest.createCourse("title9", "content", "2022-12-22", "type222", "teacher", 86, 4);
+        int istrue9 = controllerUnderTest.createCourse("tit9", "content", "2022-12-22", "type222", "teacher", 86, 4);
         assertEquals(istrue9, 1);
-        int istrue10 = controllerUnderTest.createCourse("title10", "content", "2022-12-22", "type222", "teacher", 86, 2);
+        int istrue10 = controllerUnderTest.createCourse("tit10", "content", "2022-12-22", "type222", "teacher", 86, 2);
         assertEquals(istrue10, 1);
         double result1 = controllerUnderTest.calculateGradePointAverage(1);
         assertEquals(result1, 2.77, 0.01);
@@ -285,16 +285,16 @@ class ControllerTest {
         double result3 = controllerUnderTest.calculateGradePointAverage(3);
         assertEquals(result3, 3.31, 0.1);
 
-        controllerUnderTest.deleteCourse("title1");
-        controllerUnderTest.deleteCourse("title2");
-        controllerUnderTest.deleteCourse("title3");
-        controllerUnderTest.deleteCourse("title4");
-        controllerUnderTest.deleteCourse("title5");
-        controllerUnderTest.deleteCourse("title6");
-        controllerUnderTest.deleteCourse("title7");
-        controllerUnderTest.deleteCourse("title8");
-        controllerUnderTest.deleteCourse("title9");
-        controllerUnderTest.deleteCourse("title10");
+        controllerUnderTest.deleteCourse("tit1");
+        controllerUnderTest.deleteCourse("tit2");
+        controllerUnderTest.deleteCourse("tit3");
+        controllerUnderTest.deleteCourse("tit4");
+        controllerUnderTest.deleteCourse("tit5");
+        controllerUnderTest.deleteCourse("tit6");
+        controllerUnderTest.deleteCourse("tit7");
+        controllerUnderTest.deleteCourse("tit8");
+        controllerUnderTest.deleteCourse("tit9");
+        controllerUnderTest.deleteCourse("tit10");
     }
 
     @Test
@@ -354,14 +354,14 @@ class ControllerTest {
     //grade credit如果为0,则表示为空
     @Test
     void testPanDuan5() throws URISyntaxException{
-        int istrue = controllerUnderTest.createCourse("title1", "", "2022-11-15", "type", "", 1, 1);
+        int istrue = controllerUnderTest.createCourse("tit1", "", "2022-11-15", "type", "", 1, 1);
         assertEquals(istrue, -1);
-        int istrue3 = controllerUnderTest.createCourse("title2", "content", "2023-1-21", "type", "teacher", 1, 1);
+        int istrue3 = controllerUnderTest.createCourse("tit2", "content", "2023-1-21", "type", "teacher", 1, 1);
         assertEquals(istrue3, 1);
-        int istrue4 = controllerUnderTest.createCourse("title2", "xxx", "2023-1-21", "type", "teacher", 1, 1);
+        int istrue4 = controllerUnderTest.createCourse("tit2", "xxx", "2023-1-21", "type", "teacher", 1, 1);
         assertEquals(istrue4, -2);
 
-        controllerUnderTest.deleteCourse("title2");
+        controllerUnderTest.deleteCourse("tit2");
     }
 
 }
