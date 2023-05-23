@@ -1,24 +1,14 @@
 package view;
-import controller.*;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-// import com.alibaba.fastjson.JSON;
-import org.checkerframework.checker.initialization.qual.Initialized;
-import org.checkerframework.common.initializedfields.qual.InitializedFields;
-// import org.json.JSONArray;
-import org.json.JSONArray;
 
-import com.google.gson.JsonObject;
-// import org.json.JSONException;
-// import org.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 
+import controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -28,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 public class HomeControler {
     //状态代码，0为没修改，1为修改中
     int status = 0;
@@ -178,25 +167,32 @@ public class HomeControler {
             this.status=1;
         }
             else{
-                Integer int2 = Integer.parseInt(f2.getText());
-                // File file=new File("");
-                Controller.newCreateBasicInformation(f1.getText(),int2,f3.getText(),f4.getText(),f5.getText(),f6.getText(),this.image);
-                f1.setDisable(true);
-                f2.setDisable(true);
-                f3.setDisable(true);
-                f4.setDisable(true);
-                f5.setDisable(true);
-                f6.setDisable(true);
-                bt1.setDisable(true);
-                bt2.setDisable(true);
-                bt3.setDisable(true);
-                bt4.setDisable(true);
-                changeButton.setText("MODIFY");
-                this.status=0;
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText("修改成功");
-                alert.show();
-                // testlabel.setText("修改成功!");
+                try {
+                    Integer int2 = Integer.parseInt(f2.getText());
+                    // File file=new File("");
+                    Controller.newCreateBasicInformation(f1.getText(),int2,f3.getText(),f4.getText(),f5.getText(),f6.getText(),this.image);
+                    f1.setDisable(true);
+                    f2.setDisable(true);
+                    f3.setDisable(true);
+                    f4.setDisable(true);
+                    f5.setDisable(true);
+                    f6.setDisable(true);
+                    bt1.setDisable(true);
+                    bt2.setDisable(true);
+                    bt3.setDisable(true);
+                    bt4.setDisable(true);
+                    changeButton.setText("MODIFY");
+                    this.status=0;
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Change successfully");
+                    alert.show();
+                    // testlabel.setText("修改成功!");                    
+                } catch (Exception e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("age must be integer,please change it.");
+                    alert.show();
+                }
+
             }     
 
     }
@@ -233,9 +229,10 @@ try {
     //    System.out.print(data);
        JSONObject jsonObject = JSONObject.parseObject(data);
        System.out.print(jsonObject);
+       testlabel.setWrapText(true);
     //    System.out.print(jsonObject.getString("name"));
-
-
+    // testlabel.setText("This is a student data management system. The functions are as follows:  \nCreate, modify, and save personal information  \nCreate, modify, save Course, and enable selective sorting  \nCreate, modify, save skills, and allow for selective sorting  \nCreate, modify, save Achievements, and enable selective sorting  \nCreate, modify, save activities, and enable selective sorting  \nCreate, modify, save Role, and enable selective sorting  \nGenerate corresponding GPA based on different algorithms  \nGenerate CV with one click and automatically open file  \n");
+testlabel.setText("This is a student data management system. The functions are as follows: \nCreate, modify, and save personal information \nCreate, modify, saveand enable selective sorting following items:\nCourse,Skill,Achievement,Activity,Role\nGenerate corresponding GPA based on different algorithms \nGenerate CV with one click and automatically open file \n");
     f1.setText(jsonObject.getString("name"));
     f2.setText(jsonObject.getString("age"));
     f3.setText(jsonObject.getString("school"));
@@ -245,15 +242,36 @@ try {
     String[] temp = jsonObject.getString("image_path").split("/");
     String Picture = temp[1];
     System.out.print("头像路径为"+ Picture);
+    // System.out.print("------------"+(Picture=="head1.jpeg"));
+    if(Picture.equals("head1.jpeg")){
+    System.out.print("头像和1匹配");
+       this.image = 1;
+    }else if(Picture.equals("head2.jpeg")){
+        this.image = 2;
+    System.out.print("头像和2匹配");
+    }else if(Picture.equals("head3.jpeg")){
+        this.image = 3;
+    System.out.print("头像和3匹配");
+    }else if(Picture.equals("head4.jpeg")){
+        this.image = 4;
+    System.out.print("头像和4匹配");
+    }else{
+        // this.image = 1;
+    }
+
     //暂时这样
+
     tx.setImage(new Image(getClass().getResourceAsStream(Picture)));
     // changetx1();
 } catch (Exception e) {
-    System.out.print("新建信息");
+    System.out.print("新建信息或头像没选");
 
 }
 
 
 
+    }
+    private String getResourceAsStream(String picture) {
+        return null;
     }
 }

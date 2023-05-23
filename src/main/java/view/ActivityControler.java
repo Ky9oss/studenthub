@@ -52,7 +52,7 @@ public class ActivityControler implements Initializable{
     boolean delete(ActionEvent event) throws URISyntaxException, ParseException {
         if(this.subject==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("请选择对应内容");
+            alert.setContentText("Please select the title");
             alert.show();
             return false;
         }
@@ -63,7 +63,7 @@ public class ActivityControler implements Initializable{
             time2(event);
          }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("成功删除!");
+        alert.setContentText("Delete successfully!");
         alert.show();
         Controller.deleteActivity(this.subject);
         return true;
@@ -73,7 +73,7 @@ public class ActivityControler implements Initializable{
     boolean detail(ActionEvent event) throws IOException, URISyntaxException {
         if(this.subject==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("请选择对应内容");
+            alert.setContentText("Please select the title");
             alert.show();
             return false;
         }
@@ -174,26 +174,26 @@ public class ActivityControler implements Initializable{
          stage.setScene(scene);
          stage.show();
     }
-    String[] Activity = {"请选择你想看的内容"};
+    String[] Activity = {""};
     String choose;
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
              // System.out.println(this.course[1]);
                 
-             try {
-                Controller.createActivity("ccc7c756c","1","2023-8-9","volunteer","1");
-                Controller.createActivity("ccc8456cc","1","2023-9-9","volunteer","1");
-                Controller.createActivity("ccc545cc","1","2022-6-9","volunteer","1");
-                Controller.createActivity("ccc4560cc","1","2022-7-9","volunteer","1");
-                Controller.createActivity("ccc456c2c","1","2023-4-9","volunteer","1");
-                Controller.createActivity("cc64564ccc","1","2023-6-9","volunteer","1");
-                Controller.createActivity("cc6456ccc","1","2021-8-9","else","1");
-                Controller.createActivity("cc3456ccc","1","2020-8-9","else","1");
+            //  try {
+            //     Controller.createActivity("ccc7c756c","1","2023-8-9","volunteer","1");
+            //     Controller.createActivity("ccc8456cc","1","2023-9-9","volunteer","1");
+            //     Controller.createActivity("ccc545cc","1","2022-6-9","volunteer","1");
+            //     Controller.createActivity("ccc4560cc","1","2022-7-9","volunteer","1");
+            //     Controller.createActivity("ccc456c2c","1","2023-4-9","volunteer","1");
+            //     Controller.createActivity("cc64564ccc","1","2023-6-9","volunteer","1");
+            //     Controller.createActivity("cc6456ccc","1","2021-8-9","else","1");
+            //     Controller.createActivity("cc3456ccc","1","2020-8-9","else","1");
 
-            } catch (URISyntaxException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            // } catch (URISyntaxException e) {
+            //     // TODO Auto-generated catch block
+            //     e.printStackTrace();
+            // }
             // System.out.println("111");
     //-----------------------------------------------------------------------------------------------
             try {
@@ -228,19 +228,26 @@ public class ActivityControler implements Initializable{
               });
     }
     public void changeData(String subject){
-        String[] temp = subject.split(":");
-        String tempsubject = temp[0];
-        this.subject = tempsubject;
-        System.out.println( this.subject );
+        try {
+            String[] temp = subject.split(":");
+            String tempsubject = temp[0];
+            this.subject = tempsubject;
+            System.out.println( this.subject );
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
     }
     @FXML
     void time1(ActionEvent event) throws URISyntaxException, ParseException {
+        this.subject = "";
         this.timelist=1;
         transferDataList(Controller.getActivitiesByYearAndByTypeForwardSort(this.year,this.type));
     }
 
     @FXML
     void time2(ActionEvent event) throws URISyntaxException, ParseException {
+        this.subject = "";
         // System.out.println( "逆时间排序");
         this.timelist=2;
         transferDataList(Controller.getActivitiesByYearAndByTypeReverseSort(this.year,this.type));

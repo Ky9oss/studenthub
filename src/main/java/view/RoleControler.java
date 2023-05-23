@@ -49,7 +49,7 @@ public class RoleControler implements Initializable{
     boolean delete(ActionEvent event) throws URISyntaxException, ParseException {
         if(this.subject==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("请选择对应内容");
+            alert.setContentText("Please select the title");
             alert.show();
             return false;
         }
@@ -61,7 +61,7 @@ public class RoleControler implements Initializable{
             time2(event);
          }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("成功删除!");
+        alert.setContentText("Delete successfully!");
         alert.show();
         Controller.deleteRole(this.subject);
         return true;
@@ -71,7 +71,7 @@ public class RoleControler implements Initializable{
     boolean detail(ActionEvent event) throws IOException, URISyntaxException {
         if(this.subject==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("请选择对应内容");
+            alert.setContentText("Please select the title");
             alert.show();
             return false;
         }
@@ -172,25 +172,26 @@ public class RoleControler implements Initializable{
          stage.setScene(scene);
          stage.show();
     }
-    String[] Role = {"请选择你想要的排序方式"};
+    String[] Role = {""};
     String choose;
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
              // System.out.println(this.course[1]);
                 
-             try {
-                Controller.createRole("ccccc","1","2023-8-9");
-                Controller.createRole("kkkk","1","2023-9-10");
-                Controller.createRole("cccc6c","1","2023-10-11");
-                Controller.createRole("jjjj","1","2023-11-12");
-                Controller.createRole("uuuu","1","2023-8-9");
-                Controller.createRole("ddd","1","2021-8-8");
-                Controller.createRole("eee","1","2022-8-10");
-                Controller.createRole("fff","1","2020-7-7");
-            } catch (URISyntaxException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            //  try {
+            //     Controller.createRole("ccccc","1","2023-8-9");
+            //     Controller.createRole("kkkk","1","2023-9-10");
+            //     Controller.createRole("cccc6c","1","2023-10-11");
+            //     Controller.createRole("jjjj","1","2023-11-12");
+            //     Controller.createRole("uuuu","1","2023-8-9");
+            //     Controller.createRole("ddd","1","2021-8-8");
+            //     Controller.createRole("eee","1","2022-8-10");
+            //     Controller.createRole("fff","1","2020-7-7");
+            // } catch (URISyntaxException e) {
+            //     // TODO Auto-generated catch block
+            //     e.printStackTrace();
+            // }
+
             // System.out.println("111");
     //-----------------------------------------------------------------------------------------------
             try {
@@ -225,14 +226,20 @@ public class RoleControler implements Initializable{
               });
     }
     public void changeData(String subject){
-        String[] temp = subject.split(":");
-        String tempsubject = temp[0];
-        this.subject = tempsubject;
-        System.out.println( this.subject );
+        try {
+            String[] temp = subject.split(":");
+            String tempsubject = temp[0];
+            this.subject = tempsubject;
+            System.out.println( this.subject );
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
     }
     
     @FXML
     void time1(ActionEvent event) throws URISyntaxException, ParseException {
+        this.subject = "";
         this.timelist=1;
         transferDataList(Controller.getRolesByYearForwardSort(this.year));
     }
@@ -240,6 +247,7 @@ public class RoleControler implements Initializable{
     @FXML
     void time2(ActionEvent event) throws URISyntaxException, ParseException {
         // System.out.println( "逆时间排序");
+        this.subject = "";
         this.timelist=2;
         transferDataList(Controller.getRolesByYearReverseSort(this.year));
     }

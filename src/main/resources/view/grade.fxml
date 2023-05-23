@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -7,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ReturnTest">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ReturnTest">
    <children>
       <GridPane layoutX="207.0" layoutY="17.0" prefHeight="383.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
         <columnConstraints>
@@ -18,14 +22,26 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;" GridPane.columnIndex="1">
                <children>
-                  <Label layoutX="97.0" layoutY="81.0" text="国内" />
-                  <Label layoutX="97.0" layoutY="191.0" text="出国" />
+                  <Label layoutX="16.0" layoutY="75.0" text="Domestic">
+                     <font>
+                        <Font size="36.0" />
+                     </font></Label>
+                  <Label layoutX="40.0" layoutY="175.0" text="Abroad">
+                     <font>
+                        <Font size="36.0" />
+                     </font></Label>
                   <Button layoutX="182.0" layoutY="85.0" mnemonicParsing="false" text="check" />
                   <Button layoutX="182.0" layoutY="187.0" mnemonicParsing="false" text="check" />
-                  <Label layoutX="262.0" layoutY="88.0" text="60" />
-                  <Label layoutX="269.0" layoutY="198.0" text="80" />
+                  <Label layoutX="257.0" layoutY="77.0" text="60">
+                     <font>
+                        <Font size="36.0" />
+                     </font></Label>
+                  <Label layoutX="263.0" layoutY="175.0" text="80">
+                     <font>
+                        <Font size="36.0" />
+                     </font></Label>
                </children>
             </AnchorPane>
             <Button mnemonicParsing="false" onAction="#gotoHome" text="return" />

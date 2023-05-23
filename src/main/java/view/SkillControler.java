@@ -48,7 +48,7 @@ public class SkillControler implements Initializable{
     boolean delete(ActionEvent event) throws URISyntaxException, ParseException {
         if(this.subject==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("请选择对应内容");
+            alert.setContentText("Please select the title");
             alert.show();
             return false;
         }
@@ -56,7 +56,7 @@ public class SkillControler implements Initializable{
         Controller.deleteSkill(this.subject);
             time1();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("成功删除!");
+        alert.setContentText("Delete successfully!");
         alert.show();
         Controller.deleteSkill(this.subject);
         return true;
@@ -65,7 +65,7 @@ public class SkillControler implements Initializable{
     boolean detail(ActionEvent event) throws IOException, URISyntaxException {
         if(this.subject==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("请选择对应内容");
+            alert.setContentText("Please select the title");
             alert.show();
             return false;
         }
@@ -170,16 +170,16 @@ public class SkillControler implements Initializable{
     String choose;
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        try {
-            Controller.createSkill("ccccc","1","Experted","1");
-            Controller.createSkill("ccccsdfc","1","Experted","1");
-            Controller.createSkill("cccsdfcc","1","Experted","1");
-            Controller.createSkill("ccfdgdccc","1","Experted","1");
-            Controller.createSkill("cchjghjccc","1","Experted","1");
-        } catch (URISyntaxException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        // try {
+        //     Controller.createSkill("ccccc","1","Experted","1");
+        //     Controller.createSkill("ccccsdfc","1","Experted","1");
+        //     Controller.createSkill("cccsdfcc","1","Experted","1");
+        //     Controller.createSkill("ccfdgdccc","1","Experted","1");
+        //     Controller.createSkill("cchjghjccc","1","Experted","1");
+        // } catch (URISyntaxException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
 
         String rawList;
         try {
@@ -214,13 +214,19 @@ public class SkillControler implements Initializable{
           });
     }
     public void changeData(String subject){
-        String[] temp = subject.split(":");
-        String tempsubject = temp[0];
-        this.subject = tempsubject;
-        System.out.println( this.subject );
+        try {
+            String[] temp = subject.split(":");
+            String tempsubject = temp[0];
+            this.subject = tempsubject;
+            System.out.println( this.subject );
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
     }
     @FXML
     void time1() throws URISyntaxException, ParseException {
+        this.subject = "";
         transferDataList(Controller.getSkillsByProficiency(this.prof));
     }
 

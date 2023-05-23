@@ -47,16 +47,36 @@ public class SkillDetailControler {
     void save(ActionEvent event) throws URISyntaxException {
         if(this.type==1){
         // subjectFielder.setText("保存成功");
-        Controller.createSkill(subjectFielder.getText(),text1.getText(),text2.getText(),text3.getText());
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("添加成功");
-        alert.show();
+        int statusCode = Controller.createSkill(subjectFielder.getText(),text1.getText(),text2.getText(),text3.getText());
+        if(statusCode==-1){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Empty content is not allowed. Please add corresponding content.");
+            alert.show();  
+          }else if(statusCode==-2){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("This title already exists,please choose another one");
+            alert.show();  
+          }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Add successfully!");
+            alert.show();  
+          }
         }else if(this.type==2){
         // subjectFielder.setText("保存成功");
-        Controller.changeSkill(this.subjectContent,text1.getText(),text2.getText(),text3.getText());
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("修改成功");
-        alert.show();
+        int statusCode = Controller.changeSkill(this.subjectContent,text1.getText(),text2.getText(),text3.getText());
+        if(statusCode==-1){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Empty content is not allowed. Please add corresponding content.");
+            alert.show();  
+          }else if(statusCode==-2){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("This title already exists,please choose another one");
+            alert.show();  
+          }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Change successfully!");
+            alert.show();
+          }
         }
 
     }
@@ -77,7 +97,7 @@ public class SkillDetailControler {
             text1.setText(rawObject.getString("content"));
             text2.setText(rawObject.getString("proficiency"));
             text3.setText(rawObject.getString("project"));
-            subjectFielder.setDisable(true); 
+            subjectFielder.setEditable(false); 
   
         }
     }

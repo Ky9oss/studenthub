@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.IndexControler">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.IndexControler">
    <children>
-      <Button layoutX="367.0" layoutY="333.0" mnemonicParsing="false" onAction="#gotoIdentity" text="进入系统">
+      <Button layoutX="399.0" layoutY="349.0" mnemonicParsing="false" onAction="#gotoIdentity" style="-fx-background-color: white;" text="Enter" textFill="#9a0e7a">
          <font>
             <Font size="31.0" />
          </font></Button>
-      <Label layoutX="264.0" layoutY="127.0" text="学生管理系统">
+      <Label layoutX="24.0" layoutY="102.0" text="Student Management System" textFill="#9a0e7a">
          <font>
-            <Font name="System Italic" size="62.0" />
+            <Font name="System Italic" size="60.0" />
          </font>
       </Label>
    </children>

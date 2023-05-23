@@ -128,7 +128,7 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="571.0">
                      <children>
-                        <Label id="testlabel" alignment="CENTER" contentDisplay="CENTER" layoutX="286.0" layoutY="17.0" prefHeight="185.6" prefWidth="571.2" text="home" textAlignment="CENTER" underline="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Label id="testlabel" alignment="CENTER" contentDisplay="CENTER" layoutX="286.0" layoutY="17.0" prefHeight="185.6" prefWidth="571.2" text="Home" textAlignment="CENTER" underline="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font size="49.0" />
                            </font>
@@ -161,16 +161,16 @@
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Label alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="30.4" prefWidth="51.2" text="姓名" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label alignment="CENTER" layoutX="-13.0" prefHeight="41.0" prefWidth="94.0" text="Name" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-13.0" AnchorPane.rightAnchor="-13.0" AnchorPane.topAnchor="0.0">
                                        <font>
-                                          <Font size="20.0" />
+                                          <Font size="13.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <children>
-                                    <TextField fx:id="f1" disable="true" layoutX="-24.0" layoutY="3.0" prefHeight="44.8" prefWidth="150.4" text="王子龙" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TextField fx:id="f1" disable="true" layoutX="1.0" prefHeight="41.0" prefWidth="156.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font name="MS Outlook" size="20.0" />
                                        </font>
@@ -179,16 +179,16 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
-                                    <Label alignment="CENTER" layoutX="-1.0" layoutY="8.0" prefHeight="30.4" prefWidth="51.2" text="年龄" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label alignment="CENTER" layoutX="-9.0" prefHeight="41.0" prefWidth="86.0" text="Age" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-9.0" AnchorPane.rightAnchor="-9.0" AnchorPane.topAnchor="0.0">
                                        <font>
-                                          <Font size="20.0" />
+                                          <Font size="13.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <TextField fx:id="f2" disable="true" layoutX="-5.0" layoutY="2.0" prefHeight="30.4" prefWidth="156.8" text="男" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TextField fx:id="f2" disable="true" layoutX="-5.0" layoutY="2.0" prefHeight="30.4" prefWidth="156.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font name="MS Outlook" size="20.0" />
                                        </font>
@@ -197,16 +197,16 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                  <children>
-                                    <Label alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="30.4" prefWidth="51.2" text="学校" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="30.4" prefWidth="51.2" text="School" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
-                                          <Font size="20.0" />
+                                          <Font size="13.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
-                                    <TextField fx:id="f3" disable="true" layoutY="2.0" prefHeight="30.4" prefWidth="161.6" text="北京邮电大学" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TextField fx:id="f3" disable="true" layoutY="2.0" prefHeight="30.4" prefWidth="161.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font name="MS Outlook" size="20.0" />
                                        </font>
@@ -215,16 +215,16 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                                  <children>
-                                    <Label alignment="CENTER" layoutX="-1.0" prefHeight="30.4" prefWidth="51.2" text="专业" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label alignment="CENTER" layoutX="-1.0" prefHeight="30.4" prefWidth="51.2" text="Major" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
-                                          <Font size="20.0" />
+                                          <Font size="13.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
-                                    <TextField fx:id="f4" disable="true" layoutX="14.0" layoutY="2.0" prefHeight="30.4" prefWidth="176.0" text="电信工程及管理" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TextField fx:id="f4" disable="true" layoutX="14.0" layoutY="2.0" prefHeight="30.4" prefWidth="176.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font name="MS Outlook" size="20.0" />
                                        </font>
@@ -233,16 +233,16 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                                  <children>
-                                    <Label alignment="CENTER" layoutX="10.0" layoutY="6.0" prefHeight="30.4" prefWidth="51.2" text="入学时间" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label alignment="CENTER" layoutY="6.0" prefHeight="41.0" prefWidth="68.0" text="Enrollment" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
-                                          <Font size="20.0" />
+                                          <Font size="13.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
-                                    <TextField fx:id="f5" disable="true" layoutX="-5.0" layoutY="5.0" prefHeight="30.4" prefWidth="156.8" text="2020" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TextField fx:id="f5" disable="true" layoutX="-5.0" layoutY="5.0" prefHeight="30.4" prefWidth="156.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font name="MS Outlook" size="20.0" />
                                        </font>
@@ -251,16 +251,16 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
                                  <children>
-                                    <Label alignment="CENTER" layoutX="10.0" layoutY="9.0" prefHeight="30.4" prefWidth="58.4" text="毕业时间" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label alignment="CENTER" layoutX="-9.0" prefHeight="41.0" prefWidth="86.0" text="Graduation" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-9.0" AnchorPane.rightAnchor="-9.0" AnchorPane.topAnchor="0.0">
                                        <font>
-                                          <Font size="20.0" />
+                                          <Font size="13.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
-                                    <TextField fx:id="f6" disable="true" layoutX="14.0" layoutY="19.0" prefHeight="42.4" prefWidth="176.0" text="辍学" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TextField fx:id="f6" disable="true" layoutX="14.0" layoutY="19.0" prefHeight="42.4" prefWidth="176.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font name="MS Outlook" size="20.0" />
                                        </font>
@@ -276,23 +276,21 @@
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
-                           <children>
-                              <AnchorPane prefHeight="182.0" prefWidth="230.0">
-                                 <children>
-                                    <Label fx:id="testlabel" layoutX="35.0" layoutY="7.0" prefHeight="176.0" prefWidth="234.0" text="测试文本" textOverrun="CENTER_ELLIPSIS" AnchorPane.bottomAnchor="-118.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-112.0" AnchorPane.topAnchor="0.0" />
-                                 </children>
-                              </AnchorPane>
-                           </children>
                         </GridPane>
-                        <Button fx:id="changeButton" layoutX="381.0" layoutY="339.0" mnemonicParsing="false" onAction="#changetest" text="修改信息">
+                        <Button fx:id="changeButton" layoutX="397.0" layoutY="396.0" mnemonicParsing="false" onAction="#changetest" text="Modify ">
                            <font>
                               <Font size="29.0" />
                            </font>
                         </Button>
-                        <Button fx:id="bt1" disable="true" layoutX="188.0" layoutY="30.0" mnemonicParsing="false" onAction="#changetx1" text="头像1" />
-                        <Button fx:id="bt2" disable="true" layoutX="188.0" layoutY="73.0" mnemonicParsing="false" onAction="#changetx2" text="头像2" />
-                        <Button fx:id="bt3" disable="true" layoutX="188.0" layoutY="109.0" mnemonicParsing="false" onAction="#changetx3" text="头像3" />
-                        <Button fx:id="bt4" disable="true" layoutX="188.0" layoutY="150.0" mnemonicParsing="false" onAction="#changetx4" text="头像4" />
+                        <Button fx:id="bt1" disable="true" layoutX="188.0" layoutY="30.0" mnemonicParsing="false" onAction="#changetx1" text="avatar1" />
+                        <Button fx:id="bt2" disable="true" layoutX="188.0" layoutY="73.0" mnemonicParsing="false" onAction="#changetx2" text="avatar2" />
+                        <Button fx:id="bt3" disable="true" layoutX="188.0" layoutY="109.0" mnemonicParsing="false" onAction="#changetx3" text="avatar3" />
+                        <Button fx:id="bt4" disable="true" layoutX="188.0" layoutY="150.0" mnemonicParsing="false" onAction="#changetx4" text="avatar4" />
+                        <Label fx:id="testlabel" layoutX="263.0" layoutY="14.0" prefHeight="368.0" prefWidth="414.0" textOverrun="CENTER_ELLIPSIS" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="263.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="14.0">
+                           <font>
+                              <Font name="Arial" size="19.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -7,59 +11,59 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ActivityDetailControler">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ActivityDetailControler">
    <children>
-      <Label layoutX="54.0" layoutY="86.0" text="名称">
+      <Label layoutX="71.0" layoutY="89.0" prefHeight="68.0" prefWidth="166.0" text="Name" textFill="#fff5f5">
          <font>
-            <Font size="53.0" />
+            <Font size="36.0" />
          </font>
       </Label>
-      <TextField fx:id="subjectFielder" layoutX="194.0" layoutY="101.0">
+      <TextField fx:id="subjectFielder" layoutX="204.0" layoutY="103.0" prefHeight="39.0" prefWidth="224.0">
          <font>
             <Font size="19.0" />
          </font>
       </TextField>
-      <Button layoutX="205.0" layoutY="449.0" mnemonicParsing="false" onAction="#save" text="SAVE">
+      <Button layoutX="316.0" layoutY="447.0" mnemonicParsing="false" onAction="#save" style="-fx-background-color: white;" text="SAVE" textFill="#1934ea">
          <font>
             <Font name="Bell MT" size="30.0" />
          </font>
       </Button>
-      <Button layoutX="525.0" layoutY="449.0" mnemonicParsing="false" onAction="#exit" text="EXIT">
+      <Button layoutX="520.0" layoutY="447.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: white;" text="EXIT" textFill="#1934ea">
          <font>
             <Font name="Bell MT" size="30.0" />
          </font>
       </Button>
-      <Label layoutX="358.0" layoutY="27.0" text="活动细节">
+      <Label layoutX="341.0" layoutY="22.0" text="Activity Details" textFill="#fff5f5">
          <font>
             <Font size="39.0" />
          </font>
       </Label>
-      <Label layoutX="54.0" layoutY="183.0" text="内容">
+      <Label layoutX="46.0" layoutY="197.0" text="Content" textFill="#fff5f5">
          <font>
-            <Font size="53.0" />
+            <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="60.0" layoutY="300.0" text="时间">
+      <Label layoutX="82.0" layoutY="315.0" text="Time" textFill="#fff5f5">
          <font>
-            <Font size="53.0" />
+            <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="484.0" layoutY="94.0" text="类型">
+      <Label layoutX="500.0" layoutY="99.0" text="Genre" textFill="#fff5f5">
          <font>
-            <Font size="53.0" />
+            <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="497.0" layoutY="192.0" text="地点">
+      <Label layoutX="499.0" layoutY="207.0" text="Places" textFill="#fff5f5">
          <font>
-            <Font size="53.0" />
+            <Font size="36.0" />
          </font>
       </Label>
-      <TextField fx:id="text1" layoutX="212.0" layoutY="215.0" />
-      <TextField fx:id="text3" disable="true" layoutX="617.0" layoutY="117.0" />
-      <TextField fx:id="text4" layoutX="640.0" layoutY="205.0" />
+      <TextField fx:id="text1" layoutX="204.0" layoutY="206.0" prefHeight="39.0" prefWidth="224.0" />
+      <TextField fx:id="text3" editable="false" layoutX="620.0" layoutY="103.0" prefHeight="39.0" prefWidth="166.0" style="-fx-background-color: white;" />
+      <TextField fx:id="text4" layoutX="617.0" layoutY="206.0" prefHeight="39.0" prefWidth="202.0" />
       <DatePicker fx:id="datepicker" layoutX="200.0" layoutY="323.0" />
-      <Button layoutX="794.0" layoutY="83.0" mnemonicParsing="false" onAction="#type1" text="volunteer" />
-      <Button layoutX="794.0" layoutY="117.0" mnemonicParsing="false" onAction="#type2" text="community" />
-      <Button layoutX="794.0" layoutY="150.0" mnemonicParsing="false" onAction="#type3" text="else" />
+      <Button layoutX="794.0" layoutY="74.0" mnemonicParsing="false" onAction="#type1" style="-fx-background-color: white;" text="volunteer" textFill="#1934ea" />
+      <Button layoutX="791.0" layoutY="108.0" mnemonicParsing="false" onAction="#type2" style="-fx-background-color: white;" text="community" textFill="#1934ea" />
+      <Button layoutX="795.0" layoutY="142.0" mnemonicParsing="false" onAction="#type3" style="-fx-background-color: white;" text="else" textFill="#1934ea" />
    </children>
 </AnchorPane>

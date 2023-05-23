@@ -51,7 +51,7 @@ public class AchievementControler implements Initializable{
     boolean delete(ActionEvent event) throws URISyntaxException, ParseException {
         if(this.subject==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("请选择对应内容");
+            alert.setContentText("Please select the title");
             alert.show();
             return false;
         }
@@ -62,7 +62,7 @@ public class AchievementControler implements Initializable{
             time2(event);
          }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("成功删除!");
+        alert.setContentText("Delete successfully!");
         alert.show();
         Controller.deleteAchievement(this.subject);
         return true;
@@ -72,7 +72,7 @@ public class AchievementControler implements Initializable{
      boolean detail(ActionEvent event) throws IOException, URISyntaxException {
         if(this.subject==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("请选择对应内容");
+            alert.setContentText("Please select the title");
             alert.show();
             return false;
         }
@@ -176,21 +176,21 @@ public class AchievementControler implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
-        try {
-            Controller.createAchievement("ccccc","1","2023-8-9","1","1");
-            Controller.createAchievement("bbbbb","1","2023-9-9","1","1");
-            Controller.createAchievement("ssss","1","2023-10-9","1","1");
-            Controller.createAchievement("aaa","1","2022-11-9","2","1");
-            Controller.createAchievement("ee456456","1","2022-8-9","2","1");
-            Controller.createAchievement("rr7877678","1","2021-7-9","1","1");
-            Controller.createAchievement("tttt456","1","2021-8-9","1","1");
-            Controller.createAchievement("tttt45678","1","2020-8-9","2","1");
-            Controller.createAchievement("ttt757676t","1","2020-8-9","1","1");
+        // try {
+        //     Controller.createAchievement("ccccc","1","2023-8-9","1","1");
+        //     Controller.createAchievement("bbbbb","1","2023-9-9","1","1");
+        //     Controller.createAchievement("ssss","1","2023-10-9","1","1");
+        //     Controller.createAchievement("aaa","1","2022-11-9","2","1");
+        //     Controller.createAchievement("ee456456","1","2022-8-9","2","1");
+        //     Controller.createAchievement("rr7877678","1","2021-7-9","1","1");
+        //     Controller.createAchievement("tttt456","1","2021-8-9","1","1");
+        //     Controller.createAchievement("tttt45678","1","2020-8-9","2","1");
+        //     Controller.createAchievement("ttt757676t","1","2020-8-9","1","1");
 
-        } catch (URISyntaxException | IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        // } catch (URISyntaxException | IOException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
 
         try {
             String rawList = Controller.getAchievementsByYearForwardSort(this.year);
@@ -225,19 +225,26 @@ public class AchievementControler implements Initializable{
           });
     }
     public void changeData(String subject){
-        String[] temp = subject.split(":");
-        String tempsubject = temp[0];
-        this.subject = tempsubject;
-        System.out.println( this.subject );
+        try {
+            String[] temp = subject.split(":");
+            String tempsubject = temp[0];
+            this.subject = tempsubject;
+            System.out.println( this.subject );
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
     }
     @FXML
     void time1(ActionEvent event) throws URISyntaxException, ParseException {
+        this.subject = "";
         this.timelist=1;
         transferDataList(Controller.getAchievementsByYearForwardSort(this.year));
     }
 
     @FXML
     void time2(ActionEvent event) throws URISyntaxException, ParseException {
+        this.subject = "";
         // System.out.println( "逆时间排序");
         this.timelist=2;
         transferDataList(Controller.getAchievementsByYearReverseSort(this.year));

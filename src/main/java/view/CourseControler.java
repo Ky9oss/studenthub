@@ -55,7 +55,7 @@ public class CourseControler implements Initializable{
     boolean delete(ActionEvent event) throws URISyntaxException, ParseException {
         if(this.subject==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("请选择对应内容");
+            alert.setContentText("Please select the title");
             alert.show();
             return false;
         }
@@ -66,7 +66,7 @@ public class CourseControler implements Initializable{
             time2(event);
          }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("成功删除!");
+        alert.setContentText("Delete successfully!");
         alert.show();
         // Controller.deleteCourse(this.subject);
         return true;
@@ -76,7 +76,7 @@ public class CourseControler implements Initializable{
     boolean detail(ActionEvent event) throws IOException, URISyntaxException {
         if(this.subject==""){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("请选择对应内容");
+            alert.setContentText("Please select the title");
             alert.show();
             return false;
         }
@@ -184,19 +184,19 @@ public class CourseControler implements Initializable{
     public void initialize(URL arg0, ResourceBundle arg1) {
             // System.out.println(this.course[1]);
                 
-        try {
-            Controller.createCourse("ccccc","1","2023-8-9","compulsory","1",1,1);
-            Controller.createCourse("kkkk","1","2023-9-10","compulsory","1",1,1);
-            Controller.createCourse("ccccc","1","2023-10-11","compulsory","1",1,1);
-            Controller.createCourse("jjjj","1","2023-11-12","compulsory","1",1,1);
-            Controller.createCourse("uuuu","1","2023-8-9","optional","1",1,1);
-            Controller.createCourse("ddd","1","2021-8-8","optional","1",1,1);
-            Controller.createCourse("eee","1","2022-8-10","other","1",1,1);
-            Controller.createCourse("fff","1","2020-7-7","other","1",1,1);
-        } catch (URISyntaxException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        // try {
+        //     Controller.createCourse("ccccc","1","2023-8-9","compulsory","1",1,1);
+        //     Controller.createCourse("kkkk","1","2023-9-10","compulsory","1",1,1);
+        //     Controller.createCourse("ccccc","1","2023-10-11","compulsory","1",1,1);
+        //     Controller.createCourse("jjjj","1","2023-11-12","compulsory","1",1,1);
+        //     Controller.createCourse("uuuu","1","2023-8-9","optional","1",1,1);
+        //     Controller.createCourse("ddd","1","2021-8-8","optional","1",1,1);
+        //     Controller.createCourse("eee","1","2022-8-10","other","1",1,1);
+        //     Controller.createCourse("fff","1","2020-7-7","other","1",1,1);
+        // } catch (URISyntaxException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
         // System.out.println("111");
 //-----------------------------------------------------------------------------------------------
         try {
@@ -232,13 +232,19 @@ public class CourseControler implements Initializable{
 //-------------------------------------------------------------------------------------------------
     }
     public void changeData(String subject){
-        String[] temp = subject.split(":");
-        String tempsubject = temp[0];
-        this.subject = tempsubject;
-        System.out.println( this.subject );
+        try {
+            String[] temp = subject.split(":");
+            String tempsubject = temp[0];
+            this.subject = tempsubject;
+            System.out.println( this.subject );
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
     }
     @FXML
     void time1(ActionEvent event) throws URISyntaxException, ParseException {
+        this.subject = "";
         this.timelist=1;
         transferDataList(Controller.getCoursesByYearAndByTypeForwardSort(this.year,this.type));
     }
@@ -246,6 +252,7 @@ public class CourseControler implements Initializable{
     @FXML
     void time2(ActionEvent event) throws URISyntaxException, ParseException {
         // System.out.println( "逆时间排序");
+        this.subject = "";
         this.timelist=2;
         transferDataList(Controller.getCoursesByYearAndByTypeReverseSort(this.year,this.type));
     }

@@ -60,32 +60,61 @@ public class CourseDetailControler {
     @FXML
     void save(ActionEvent event) throws URISyntaxException {
         if(this.type==1){
-        Integer int5 = Integer.parseInt(text5.getText());
-        Integer int6 = Integer.parseInt(text6.getText());
-        String title = subjectFielder.getText();
-        // Controller.createCourse("bbbbbbbbb","1","1","1","1",1,1);
-        // System.out.println("测试");
-        // System.out.println(Controller.getCourseByTitle("bbbbbbbbb"));
+          try {
+            Integer int5 = Integer.parseInt(text5.getText());
+            Integer int6 = Integer.parseInt(text6.getText());
+            String title = subjectFielder.getText();
+            // Controller.createCourse("bbbbbbbbb","1","1","1","1",1,1);
+            // System.out.println("测试");
+            // System.out.println(Controller.getCourseByTitle("bbbbbbbbb"));
+            int statusCode = Controller.createCourse(title,text1.getText(),this.dataString,text3.getText(),text4.getText(),int5,int6);
+            // Controller.createCourse(title,text1.getText(),this.dataString,this.typeString,text4.getText(),int5,int6);
+            if(statusCode==-1){
+              Alert alert = new Alert(Alert.AlertType.INFORMATION);
+              alert.setContentText("Empty content is not allowed. Please add corresponding content.");
+              alert.show();  
+            }else if(statusCode==-2){
+              Alert alert = new Alert(Alert.AlertType.INFORMATION);
+              alert.setContentText("This title already exists,please choose another one");
+              alert.show();  
+            }else{
+              Alert alert = new Alert(Alert.AlertType.INFORMATION);
+              alert.setContentText("Add successfully!");
+              alert.show();  
+            }
+          } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("grade and credit must be integer,please change");
+            alert.show();
+          }
 
-
-        Controller.createCourse(title,text1.getText(),this.dataString,text3.getText(),text4.getText(),int5,int6);
-        // Controller.createCourse(title,text1.getText(),this.dataString,this.typeString,text4.getText(),int5,int6);
-
-
-        // System.out.println(Controller.getCourseByTitle(subjectFielder.getText()));
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("添加成功");
-        alert.show();
         }else if(this.type==2){
         // subjectFielder.setText("保存成功");
-        Integer int5 = Integer.parseInt(text5.getText());
-        Integer int6 = Integer.parseInt(text6.getText());
-        Controller.changeCourse(this.subjectContent,text1.getText(),this.dataString,text3.getText(),text4.getText(),int5,int6);
-        // Controller.changeCourse(this.subjectContent,text1.getText(),this.dataString,"111",text4.getText(),int5,int6);
+        try {
+          Integer int5 = Integer.parseInt(text5.getText());
+          Integer int6 = Integer.parseInt(text6.getText());
+          int statusCode = Controller.changeCourse(this.subjectContent,text1.getText(),this.dataString,text3.getText(),text4.getText(),int5,int6);
+                  // Controller.changeCourse(this.subjectContent,text1.getText(),this.dataString,"111",text4.getText(),int5,int6);
+        if(statusCode==-1){
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setContentText("Empty content is not allowed. Please add corresponding content.");
+          alert.show();  
+        }else if(statusCode==-2){
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setContentText("This title already exists,please choose another one");
+          alert.show();  
+        }else{
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setContentText("Change successfully!");
+          alert.show();
+        }
+        } catch (Exception e) {
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setContentText("grade and credit must be integer,please change");
+          alert.show();
+        }
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("修改成功");
-        alert.show();
+
         }
 
     }
@@ -112,8 +141,10 @@ public class CourseDetailControler {
           text4.setText(rawObject.getString("teacher"));
           text5.setText(""+rawObject.getString("grade"));
           text6.setText(""+rawObject.getString("credit"));
-          subjectFielder.setDisable(true); 
-      }
+          subjectFielder.setEditable(false); 
+        }else{
+          setDate("2020-9-1");
+        }
 
         // this.subjectContent = subjectContent;
         // LocalDate datatest = LocalDate.parse("2020-3-3");

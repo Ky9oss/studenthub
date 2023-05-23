@@ -51,16 +51,36 @@ public class ActivityDetailControler {
     void save(ActionEvent event) throws URISyntaxException {
         if(this.type==1){
         // subjectFielder.setText("保存成功");
-        Controller.createActivity(subjectFielder.getText(),text1.getText(),getDate(),text3.getText(),text4.getText());
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("添加成功");
-        alert.show();
+        int statusCode = Controller.createActivity(subjectFielder.getText(),text1.getText(),getDate(),text3.getText(),text4.getText());
+        if(statusCode==-1){
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setContentText("Empty content is not allowed. Please add corresponding content.");
+          alert.show();  
+        }else if(statusCode==-2){
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setContentText("This title already exists,please choose another one");
+          alert.show();  
+        }else{
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setContentText("Add successfully!");
+          alert.show();  
+        }
         }else if(this.type==2){
         // subjectFielder.setText("保存成功");
-        Controller.changeActivity(this.subjectContent,text1.getText(),getDate(),text3.getText(),text4.getText());
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("修改成功");
-        alert.show();
+        int statusCode = Controller.changeActivity(this.subjectContent,text1.getText(),getDate(),text3.getText(),text4.getText());
+        if(statusCode==-1){
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setContentText("Empty content is not allowed. Please add corresponding content.");
+          alert.show();  
+        }else if(statusCode==-2){
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setContentText("This title already exists,please choose another one");
+          alert.show();  
+        }else{
+          Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setContentText("Change successfully!");
+          alert.show();
+        }
         }
 
     }
@@ -83,8 +103,10 @@ public class ActivityDetailControler {
             text3.setText(rawObject.getString("type"));
           System.out.println(rawObject.getString("location"));
             text4.setText(rawObject.getString("location"));
-          subjectFielder.setDisable(true); 
+          subjectFielder.setEditable(false); 
 
+        }else{
+          setDate("2020-9-1");
         }
     }
     @FXML
