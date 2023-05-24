@@ -18,7 +18,15 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+/**
+ Represents a role with its title, content, and time.
+@author YiruLi
+@since 2023-05-24
+Constructs a new Role object with the specified title, content, and time.
+@param title The title of the role.
+@param content The content of the role.
+@param time The time of the role.
+*/
 public class Role {
     public Role(String title, String content, String time) {
         this.title = title;
@@ -111,6 +119,23 @@ public class Role {
         this.rolepath = path;
     }
 
+/**
+@author YiruLi
+@since 2023-05-24+
+Saves the role to the role.json file in the resources directory.
+
+<p>
+This method retrieves the path of the role.json file in the resources directory and saves the current role object to it in JSON format.
+
+</p>
+<p>
+Note: The role.json file must exist in the resources directory prior to calling this method.
+
+</p>
+@return 1 if the role is successfully saved, 0 if an error occurs while saving, -1 if the title, content, or time is empty, -2 if a role with the same title already exists.
+
+@throws URISyntaxException If the URL of the class resource cannot be converted to a URI.
+*/
     public int saveRoles() throws URISyntaxException {
         java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
@@ -156,12 +181,32 @@ public class Role {
         }
         // 再加return-1和return-2的情况
     }
-
     /**
-     * @param title
-     * @return
-     * @throws URISyntaxException
-     */
+
+    Deletes roles based on the specified title.
+
+    <p>
+    This method allows you to delete roles from a JSON file based on their title. The JSON file should be located in the "src/main/resources" directory of the project.
+
+    </p>
+    @param title the title of the roles to be deleted
+
+    @return {@code true} if the roles were successfully deleted, {@code false} otherwise
+
+    @throws URISyntaxException if the URI syntax is incorrect
+
+    @see Role
+
+    @see Gson
+
+    @see java.net.URL
+
+    @see java.nio.file.Path
+
+    @author YiruLi
+
+    @version 1.0
+    */
     public static boolean deleteRoles(String title) throws URISyntaxException {
         java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
@@ -187,12 +232,38 @@ public class Role {
         return setStr(pathStr, deletedRoles);
     }
 
-    /**
-     * @param year
-     * @return
-     * @throws ParseException
-     * @throws URISyntaxException
-     */
+   /**
+
+    Retrieves roles from a JSON file based on the specified year and returns them in reverse chronological order.
+
+    <p>
+    This method retrieves roles from a JSON file located in the "src/main/resources" directory of the project. The roles are filtered based on the specified year and sorted in reverse chronological order based on their time.
+
+    </p>
+    @param year the year to filter the roles
+
+    @return a JSON string representing the roles in reverse chronological order
+
+    @throws ParseException if an error occurs while parsing the role's time
+
+    @throws URISyntaxException if the URI syntax is incorrect
+
+    @see Role
+
+    @see Gson
+
+    @see java.net.URL
+
+    @see java.nio.file.Path
+
+    @see java.text.SimpleDateFormat
+
+    @see java.util.Collections
+
+    @author YiruLi
+
+    @version 1.0
+    */
     public static String getRolesByYearReverseSort(int year) throws ParseException, URISyntaxException {
         java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
@@ -241,12 +312,38 @@ public class Role {
         return allRoles;
     }
 
-    /**
-     * @param year
-     * @return
-     * @throws ParseException
-     * @throws URISyntaxException
-     */
+  /**
+
+    Retrieves roles from a JSON file based on the specified year and returns them in chronological order.
+
+    <p>
+    This method retrieves roles from a JSON file located in the "src/main/resources" directory of the project. The roles are filtered based on the specified year and sorted in chronological order based on their time.
+
+    </p>
+    @param year the year to filter the roles
+
+    @return a JSON string representing the roles in chronological order
+
+    @throws ParseException if an error occurs while parsing the role's time
+
+    @throws URISyntaxException if the URI syntax is incorrect
+
+    @see Role
+
+    @see Gson
+
+    @see java.net.URL
+
+    @see java.nio.file.Path
+
+    @see java.text.SimpleDateFormat
+
+    @see java.util.Collections
+
+    @author YiruLi
+
+    @version 1.0
+    */
     public static String getRolesByYearForwardSort(int year) throws ParseException, URISyntaxException {
         java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
@@ -296,10 +393,31 @@ public class Role {
     }
 
     /**
-     * @param roles_titles
-     * @return
-     * @throws URISyntaxException
-     */
+
+    Retrieves roles from a JSON file based on the specified role titles and returns them as a JSON string.
+
+    <p>
+    This method retrieves roles from a JSON file located in the "src/main/resources" directory of the project. The roles are filtered based on the provided role titles and returned as a JSON string.
+
+    </p>
+    @param roles_titles a comma-separated string of role titles
+
+    @return a JSON string representing the matching roles
+
+    @throws URISyntaxException if the URI syntax is incorrect
+
+    @see Role
+
+    @see Gson
+
+    @see java.net.URL
+
+    @see java.nio.file.Path
+
+    @author YiruLi
+
+    @version 1.0
+    */
     public static String getRolesByTitles(String roles_titles) throws URISyntaxException {
         if (roles_titles == "")
             return "";
@@ -343,7 +461,31 @@ public class Role {
         allRoles = "["+allRoles+"]";
         return allRoles;
     }
+    
+    /**
 
+    Retrieves all roles from a JSON file and returns them as a JSON string.
+
+    <p>
+    This method retrieves all roles from a JSON file located in the "src/main/resources" directory of the project and returns them as a JSON string.
+
+    </p>
+    @return a JSON string representing all the roles
+
+    @throws URISyntaxException if the URI syntax is incorrect
+
+    @see Role
+
+    @see Gson
+
+    @see java.net.URL
+
+    @see java.nio.file.Path
+
+    @author YiruLi
+
+    @version 1.0
+    */
     public static String getAllRoles() throws URISyntaxException {
         java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
@@ -375,6 +517,30 @@ public class Role {
         return allRoles;
 
     }
+    /**
+
+    Retrieves the roles needed for a CV (Curriculum Vitae) from a JSON file and returns them as a JSON string.
+
+    <p>
+    This method retrieves the roles needed for a CV from a JSON file located in the "src/main/resources" directory of the project and returns them as a JSON string. The method selects the first three roles from the list and includes their title, content, and time.
+
+    </p>
+    @return a JSON string representing the roles for the CV
+
+    @throws URISyntaxException if the URI syntax is incorrect
+
+    @see Role
+
+    @see Gson
+
+    @see java.net.URL
+
+    @see java.nio.file.Path
+
+    @author YiruLi
+
+    @version 1.0
+    */
     public static String getRolesForCV() throws URISyntaxException {
         java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
@@ -410,6 +576,18 @@ public class Role {
         return allRoles;
 
     }
+    /**
+
+Reads the content of a JSON file and returns it as a string.
+<p>
+This method reads the content of a JSON file specified by the file path and returns it as a string. The file is expected to be encoded in UTF-8 format. The method eliminates any carriage return characters ("\r") present in the content.
+</p>
+@param jsonFile the path of the JSON file
+@return a string representation of the JSON content
+@throws IOException if an I/O error occurs while reading the file
+@author YiruLi
+@version 1.0
+*/
     public static String getStr(String jsonFile) {
         String jsonStr = "";
         try {
@@ -432,7 +610,19 @@ public class Role {
             return null;
         }
     }
+/**
 
+Sets the content of a JSON file with the provided text.
+<p>
+This method sets the content of a JSON file specified by the file path with the provided text. The existing content of the file will be replaced with the new text. The method returns {@code true} if the operation is successful, and {@code false} otherwise.
+</p>
+@param jsonFile the path of the JSON file
+@param text the text to be written to the file
+@return {@code true} if the file content is successfully set, {@code false} otherwise
+@throws IOException if an I/O error occurs while writing to the file
+@author YiruLi
+@version 1.0
+*/
     public static boolean setStr(String jsonFile, String text) {
         try {
             File file = new File(jsonFile);
@@ -451,7 +641,24 @@ public class Role {
             return false;
         }
     }
+/**
 
+Retrieves a role from the JSON file based on the provided title.
+
+<p>
+This method retrieves a role from the JSON file by searching for a matching title. The title is compared case-sensitive. If the provided title is an empty string, an empty string will be returned.
+
+</p>
+@param title the title of the role to retrieve
+
+@return the role information in JSON format if a matching title is found, or an empty string if the title is not found or an empty string is provided
+
+@throws URISyntaxException if a URI syntax error occurs while accessing the JSON file
+
+@author YiruLi
+
+@version 1.0
+*/
     public static String getRoleByTitle(String title) throws URISyntaxException {
         if (title == "")
             return "";
@@ -488,7 +695,24 @@ public class Role {
     
         return theActivity;
     }
-    
+    /**
+
+Extracts titles from a JSON string.
+
+<p>
+This method takes a JSON string as input and extracts the titles from it. The JSON string should be in valid JSON array format. The titles are returned as a JSON object containing an array of strings. If the input JSON string is empty or not in valid JSON array format, an empty JSON object is returned.
+
+</p>
+@param json_str the JSON string containing the role information
+
+@return a JSON object containing an array of titles, or an empty JSON object if the input is empty or not in valid JSON array format
+
+@see org.json.JSONArray
+
+@author YiruLi
+
+@version 1.0
+*/
     public static String getRolesTitles(String json_str) {
         JSONArray jsonString = new JSONArray(json_str);
     
@@ -514,4 +738,5 @@ public class Role {
     
     }
 }
+
 
