@@ -10,12 +10,27 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
 import com.google.gson.Gson;
-
 /**
- * zu
- */
-public class Skill {
 
+Represents a skill.
+
+<p>
+The Skill class represents a skill with its associated properties such as title, content, proficiency level, and project details. A skill object can be instantiated by providing values for these properties through the constructor.
+
+</p>
+@author YiruLi
+
+@version 1.0
+*/
+public class Skill {
+/**
+
+Constructs a Skill object with the specified properties.
+@param title the title of the skill
+@param content the content or description of the skill
+@param proficiency the proficiency level of the skill
+@param project the project related to the skill
+*/
     public Skill(String title, String content, String proficiency, String project) {
         this.title = title;
         this.content = content;
@@ -54,8 +69,23 @@ public class Skill {
         this.skillpath = path;
     }
     /**
-     * @return
-     */
+
+Saves the Skill object to a JSON file.
+
+<p>
+This method saves the Skill object to a JSON file specified by the SkillPath. It serializes the Skill object to JSON format and appends it to the existing JSON data. If the Skill object is successfully saved, it returns 1. If the Skill object is invalid (missing required fields), it returns -1. If the Skill object already exists in the JSON data, it returns -2. If there is an error during the save operation, it returns 0.
+
+</p>
+@return 1 if the Skill object is successfully saved, -1 if the Skill object is invalid, -2 if the Skill object already exists, 0 if there is an error
+
+@throws URISyntaxException if there is an error in the URI syntax
+
+@throws IOException if there is an error in reading or writing the JSON file
+
+@author YiruLi
+
+@version 1.0
+*/
     public int saveSkill() throws URISyntaxException {
         // -------------done, waiting for changing the JSON path---------------
 
@@ -102,11 +132,26 @@ public class Skill {
         }
     }
 
-    /**
-     * @param title
-     * @return
-     * @throws URISyntaxException
-     */
+   /**
+
+Deletes a Skill from the skill.json file based on the given title.
+
+<p>
+This method deletes a Skill object from the skill.json file by matching the title. It retrieves the JSON data from the skill.json file, deserializes it into Skill objects, searches for a Skill with a matching title, and removes it from the list. The modified Skill list is then serialized back into JSON format and saved to the skill.json file. If the deletion is successful, it returns true. Otherwise, it returns false.
+
+</p>
+@param title the title of the Skill to be deleted
+
+@return true if the Skill is successfully deleted, false otherwise
+
+@throws URISyntaxException if there is an error in the URI syntax
+
+@throws IOException if there is an error in reading or writing the JSON file
+
+@author YiruLi
+
+@version 1.0
+*/
     public static boolean deleteSkill(String title) throws URISyntaxException {
         // -------------done, waiting for changing the JSON path---------------
 
@@ -136,11 +181,26 @@ public class Skill {
         return setStr(pathStr, deletedSkills);
     }
 
-    /**
-     * @param proficiency
-     * @return
-     * @throws URISyntaxException
-     */
+/**
+
+Retrieves a list of Skills filtered by proficiency from the skill.json file.
+
+<p>
+This method retrieves a list of Skills from the skill.json file that match the given proficiency. It reads the JSON data from the skill.json file, deserializes it into Skill objects, filters the list based on the provided proficiency, and returns the filtered Skills as a JSON string. The proficiency can be a single value or multiple values separated by commas. If no Skills match the given proficiency, an empty string is returned.
+
+</p>
+@param proficiency the proficiency level(s) to filter the Skills by
+
+@return a JSON string representing the list of Skills matching the given proficiency
+
+@throws URISyntaxException if there is an error in the URI syntax
+
+@throws IOException if there is an error in reading the JSON file
+
+@author YiruLi
+
+@version 1.0
+*/
     public static String getSkillsByProficiency(String proficiency) throws URISyntaxException {
         // -------------done, waiting for changing the JSON path---------------
         if (proficiency == "")
@@ -186,12 +246,19 @@ public class Skill {
         allSkills = "["+allSkills+"]";
         return allSkills;
     }
+/**
 
-    /**
-     * @param skills_titles
-     * @return
-     * @throws URISyntaxException
-     */
+Retrieves a list of Skills based on the provided titles from the skill.json file.
+<p>
+This method retrieves a list of Skills from the skill.json file that match the given titles. It reads the JSON data from the skill.json file, deserializes it into Skill objects, filters the list based on the provided titles, and returns the filtered Skills as a JSON string. The titles can be a single title or multiple titles separated by commas. If no Skills match the given titles, an empty string is returned.
+</p>
+@param skills_titles the titles of Skills to retrieve
+@return a JSON string representing the list of Skills matching the given titles
+@throws URISyntaxException if there is an error in the URI syntax
+@throws IOException if there is an error in reading the JSON file
+@author YiruLi
+@version 1.0
+*/
     // skills_titles = "Peter,John"
     public static String getSkillsByTitles(String skills_titles) throws URISyntaxException {
         // -------------done, waiting for changing the JSON path---------------
@@ -240,6 +307,24 @@ public class Skill {
         return allSkills;
     }
 
+/**
+
+Retrieves all Skills from the skill.json file.
+
+<p>
+This method retrieves all Skills from the skill.json file. It reads the JSON data from the skill.json file, deserializes it into an array of Skill objects, and returns the Skills as a JSON string. Each Skill object in the JSON string includes the title, content, proficiency, and project. If there are no Skills available, an empty string is returned.
+
+</p>
+@return a JSON string representing all the Skills
+
+@throws URISyntaxException if there is an error in the URI syntax
+
+@throws IOException if there is an error in reading the JSON file
+
+@author YiruLi
+
+@version 1.0
+*/
     public static String getAllSkills() throws URISyntaxException {
         // -------------done, waiting for changing the JSON path---------------
         java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
@@ -309,6 +394,13 @@ public class Skill {
         allSkills = "["+allSkills+"]";
         return allSkills;
     }
+    /**
+
+Reads the content of a file and returns it as a string.
+@param jsonFile the path of the JSON file to be read
+@return the content of the JSON file as a string
+@throws IOException if there is an error in reading the JSON file
+*/
     public static String getStr(String jsonFile) {
         String jsonStr = "";
         try {
@@ -330,6 +422,19 @@ public class Skill {
         }
     }
 
+/**
+
+Sets the content of a file with the provided text.
+<p>
+This method sets the content of the specified file with the provided text. It first clears the file content, then writes the new text to the file.
+</p>
+@param jsonFile the path of the file to be updated
+@param text the text to be written to the file
+@return {@code true} if the file content is successfully updated, {@code false} otherwise
+@throws IOException if there is an error in writing to the file
+@author YiruLi
+@version 1.0
+*/
     public static boolean setStr(String jsonFile, String text) {
         try {
             File file = new File(jsonFile);
@@ -350,6 +455,18 @@ public class Skill {
     }
 
 
+/**
+
+Retrieves the skill information based on the specified title.
+<p>
+This method searches for the skill with the provided title in the skill.json file and returns its information.
+</p>
+@param title the title of the skill to retrieve
+@return a string representation of the skill information in JSON format, or an empty string if the title is empty or no skill is found
+@throws URISyntaxException if there is an error in obtaining the JSON file path
+@author YiruLi
+@version 1.0
+*/
     public static String getSkillByTitle(String title) throws URISyntaxException {
         if (title == "")
             return "";
@@ -424,4 +541,5 @@ class Main {
     }
 }
 */
+
 
