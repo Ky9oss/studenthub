@@ -32,15 +32,18 @@ import java.util.Arrays;
 import java.io.*;
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.io.IOException;
+//import java.io.File;
+//import java.io.FileWriter;
+//import java.io.IOException;
+//import java.nio.file.Files;
+//import java.nio.file.Paths;
+//import java.io.IOException;
 
 /**
- * 
+ * The Course class perform actions related to the course
+ * It contains methods for saving, deleting, sorting and selective returning values
+ * @author ZhengnanCao
+ * @version 1.0
  */
 public class Course {
 
@@ -89,6 +92,9 @@ public class Course {
      */
     private int credit;
 
+    public static String getCoursesForCV(){
+        return "";
+    }
 
     public String getTitle() {
         return title;
@@ -125,8 +131,20 @@ public class Course {
     }
 
     /**
-     * @return
-     */
+    Saves a new course to a JSON file.
+
+    @return An integer value indicating the status of the save operation:
+
+    Copy
+        1 - Success
+    Copy
+        0 - Failure
+    Copy
+        -1 - Invalid input fields
+    Copy
+        -2 - Duplicate course title
+    @throws URISyntaxException if there is an error getting the path to the program file
+    */
     public int saveCourse() throws URISyntaxException {
         try {
             // 获取程序文件所在的目录
@@ -155,11 +173,14 @@ public class Course {
             Gson gson = new Gson();
             Course[] Courses = gson.fromJson(coursejson, Course[].class);
             ArrayList<Course> courseList = new ArrayList<>(Arrays.asList(Courses));
+
+            // Check if any input fields are empty
             if(this.type.isEmpty()||this.title.isEmpty()||this.content.isEmpty()||this.time.isEmpty()||this.teacher.isEmpty()){
                 return -1;
             }
 
             // Constructor
+            // Create a new Course object
             Course newCourse = new Course(this.title, this.content, this.time, this.type, this.teacher, this.grade, this.credit);
             for(int i = 0; i < courseList.size(); i++){
                 if(courseList.get(i).title.equals(newCourse.title)){
@@ -181,9 +202,14 @@ public class Course {
     }
 
     /**
-     * @param title
-     * @return
-     */
+    Deletes a course from the JSON file with the specified title.
+
+    @param title The title of the course to be deleted.
+
+    @return A boolean value indicating the success of the delete operation.
+
+    @throws URISyntaxException if there is an error getting the path to the program file
+    */
     public static boolean deleteCourse(String title) throws URISyntaxException {
         // try{
         // 获取程序文件所在的目录
@@ -212,10 +238,14 @@ public class Course {
     }
 
     /**
-     * @param year
-     * @param type
-     * @return
-     */
+    Deletes a course from the JSON file with the specified title.
+
+    @param title The title of the course to be deleted.
+
+    @return A boolean value indicating the success of the delete operation.
+
+    @throws URISyntaxException if there is an error getting the path to the program file
+    */
     public static String getCoursesByYearAndByTypeForwardSort(int year, String typetype)
             throws URISyntaxException, ParseException {
 
@@ -310,9 +340,17 @@ public class Course {
     }
 
     /**
-     * @param year
-     * @param type
-     * @return
+    Gets a JSON string of courses sorted by year and type in ascending order of date, filtered by a specified year and type.
+
+    @param year The year to filter the courses by.
+
+    @param type The type of course to filter the courses by.
+
+    @return A JSON string of courses sorted by year and type in ascending order of date.
+
+    @throws URISyntaxException if there is an error getting the path to the program file
+
+    @throws ParseException if there is an error parsing the course date
      */
     public static String getCoursesByYearAndByTypeReverseSort(int year, String type)
             throws URISyntaxException, ParseException {
@@ -404,6 +442,14 @@ public class Course {
         return allCourses;
     }
 
+    /**
+
+    Gets a JSON string of all courses.
+
+    @return A JSON string of all courses.
+
+    @throws URISyntaxException if there is an error getting the path to the program file
+    */
     public static String getAllCourses() throws URISyntaxException {
         java.net.URL classResource = Course.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
@@ -440,6 +486,12 @@ public class Course {
         return allCourses;
     }
 
+    /**
+
+    Reads the contents of a text file and returns it as a string.
+    @param filePath The path of the text file to read.
+    @return The contents of the text file as a string.
+    */
     public static String getStr(String jsonFile) {
         String jsonStr = "";
         try {
@@ -463,6 +515,13 @@ public class Course {
         }
     }
 
+    /**
+
+    Writes a string to a text file, replacing its existing contents.
+    @param filePath The path of the text file to write to.
+    @param text The string to write to the text file.
+    @return true if the write operation was successful, false otherwise.
+    */
     public static boolean setStr(String jsonFile, String text) {
         try {
             File file = new File(jsonFile);
@@ -482,17 +541,17 @@ public class Course {
         }
     }
 
-    // 任务3 ： 根据所给的JSON格式的String，获取所有title;根据一个title获取一组数据
-    // public static String getRoleByTitle(String title){
-    // return "";
-    // }
-    // 传入title3 返回不带[]的一整行
+    
+    /**
 
-    // public static String[] getRolesTitles(String json_str){
-    // //下面是一个输出结果的格式的示例
-    // String[] results = {"title1", "title2", "title3", "title4", "title5"};
-    // return results;
-    // }
+    Gets the details of a course with the specified title.
+
+    @param title The title of the course to search for.
+
+    @return A JSON string containing the details of the course, or an empty string if the title is empty or the course is not found.
+
+    @throws URISyntaxException if there is an error getting the path to the program file.
+    */
     public static String getCourseByTitle(String title) throws URISyntaxException {
         if (title == "")
             return "";
@@ -534,6 +593,14 @@ public class Course {
         return theCourse;
     }
 
+    /**
+
+    Gets a JSON string containing the titles of all courses.
+
+    @param json_str A JSON string containing the details of all courses.
+
+    @return A JSON string containing the titles of all courses.
+    */
     public static String getCoursesTitles(String json_str) {
         JSONArray jsonString = new JSONArray(json_str);
 
@@ -554,16 +621,6 @@ public class Course {
         }
         titleList = titleList + "}";
         return titleList;
-
-        
-        // input 一整个或好多行，输出{"title1", "title2", "title3", "title4", "title5"}
-        // 下面是一个输出结果的格式的示例
-        // String[] results = { "title1", "title2", "title3", "title4", "title5" };
-        // return results;
-
-        // [{"responsibility":"responsibility","time":"2022-5-25","team":"team","title":"title3","content":"111"},
-        // {"responsibility":"responsibility","time":"2022-6-9","team":"team","title":"title1","content":"222"},
-        // {"responsibility":"responsibility","time":"2022-12-21","team":"team","title":"title5","content":"333"}]
 
     }
 }

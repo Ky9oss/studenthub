@@ -40,7 +40,11 @@ import java.io.IOException;
 
 
 /**
- * 
+ * The class activity class serves as one of the main functions of the application
+ * It countains methods for save, read and delete
+ * It can get the list what the main function asked
+ @author YihanZhu
+ @version 1.0
  */
 public class Activity {
 
@@ -78,6 +82,9 @@ public class Activity {
      */
     private String location;
 
+    public static String getActivitiesForCV(){
+        return "";
+    }
 
     public String getTitle() {
         return title;
@@ -106,9 +113,11 @@ public class Activity {
     }
 
     /**
-     * @return
-     * @throws URISyntaxException
-     */
+    * This method is used to save an Activity object to a JSON file.
+    *
+    * @return 1 if the Activity object is successfully saved, 0 otherwise
+    * @throws URISyntaxException if the URI syntax is invalid
+    */
     public int saveActivity() throws URISyntaxException {
         try{
             // 获取程序文件所在的目录
@@ -137,17 +146,9 @@ public class Activity {
             Gson gson = new Gson();
             Activity[] Activitys = gson.fromJson(actjson, Activity[].class);
             ArrayList<Activity> activityList = new ArrayList<>(Arrays.asList(Activitys));
-            if(this.type.isEmpty()||this.title.isEmpty()||this.content.isEmpty()||this.time.isEmpty()||this.location.isEmpty()){
-                return -1;
-            }
     
             // Constructor
             Activity newActivity = new Activity(this.title, this.content, this.time,this.type,this.location);
-            for(int i = 0; i < activityList.size(); i++){
-                if(activityList.get(i).title.equals(newActivity.title)){
-                   return -2;
-                }
-              }
             activityList.add(newActivity);
     
             String savedActivitys = gson.toJson(activityList);
@@ -163,10 +164,12 @@ public class Activity {
     }
 
     /**
-     * @param title
-     * @return
-     * @throws URISyntaxException
-     */
+    * This method is used to delete an Activity object from the "activity.json" file.
+    *
+    * @param title the title of the Activity object to be deleted
+    * @return true if the Activity object is successfully deleted, false otherwise
+    * @throws URISyntaxException if the URI syntax is invalid
+    */
     public static boolean deleteActivity(String title) throws URISyntaxException {
         //try{
         // 获取程序文件所在的目录
@@ -198,10 +201,14 @@ public class Activity {
     
 
     /**
-       @param year
-     * @param type
-     * @throws ParseException
-     */
+    * This method is used to get a list of Activity objects that match a specific year and type, and sort the list in ascending order based on the activity time.
+    *
+    * @param year the year to match
+    * @param typetype the type to match
+    * @return a JSON string representing the list of Activity objects that match the specified year and type, sorted in ascending order based on the activity time
+    * @throws URISyntaxException if the URI syntax is invalid
+    * @throws ParseException if the date string in the Activity object is not in the correct format
+    */
     public static String getActivitiesByYearAndByTypeForwardSort(int year, String typetype)  throws URISyntaxException,ParseException{
         String yearyear = String.valueOf(year);
         //JSONArray results = new JSONArray();
@@ -299,10 +306,15 @@ public class Activity {
 
 
     /**
-     * @param year
-     * @param type
-     * @throws ParseException
-     */
+    * Returns a JSON string containing all activities that match the input year and type,
+    * sorted in reverse chronological order by their time.
+    *
+    * @param year the year to filter activities by
+    * @param type the type to filter activities by
+    * @return a JSON string containing all matching activities
+    * @throws URISyntaxException if the URI syntax is invalid
+    * @throws ParseException if the date format is invalid
+    */
     public static String getActivitiesByYearAndByTypeReverseSort(int year, String type)  throws URISyntaxException,ParseException{
         String yearyear = String.valueOf(year);
         //JSONArray results = new JSONArray();
@@ -399,9 +411,12 @@ public class Activity {
                 } 
 
     /**
-     * @param activities_titles
-     * @return
-     */
+    * Returns a JSON string containing all activities that match the input titles.
+    *
+    * @param activities_titles a comma-separated list of activity titles to filter by
+    * @return a JSON string containing all matching activities
+    * @throws URISyntaxException if the URI syntax is invalid
+    */
     public static String getActivitiesByTitles(String activities_titles)throws URISyntaxException {
         if (activities_titles == "") return "";
 
@@ -444,7 +459,6 @@ public class Activity {
                 allActivitys = allActivitys + "},\n";
             }
         }
-        allActivitys="["+allActivitys+"]";
         return allActivitys;
     }
         /*try {
@@ -469,8 +483,11 @@ public class Activity {
     
 
     /**
-     * @return
-     */
+    * Returns a JSON string containing all activities in the activity.json file.
+    *
+    * @return a JSON string containing all activities
+    * @throws URISyntaxException if the URI syntax is invalid
+    */
     public static String getallActivitys()throws URISyntaxException{
         java.net.URL classResource = Activity.class.getProtectionDomain().getCodeSource().getLocation();
         Path classDirectory = Paths.get(classResource.toURI());
@@ -503,7 +520,6 @@ public class Activity {
                 allActivitys = allActivitys + "},\n";
             }
         }
-        allActivitys="["+allActivitys+"]";
         return allActivitys;
 	    /*JSONArray results = new JSONArray();
         
@@ -527,45 +543,6 @@ public class Activity {
             }
 
           return results.toString();*/
-}
-public static String getActivitiesForCV()throws URISyntaxException{
-    java.net.URL classResource = Activity.class.getProtectionDomain().getCodeSource().getLocation();
-    Path classDirectory = Paths.get(classResource.toURI());
-    Path resourcesPath = classDirectory.getParent().getParent();
-    Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
-    //获取resources的文件目录
-
-         String jsonPath = mainResourcesPath.toString() + "/activity.json";
-         Path filePath = Paths.get(jsonPath);
-         String pathStr = filePath.toString();
-         String json = getStr(pathStr);
-    Gson gson = new Gson();
-    Activity[] activities = gson.fromJson(json, Activity[].class);
-    ArrayList<Activity> activityList = new ArrayList<>(Arrays.asList(activities));
-
-    String allActivitys = "";
-    if(activityList.size()<3)
-        {
-            return null;
-        }
-    for(int i = 0; i < 3; i++) {
-        allActivitys = allActivitys + "{\n";
-        allActivitys = allActivitys + "\"title\": \"" + activityList.get(i).title + "\",\n";
-        allActivitys = allActivitys + "\"content\": \"" + activityList.get(i).content+ "\",\n";
-        allActivitys = allActivitys + "\"time\": \"" + activityList.get(i).time + "\",\n";
-        allActivitys = allActivitys + "\"type\": \"" + activityList.get(i).type + "\",\n";
-        allActivitys = allActivitys + "\"location\": \"" + activityList.get(i).location+ "\",\n";
-
-
-        if (i == activityList.size() - 1) {
-            allActivitys = allActivitys + "}\n";
-        }
-        else {
-            allActivitys = allActivitys + "},\n";
-        }
-    }
-    allActivitys="["+allActivitys+"]";
-    return allActivitys;
 }
 public static String getStr(String jsonFile){
     String jsonStr = "";
@@ -606,70 +583,6 @@ public static boolean setStr(String jsonFile, String text){
         e.printStackTrace();
         return false;
     }
-}
-
-public static String getActivityByTitle(String title) throws URISyntaxException {
-    if (title == "")
-        return "";
-
-    
-    java.net.URL classResource = Activity.class.getProtectionDomain().getCodeSource().getLocation();
-    
-    Path classDirectory = Paths.get(classResource.toURI());
-    
-    Path resourcesPath = classDirectory.getParent().getParent();
-    Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
-    
-    // 获取resources的文件目录
-
-    String jsonPath = mainResourcesPath.toString() + "/activity.json";
-    Path filePath = Paths.get(jsonPath);
-    String pathStr = filePath.toString();
-    String json = getStr(pathStr);
-    Gson gson = new Gson();
-    Activity[] activities = gson.fromJson(json, Activity[].class);
-    ArrayList<Activity> courseList = new ArrayList<>(Arrays.asList(activities));
-    
-
-    String theActivity = "";
-    for (int i = 0; i < courseList.size(); i++) {
-        if (courseList.get(i).title.equals(title)) {
-            theActivity = theActivity + "{\n";
-            theActivity = theActivity + "\"title\": \"" + courseList.get(i).title + "\",\n";
-            theActivity = theActivity + "\"content\": \"" + courseList.get(i).content + "\",\n";
-            theActivity = theActivity + "\"time\": \"" + courseList.get(i).time + "\",\n";
-            theActivity = theActivity + "\"type\": \"" + courseList.get(i).type + "\",\n";
-            theActivity = theActivity + "\"location\": \"" + courseList.get(i).location + "\",\n";
-            theActivity = theActivity + "}\n";
-        }
-    }
-
-    return theActivity;
-}
-
-public static String getActivitiesTitles(String json_str) {
-    JSONArray jsonString = new JSONArray(json_str);
-
-    String titleList = "{";
-    //List<String> tempList = new ArrayList<>(Arrays.asList(jsonString));
-    for (int i = 0; i < jsonString.length(); i++) {
-
-
-        JSONObject jsonObject = jsonString.getJSONObject(i);
-        String titles = jsonObject.getString("title");
-        titleList = titleList +"\"" +titles +"\"";
-        if (i == jsonString.length() - 1) {
-            titleList = titleList + "";
-        }
-        else {
-            titleList = titleList + ",";
-        }
-    }
-    titleList = titleList + "}";
-    return titleList;
-
-    
-
 }
 }
 

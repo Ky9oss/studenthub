@@ -23,14 +23,13 @@ import netscape.javascript.JSObject;
 
 import org.json.JSONArray;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.List;
 
 /**
- * 
+ * The Calculater class provide algorithms for generating GPA
+ * It contains three methods of different GPA algorithms
+ * @author ZhengnanCao
+ * @version 1.0
  */
 public class Calculator {
 
@@ -38,8 +37,10 @@ public class Calculator {
     }
 
     /**
-     * @param grades_credits_types
-     * @return
+
+     *Calculates the GPA of a student based on a standard grading system.
+     *@param cont A JSON string containing the details of the student's courses.
+     *@return The GPA of the student.
      */
     public double calculateByStandard(String cont) {
         double gpa = 0;
@@ -85,15 +86,17 @@ public class Calculator {
         gpa = Math.round(gpa * 100.0) / 100.0;
 
         return gpa;
-    }// 100～90 4.0
-     // 89～80 3.0
-     // 79～70 2.0
-     // 69～60 1.0
-     // 59～0 0 只有"type1"纳入计算
+        // 100～90 4.0
+        // 89～80 3.0
+        // 79～70 2.0
+        // 69～60 1.0
+        // 59～0 0 
+    }
 
     /**
-     * @param grades_credits_types
-     * @return
+     * Calculates the GPA of a student based on the Beida 4.0 grading system.
+     * @param content A JSON string containing the details of the student's courses.
+     * @return The GPA of the student.
      */
     public double calculateByBeida4_0(String content) {
         double gpa = 0;
@@ -147,11 +150,12 @@ public class Calculator {
         gpa = Math.round(gpa * 100.0) / 100.0;
 
         return gpa;
-    }// 只有"type1"纳入计算
+    }
 
     /**
-     * @param grades_credits_types
-     * @return
+     * Calculates the World Education Services (WES) score of a student based on their grades.
+     * @param content A JSON string containing the details of the student's courses.
+     * @return The WES score of the student.
      */
     public double calculateByWorldEducationScore(String content) {
         double gpa = 0;
@@ -190,27 +194,50 @@ public class Calculator {
         gpa = Math.round(gpa * 100.0) / 100.0;
 
         return gpa;
-    }// 100～85 4.0, 84～75 3.0, 74～60 2.0, 59～0 1.0 所有type都纳入计算
+        // 100～85 4.0, 84～75 3.0, 74～60 2.0, 59～0 1.0 所有type都纳入计算
+    }
 
     class Course {
         private double grade;
         private int credits;
         private String type;
 
+        /**
+
+         *Constructs a new Course object with the given grade, credits and type.
+         *@param score The grade received by the student in the course.
+         *@param credits The number of credits earned for the course.
+         *@param type The type of the course.
+         */
         public Course(double score, int credits, String type) {
             this.type = type;
             this.grade = score;
             this.credits = credits;
         }
 
+        /**
+
+         *Gets the type of the course represented by this Course object.
+         *@return The type of the course.
+         */
         public String getType() {
             return type;
         }
 
+        /**
+
+         *Gets the grade of the course represented by this Course object.
+         *@return The grade of the course.
+         */
         public double getGrade() {
             return grade;
         }
 
+        /**
+
+         *Gets the credit of the course represented by this Course object.
+         *@return The credit of the course.
+         */
         public int getCredit() {
             return credits;
         }
