@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"model","l":"Activity"},{"l":"All Classes and Interfaces","u":"allclasses-index.html"}];updateSearchResults();
