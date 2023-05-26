@@ -1,3 +1,13 @@
+/**
+ * This class represents a CV generator that creates a CV document based on provided information.
+ * The CV generator uses Apache POI library for creating the Word document.
+ * 
+ * @author Wenxuan Wu
+ *
+ * Usage:
+ * To generate a CV, call the createCV() method and provide the necessary information.
+ */
+
 package model;
 
 import org.apache.poi.xwpf.usermodel.*;
@@ -18,7 +28,12 @@ import java.util.Iterator;
 
 public class CV {
 
-
+    /**
+     * Main method for testing CV generation.
+     * 
+     * @param args Command-line arguments (unused).
+     * @throws URISyntaxException If there is an error with the URI syntax.
+     */
 
     public static void main(String[] args) throws URISyntaxException {
         // 提供您的输入字符串。
@@ -34,6 +49,20 @@ public class CV {
     }
 
     private String filePath1;
+
+
+    /**
+     * This method generates a CV document based on the provided information.
+     * The CV document includes sections like basic information, skills, activities, roles, and achievements.
+     *
+     * @param basic_information Basic information in JSON format.
+     * @param skills Skills information in JSON format.
+     * @param achievements Achievements information in JSON format.
+     * @param roles Roles information in JSON format.
+     * @param activities Activities information in JSON format.
+     * @return String The file path of the generated CV document.
+     * @throws URISyntaxException If there is an error with the file path URI.
+     */
 
     public String createCV(String basic_informations, String skills, String achievements, String roles, String activities) throws URISyntaxException {
         try {
@@ -83,7 +112,12 @@ public class CV {
         }
         return filePath1;
     }
-
+    /**
+     * Adds basic information to the document.
+     *
+     * @param document The XWPFDocument object to add the basic information to.
+     * @param basicInfo A JSONObject containing the basic information.
+     */
     private void addBasicInformation(XWPFDocument document, JSONObject basicInfo) {
         XWPFParagraph title = document.createParagraph();
         title.setAlignment(ParagraphAlignment.CENTER);
@@ -110,6 +144,14 @@ public class CV {
         basicInfoRun.setText("年龄: " + basicInfo.getInt("age") + "\n");
     }
     
+    /**
+     * Adds a section to the document.
+     *
+     * @param document The XWPFDocument object to add the section to.
+     * @param sectionTitle The title of the section.
+     * @param jsonArray A JSONArray containing the section items.
+     */
+
     private void addSection(XWPFDocument document, String sectionTitle, JSONArray jsonArray) {
         XWPFParagraph sectionHeader = document.createParagraph();
         sectionHeader.setAlignment(ParagraphAlignment.LEFT);
@@ -133,9 +175,22 @@ public class CV {
         }
     }
 
+    /**
+    /**
+     * Sets the file path for the generated CV document.
+     *
+     * @param filepath The desired file path for the CV document.
+     */
+
     public void filePathSetter(String filepath){
         this.filePath1 = filepath;
     }
+
+    /**
+     * Retrieves the file path of the generated CV document.
+     *
+     * @return String The file path of the generated CV document.
+     */
 
     public String filePathGetter(){
         return filePath1;
