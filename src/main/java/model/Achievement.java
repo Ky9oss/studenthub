@@ -36,6 +36,9 @@ import com.google.gson.Gson;
  import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
+import java.io.File;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
 
 
 /**
@@ -80,12 +83,6 @@ public class Achievement {
      */
     private String responsibility;
 
-    
-    public static String getAchievementsForCV(){
-        return "";
-    }
-
-
     public String getTitle() {
         return title;
     }
@@ -112,14 +109,13 @@ public class Achievement {
         this.achievementpath = path;
     }
 
-
     /**
     * This method is used to save an Achievement object to a JSON file.
     *
     * @return 1 if the save is successful, 0 otherwise
     * @throws URISyntaxException if the URI syntax is invalid
     */
-    public int saveAchievement() throws URISyntaxException {
+    public int saveAchievement() throws URISyntaxException, IOException {
         try{
             // 获取程序文件所在的目录
             java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
@@ -129,6 +125,8 @@ public class Achievement {
 
             // 获取resources的文件目录
             String AchievementPath = mainResourcesPath.toString() + "/achievement.json";
+            File file = new File(AchievementPath);
+            String content = FileUtils.readFileToString(file, "UTF-8");
 
             // 设置Achievement_path变量
 
@@ -147,15 +145,24 @@ public class Achievement {
             Gson gson = new Gson();
             Achievement[] Achievements = gson.fromJson(achjson, Achievement[].class);
             ArrayList<Achievement> achievementList = new ArrayList<>(Arrays.asList(Achievements));
+            if(this.team.isEmpty()||this.title.isEmpty()||this.content.isEmpty()||this.time.isEmpty()||this.responsibility.isEmpty()){
+                return -1;
+            }
     
             // Constructor
             Achievement newAchievement = new Achievement(this.title, this.content, this.time,this.team,this.responsibility);
+            for(int i = 0; i < achievementList.size(); i++){
+                if(achievementList.get(i).title.equals(newAchievement.title)){
+                   return -2;
+                }
+              }
             achievementList.add(newAchievement);
     
             String savedAchievements = gson.toJson(achievementList);
             if(setStr(AchievementPath, savedAchievements)==true){
                 return 1;
-            }else{
+            }
+            else {
                 return 0;
             }
         } catch (URISyntaxException e) {
@@ -165,7 +172,6 @@ public class Achievement {
     }
 
 
-    
     /**
      * This method is used to delete an Achievement object from a JSON file by its title.
     *
@@ -199,7 +205,6 @@ public class Achievement {
     String deletedAchievements = gson.toJson(results);
     return setStr(pathStr, deletedAchievements);}
 
-  
     /**
     * This method is used to get a string representation of all Achievement objects that have a time string containing the specified year, sorted in ascending order by time.
     *
@@ -277,7 +282,7 @@ public class Achievement {
 
     }
 
-    /**
+/**
     * This method is used to get a string representation of all Achievement objects that have a time string containing the specified year, sorted in descending order by time.
     *
     * @param year the year to filter the Achievement objects by
@@ -285,8 +290,6 @@ public class Achievement {
     * @throws URISyntaxException if the URI syntax is invalid
     * @throws ParseException if the parsing of time string fails
     */
-
-
     public static String getAchievementsByYearReverseSort(int year)throws URISyntaxException,ParseException {
         String yearyear = String.valueOf(year);
         //JSONArray results = new JSONArray();
@@ -404,9 +407,10 @@ public class Achievement {
                 allachievements = allachievements + "},\n";
             }
         }
+        allachievements="["+allachievements+"]";
         return allachievements;
     }
-  
+
     /**
     * This method is used to get a string representation of all Achievement objects.
     *
@@ -445,9 +449,59 @@ public class Achievement {
                 allAchievements = allAchievements + "},\n";
             }
         }
+        allAchievements="["+allAchievements+"]";
         return allAchievements;
           }
 
+
+
+
+    /**
+    * This method is used to get a string representation of all Achievement objects for CV.
+    *
+    * @return a string representation of all Achievement objects
+    * @throws URISyntaxException if the URI syntax is invalid
+    */
+    public static String getAchievementsForCV()throws URISyntaxException {
+        java.net.URL classResource = Achievement.class.getProtectionDomain().getCodeSource().getLocation();
+        Path classDirectory = Paths.get(classResource.toURI());
+        Path resourcesPath = classDirectory.getParent().getParent();
+        Path mainResourcesPath = resourcesPath.resolve("src").resolve("main").resolve("resources");
+        //获取resources的文件目录
+
+             String jsonPath = mainResourcesPath.toString() + "/Achievement.json";
+             Path filePath = Paths.get(jsonPath);
+             String pathStr = filePath.toString();
+             String json = getStr(pathStr);
+        Gson gson = new Gson();
+        Achievement[] activities = gson.fromJson(json, Achievement[].class);
+        ArrayList<Achievement> AchievementList = new ArrayList<>(Arrays.asList(activities));
+
+        String allAchievements = "";
+        if(AchievementList.size()<3)
+        {
+            return null;
+        }
+        for(int i = 0; i <3; i++) {
+            allAchievements = allAchievements + "{\n";
+            allAchievements = allAchievements + "\"title\": \"" + AchievementList.get(i).title + "\",\n";
+            allAchievements = allAchievements + "\"content\": \"" + AchievementList.get(i).content+ "\",\n";
+            allAchievements = allAchievements + "\"time\": \"" + AchievementList.get(i).time + "\",\n";
+            allAchievements = allAchievements + "\"team\": \"" + AchievementList.get(i).team + "\",\n";
+            allAchievements = allAchievements + "\"responsibility\": \"" + AchievementList.get(i).responsibility+ "\",\n";
+
+
+            if (i == AchievementList.size() - 1) {
+                allAchievements = allAchievements + "}\n";
+            }
+            else {
+                allAchievements = allAchievements + "},\n";
+            }
+        }
+        allAchievements="["+allAchievements+"]";
+        return allAchievements;
+          }
+          
     public static String getStr(String jsonFile){
         String jsonStr = "";
         try {
@@ -470,6 +524,8 @@ public class Achievement {
         return null;
     }
     }
+
+
 
 public static boolean setStr(String jsonFile, String text){
     try{
