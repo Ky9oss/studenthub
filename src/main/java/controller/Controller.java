@@ -800,7 +800,7 @@ Creates a CV based on information retrieved from various sources.
 @return a string representing the file path of the created CV in PDF format
 @throws URISyntaxException if a URI syntax exception occurs while retrieving information for the CV */ 
     //createCV
-    public String createCV() throws URISyntaxException {
+    public static String createCV() throws URISyntaxException {
         CV cv = new CV();
         String basic_information = BasicInformation.getBasicInformation();
         String skills = Skill.getSkillsForCV();

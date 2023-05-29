@@ -1,23 +1,21 @@
 package view;
-import controller.*;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
 import javafx.stage.Stage;
-import javafx.scene.Node;
 // import javafx.scene.layout.VBox;
 // import java.io.IOException;
- public class CVControler {
-    
+ public class CVControler { 
     @FXML
     private void gotoHome(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
@@ -101,6 +99,28 @@ import javafx.scene.Node;
          stage.setScene(scene);
          stage.show();
     }
+    
+    // @FXML
+    // void generateCV(ActionEvent event) {
+
+    // }
+
+    @FXML
+    private void generateCV(ActionEvent event){
+    try {
+        Controller.createCV();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("generate CV successfully");
+        alert.show();
+    } catch (URISyntaxException e) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("fail to generate CV ");
+        alert.show();
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+
+    }    
 
  }
  
