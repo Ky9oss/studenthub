@@ -239,8 +239,12 @@ testlabel.setText("This is a student data management system. The functions are a
     f4.setText(jsonObject.getString("major"));
     f5.setText(jsonObject.getString("admission_time"));
     f6.setText(jsonObject.getString("graduation_time"));
-    String[] temp = jsonObject.getString("image_path").split("/");
-    String Picture = temp[1];
+    // String[] temp = jsonObject.getString("image_path").split("/");
+    String temp = jsonObject.getString("image_path");
+
+    // String Picture = temp[1];
+    String Picture = temp.substring(temp.length()-10);
+
     System.out.print("头像路径为"+ Picture);
     // System.out.print("------------"+(Picture=="head1.jpeg"));
     if(Picture.equals("head1.jpeg")){
