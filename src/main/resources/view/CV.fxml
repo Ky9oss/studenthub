@@ -118,17 +118,17 @@
       </GridPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: pink;" GridPane.columnIndex="1">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="44.0" layoutY="27.0" prefHeight="62.0" prefWidth="689.0" text="CV" textFill="#f5dfdf">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="27.0" prefHeight="62.0" prefWidth="689.0" text="CV" textFill="#f5dfdf">
                <font>
                   <Font size="64.0" />
                </font>
             </Label>
-            <Button layoutX="105.0" layoutY="335.0" mnemonicParsing="false" onAction="#generateCV" prefHeight="71.0" prefWidth="573.0" style="-fx-background-color: white;" text="A Simple Click to Generate CV" textFill="#e83fad">
+            <Button layoutX="65.0" layoutY="339.0" mnemonicParsing="false" onAction="#generateCV" prefHeight="71.0" prefWidth="573.0" style="-fx-background-color: white;" text="A Simple Click to Generate CV" textFill="#e83fad">
                <font>
                   <Font size="36.0" />
                </font>
             </Button>
-            <Label layoutX="90.0" layoutY="143.0" text="CV Generation Statement" textFill="#eee7e7">
+            <Label layoutX="53.0" layoutY="155.0" text="CV Generation Statement" textFill="#eee7e7">
                <font>
                   <Font size="49.0" />
                </font>
